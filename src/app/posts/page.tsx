@@ -6,7 +6,6 @@ export default async function Page() {
   return (
     <div>
       <h1>전체 글 목록</h1>
-
       <ul>
         {posts.map((post) => {
           const { url, title } = post;
