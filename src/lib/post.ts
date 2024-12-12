@@ -4,14 +4,15 @@ import { format } from 'date-fns';
 import matter from 'gray-matter';
 import { sync } from 'glob';
 
-import { Post, PostMatter } from '@/types/post';
+import { Categories, Post, PostMatter } from '@/types/post';
+
 const BASE_PATH = '/src/posts';
 const POSTS_PATH = path.join(process.cwd(), BASE_PATH);
 
 // 모든 MDX 파일 경로 조회
-export const getAllMdxFilePaths = (category?: string): string[] => {
+export const getAllMdxFilePaths = (category: string): string[] => {
   try {
-    const folder = category || '**';
+    const folder = category === 'all' ? '**' : category;
     const paths: string[] = sync(`${POSTS_PATH}/${folder}/**/*.mdx`);
     return paths;
   } catch (error) {
@@ -21,7 +22,7 @@ export const getAllMdxFilePaths = (category?: string): string[] => {
 };
 
 // 모든 포스트 목록 조회
-export const getAllPosts = async (category?: string): Promise<Post[]> => {
+export const getAllPosts = async (category: string): Promise<Post[]> => {
   try {
     const paths: string[] = getAllMdxFilePaths(category);
     const posts = await Promise.all(paths.map((postPath) => parsePost(postPath)));
@@ -68,5 +69,28 @@ const parsePostDetail = async (postPath: string) => {
   } catch (error) {
     console.error('Error occurred:', error);
     return { title: '', content: '', thumbnail: '', date: '' };
+  }
+};
+
+// 카테고리별 포스트 개수 조회
+export const getCategories = async (): Promise<Categories[]> => {
+  try {
+    const posts = await getAllPosts('all');
+
+    const categoryCount = posts.reduce<Record<string, number>>((acc, post) => {
+      const category = post.category;
+      acc[category] = (acc[category] || 0) + 1;
+      return acc;
+    }, {});
+
+    const categories = Object.entries(categoryCount).map(([category, count]) => ({ category, count }));
+
+    const totalCount = posts.length;
+    categories.unshift({ category: 'all', count: totalCount });
+
+    return categories;
+  } catch (error) {
+    console.error('Error occurred:', error);
+    return [];
   }
 };
