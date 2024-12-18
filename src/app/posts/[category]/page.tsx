@@ -22,7 +22,7 @@ export default async function Page({ params }: Props) {
   };
 
   return (
-    <div>
+    <div className="w-full">
       <CategoriesTabs defaultValue={category} categories={categories} buildHref={handleCategoryLink} />
 
       <ul>
