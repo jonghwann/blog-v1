@@ -1,24 +1,23 @@
 import Link from 'next/link';
 
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
-
 import { Categories } from '@/types/post';
 
-interface CategoriesTabs {
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+
+interface CategoryTabsProps {
   defaultValue: string;
   categories: Categories[];
-  buildHref: (category: string) => string;
+  baseUrl: string;
 }
 
-export default function CategoriesTabs({ defaultValue, categories, buildHref }: CategoriesTabs) {
+export default function CategoryTabs({ defaultValue, categories, baseUrl }: CategoryTabsProps) {
   return (
     <Tabs defaultValue={defaultValue}>
       <TabsList>
-        {categories.map((categoryItem) => {
-          const { category, count } = categoryItem;
+        {categories.map(({ category, count }) => {
           return (
             <TabsTrigger key={category} value={category}>
-              <Link href={buildHref(category)}>
+              <Link href={category === 'all' ? baseUrl : `${baseUrl}/${category}`}>
                 {category} ({count})
               </Link>
             </TabsTrigger>
