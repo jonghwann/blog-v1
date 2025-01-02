@@ -1,12 +1,13 @@
 export interface PostMatter {
+  thumbnail: string;
   title: string;
   date: string;
-  thumbnail: string;
 }
 
 export interface Post extends PostMatter {
   content: string;
   category: string;
+  readingMinutes: number;
   url: string;
 }
 

@@ -1,4 +1,4 @@
-import { getAllPosts, getCategories } from '@/lib/post';
+import { getPosts, getCategories } from '@/lib/post';
 
 import CategoryTabs from '@/components/molecules/category-tabs';
 
@@ -9,7 +9,7 @@ interface Props {
 export default async function Page({ params }: Props) {
   const { category } = await params;
 
-  const [categories, posts] = await Promise.all([getCategories(), getAllPosts(category)]);
+  const [categories, posts] = await Promise.all([getCategories(), getPosts(category)]);
 
   return (
     <div className="w-full">

@@ -1,96 +1,71 @@
 import fs from 'fs';
 import path from 'path';
+
+import { sync } from 'glob';
 import { format } from 'date-fns';
 import matter from 'gray-matter';
-import { sync } from 'glob';
+import readingTime from 'reading-time';
 
 import { Categories, Post, PostMatter } from '@/types/post';
 
-const BASE_PATH = '/src/posts';
-const POSTS_PATH = path.join(process.cwd(), BASE_PATH);
+const POST_BASE_PATH = '/src/posts';
+const POST_PATH = path.join(process.cwd(), POST_BASE_PATH);
 
-// 모든 MDX 파일 경로 조회
-export const getAllMdxFilePaths = (category: string): string[] => {
-  try {
-    const folder = category === 'all' ? '**' : category;
-    const paths: string[] = sync(`${POSTS_PATH}/${folder}/**/*.mdx`);
-    return paths;
-  } catch (error) {
-    console.error('Error occurred:', error);
-    return [];
-  }
+// 포스트 파일 경로 조회
+const getPostPaths = (category: string): string[] => {
+  const categoryPath = category === 'all' ? '**' : category;
+  return sync(`${POST_PATH}/${categoryPath}/**/*.mdx`);
 };
 
-// 모든 포스트 목록 조회
-export const getAllPosts = async (category: string): Promise<Post[]> => {
-  try {
-    const paths: string[] = getAllMdxFilePaths(category);
-    const posts = await Promise.all(paths.map((postPath) => parsePost(postPath)));
-    return posts;
-  } catch (error) {
-    console.error('Error occurred:', error);
-    return [];
-  }
+// 포스트 파싱
+const parsePost = (filePath: string): Post => {
+  const postInfo = parsePostAbstract(filePath);
+  const postData = parsePostDetail(filePath);
+  return { ...postInfo, ...postData };
 };
 
-// MDX 파일을 파싱하여 포스트의 요약 정보와 세부 정보를 결합
-const parsePost = async (postPath: string): Promise<Post> => {
-  try {
-    const postAbstract = parsePostAbstract(postPath);
-    const postDetail = await parsePostDetail(postPath);
-    return { ...postAbstract, ...postDetail };
-  } catch (error) {
-    console.error('Error occurred:', error);
-    return { title: '', content: '', thumbnail: '', date: '', category: '', url: '' };
-  }
+// 포스트 경로 정보 파싱
+const parsePostAbstract = (filePath: string) => {
+  const postPath = filePath.slice(filePath.indexOf(POST_BASE_PATH)).replace(`${POST_BASE_PATH}/`, '').replace('.mdx', '');
+  const [category, slug] = postPath.split('/');
+  const postUrl = `/posts/${category}/${slug}`;
+
+  return { category, url: postUrl };
 };
 
-// MDX 파일에서 포스트의 요약 정보 파싱
-export const parsePostAbstract = (postPath: string) => {
-  try {
-    const filePath = postPath.slice(postPath.indexOf(BASE_PATH)).replace(`${BASE_PATH}/`, '').replace('.mdx', '');
-    const [category, slug] = filePath.split('/');
-    const url = `/posts/${category}/${slug}`;
-    return { category, url };
-  } catch (error) {
-    console.error('Error occurred:', error);
-    return { url: '', category: '' };
-  }
+// 포스트 콘텐츠 파싱
+const parsePostDetail = (filePath: string) => {
+  const fileContent = fs.readFileSync(filePath, 'utf8');
+  const { data, content } = matter(fileContent);
+  const postMatter = data as PostMatter;
+
+  return {
+    ...postMatter,
+    content,
+    date: postMatter.date ? format(new Date(postMatter.date), 'yyyy.MM.dd') : '',
+    readingMinutes: Math.ceil(readingTime(content).minutes),
+  };
 };
 
-// MDX 파일에서 포스트의 세부 정보 파싱
-const parsePostDetail = async (postPath: string) => {
-  try {
-    const file = fs.readFileSync(postPath, 'utf8');
-    const { data, content } = matter(file);
-    const grayMatter = data as PostMatter;
-    const date = grayMatter.date ? format(new Date(grayMatter.date), 'yyyy.MM.dd') : '';
-    return { ...grayMatter, content, date };
-  } catch (error) {
-    console.error('Error occurred:', error);
-    return { title: '', content: '', thumbnail: '', date: '' };
-  }
+// 카테고리 조회
+export const getCategories = (): Categories[] => {
+  const posts = getPosts('all');
+  const categoryMap = posts.reduce<Record<string, number>>((acc, post) => {
+    acc[post.category] = (acc[post.category] || 0) + 1;
+    return acc;
+  }, {});
+
+  return [
+    { category: 'all', count: posts.length },
+    ...Object.entries(categoryMap).map(([category, count]) => ({
+      category,
+      count,
+    })),
+  ];
 };
 
-// 카테고리별 포스트 개수 조회
-export const getCategories = async (): Promise<Categories[]> => {
-  try {
-    const posts = await getAllPosts('all');
-
-    const categoryCount = posts.reduce<Record<string, number>>((acc, post) => {
-      const category = post.category;
-      acc[category] = (acc[category] || 0) + 1;
-      return acc;
-    }, {});
-
-    const categories = Object.entries(categoryCount).map(([category, count]) => ({ category, count }));
-
-    const totalCount = posts.length;
-    categories.unshift({ category: 'all', count: totalCount });
-
-    return categories;
-  } catch (error) {
-    console.error('Error occurred:', error);
-    return [];
-  }
+// 포스트 목록 조회
+export const getPosts = (category: string): Post[] => {
+  const postPaths = getPostPaths(category);
+  return postPaths.map(parsePost);
 };
