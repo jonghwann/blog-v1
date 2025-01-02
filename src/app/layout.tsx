@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 
+import ThemeProvider from '@/providers/theme-provider';
 import Layout from '@/layout/layout';
 
 import '@/styles/reset.css';
@@ -16,9 +17,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
+    <html lang="ko" suppressHydrationWarning>
       <body>
-        <Layout>{children}</Layout>
+        <ThemeProvider>
+          <Layout>{children}</Layout>
+        </ThemeProvider>
       </body>
     </html>
   );
