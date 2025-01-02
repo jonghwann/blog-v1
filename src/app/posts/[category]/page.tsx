@@ -1,6 +1,6 @@
 import { getAllPosts, getCategories } from '@/lib/post';
 
-import CategoriesTabs from '@/components/molecules/categories-tabs';
+import CategoryTabs from '@/components/molecules/category-tabs';
 
 interface Props {
   params: Promise<{ category: string }>;
@@ -9,21 +9,11 @@ interface Props {
 export default async function Page({ params }: Props) {
   const { category } = await params;
 
-  const categories = await getCategories();
-  const posts = await getAllPosts(category);
-
-  // 카테고리 값을 기반으로 링크 생성
-  const handleCategoryLink = (category: string) => {
-    if (category === 'all') {
-      return '/posts';
-    } else {
-      return `/posts/${category}`;
-    }
-  };
+  const [categories, posts] = await Promise.all([getCategories(), getAllPosts(category)]);
 
   return (
     <div className="w-full">
-      <CategoriesTabs defaultValue={category} categories={categories} buildHref={handleCategoryLink} />
+      <CategoryTabs defaultValue={category} categories={categories} baseUrl={'/posts'} />
 
       <ul>
         {posts.map((post) => {
