@@ -6,10 +6,10 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   return (
-    <main className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col">
       <Header />
-      <div className="flex w-full flex-1">{children}</div>
+      <main className="mt-[64px] flex w-full flex-1">{children}</main>
       <div className="bg-slate-300">푸터 입니다.</div>
-    </main>
+    </div>
   );
 }
