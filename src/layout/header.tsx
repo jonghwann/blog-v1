@@ -6,7 +6,7 @@ import { Github } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 
-import ThemeToggle from '@/components/test/theme-toggle';
+import ThemeToggle from '@/components/atoms/theme-toggle';
 
 const NAV_LINKS = [
   {
