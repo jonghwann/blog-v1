@@ -7,9 +7,12 @@ export default {
   theme: {
     extend: {
       colors: {
-        border: 'var(--border)',
-        background: 'var(--background)',
-        foreground: 'var(--foreground)',
+        border: 'var(--color-border)',
+        background: 'var(--color-bg)',
+        foreground: 'var(--color-text)',
+      },
+      zIndex: {
+        header: '50',
       },
     },
   },

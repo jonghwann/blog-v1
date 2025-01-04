@@ -31,17 +31,24 @@
 
 @layer base {
   :root {
-    --white: hsl(210 40% 98%);
-    --black: #0d1117;
-    --borderColor: #3d444d;
-
-    --border: var(--white);
-    --background: var(--white) --foreground: var(--black);
+    --color-border: #d1d9e0;
+    --color-bg: #ffffff;
+    --color-bg-muted: #818b981a;
+    --color-text: #1f2328;
+    --color-text-muted: #6e7781;
   }
 
   .dark {
-    --border: var(--borderColor);
-    --background: var(--black);
-    --foreground: var(--white);
+    --color-border: #3d444d;
+    --color-bg: #0d1117;
+    --color-bg-muted: #656c7633;
+    --color-text: #f0f6fc;
+    --color-text-muted: #9198a1;
+  }
+}
+
+@layer components {
+  .icon-box {
+    @apply rounded-md p-2 transition-colors hover:bg-[--color-bg-muted];
   }
 }
