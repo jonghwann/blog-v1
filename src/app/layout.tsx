@@ -3,7 +3,6 @@ import type { Metadata } from 'next';
 import ThemeProvider from '@/providers/theme-provider';
 import Layout from '@/layout/layout';
 
-import '@/styles/reset.css';
 import '@/styles/global.css';
 
 export const metadata: Metadata = {

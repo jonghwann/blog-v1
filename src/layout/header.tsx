@@ -1,3 +1,9 @@
+import ThemeToggle from '@/components/test/theme-toggle';
+
 export default function Header() {
-  return <div className="border-b border-slate-200 bg-[#0d1117]">header</div>;
+  return (
+    <header className="border-b border-[#3d444d]">
+      <ThemeToggle />
+    </header>
+  );
 }
