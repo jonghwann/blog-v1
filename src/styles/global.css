@@ -34,16 +34,22 @@
     --color-border: #d1d9e0;
     --color-bg: #ffffff;
     --color-bg-muted: #818b981a;
+    --color-bg-inverse: #0d1117;
+    --color-bg-inverse-hover: #24292f;
     --color-text: #1f2328;
     --color-text-muted: #6e7781;
+    --color-text-inverse: #f0f6fc;
   }
 
   .dark {
     --color-border: #3d444d;
     --color-bg: #0d1117;
     --color-bg-muted: #656c7633;
+    --color-bg-inverse: #ffffff;
+    --color-bg-inverse-hover: #f0f3f6;
     --color-text: #f0f6fc;
     --color-text-muted: #9198a1;
+    --color-text-inverse: #1f2328;
   }
 }
 

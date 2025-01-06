@@ -5,8 +5,8 @@ export interface PostMatter {
 }
 
 export interface Post extends PostMatter {
-  content: string;
   category: string;
+  content: string;
   readingMinutes: number;
   url: string;
 }

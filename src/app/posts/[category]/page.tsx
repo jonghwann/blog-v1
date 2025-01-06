@@ -1,6 +1,7 @@
 import { getPosts, getCategories } from '@/lib/post';
 
 import CategoryTabs from '@/components/molecules/category-tabs';
+import PostCard from '@/components/atoms/post-card';
 
 interface Props {
   params: Promise<{ category: string }>;
@@ -13,12 +14,11 @@ export default async function Page({ params }: Props) {
 
   return (
     <div className="w-full">
-      <CategoryTabs defaultValue={category} categories={categories} baseUrl={'/posts'} />
+      <CategoryTabs className="mb-10" defaultValue={category} categories={categories} baseUrl={'/posts'} />
 
-      <ul>
+      <ul className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {posts.map((post) => {
-          const { url, title } = post;
-          return <li key={url}>{title}</li>;
+          return <PostCard key={post.url} post={post} />;
         })}
       </ul>
     </div>

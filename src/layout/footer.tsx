@@ -18,7 +18,7 @@ export default function Footer() {
         </Link>
       </div>
 
-      <span>© {getYear(new Date())} Powered by Jonghwan Jang</span>
+      <span>© {getYear(new Date())} Powered by JongHwan Jang</span>
     </footer>
   );
 }
