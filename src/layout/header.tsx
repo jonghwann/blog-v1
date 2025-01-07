@@ -25,19 +25,22 @@ export default function Header() {
   return (
     <header className="fixed z-header w-full border-b border-[--color-border] bg-[--color-bg]">
       <div className="mx-auto flex h-[64px] w-full max-w-[1280px] items-center justify-between px-4">
-        <nav className="flex items-center">
-          {NAV_LINKS.map(({ name, href }) => (
-            <Link
-              key={href}
-              href={href}
-              className={cn(
-                'rounded-full px-4 py-1 text-sm text-[--color-text-muted] transition-colors hover:text-[--color-text]',
-                pathname.startsWith(href) && 'bg-[--color-bg-muted] font-semibold text-[--color-text]',
-              )}
-            >
-              {name}
-            </Link>
-          ))}
+        <nav>
+          <ul className="flex items-center">
+            {NAV_LINKS.map(({ name, href }) => (
+              <li key={href}>
+                <Link
+                  href={href}
+                  className={cn(
+                    'rounded-full px-4 py-1 text-sm text-[--color-text-muted] transition-colors hover:text-[--color-text]',
+                    pathname.startsWith(href) && 'bg-[--color-bg-muted] font-semibold text-[--color-text]',
+                  )}
+                >
+                  {name}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </nav>
 
         <div className="flex items-center">
