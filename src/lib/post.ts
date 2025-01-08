@@ -33,15 +33,29 @@ const parsePostAbstract = (filePath: string) => {
   return { category, url: postUrl };
 };
 
+// 콘텐츠 미리보기 텍스트 추출
+const getExcerpt = (content: string, maxLength: number = 150): string => {
+  const plainText = content
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/[#*`]/g, '')
+    .replace(/(?:^|\n)> /g, '')
+    .replace(/\n/g, ' ')
+    .trim();
+
+  return plainText.length > maxLength ? plainText.slice(0, maxLength).trim() + '...' : plainText;
+};
+
 // 포스트 콘텐츠 파싱
 const parsePostDetail = (filePath: string) => {
   const fileContent = fs.readFileSync(filePath, 'utf8');
   const { data, content } = matter(fileContent);
   const postMatter = data as PostMatter;
+  const excerpt = getExcerpt(content);
 
   return {
     ...postMatter,
     content,
+    excerpt,
     date: postMatter.date ? format(new Date(postMatter.date), 'yyyy.MM.dd') : '',
     readingMinutes: Math.ceil(readingTime(content).minutes),
   };

@@ -16,7 +16,7 @@ export default async function Page({ params }: Props) {
     <div className="w-full">
       <CategoryTabs className="mb-10" defaultValue={category} categories={categories} baseUrl={'/posts'} />
 
-      <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
         {posts.map((post) => {
           return <PostCard key={post.url} post={post} />;
         })}
