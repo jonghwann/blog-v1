@@ -1,7 +1,5 @@
 import Link from 'next/link';
 
-import { getYear } from 'date-fns';
-
 import Github from '@/components/icons/github';
 import LinkedIn from '@/components/icons/linked-in';
 
@@ -18,7 +16,7 @@ export default function Footer() {
         </Link>
       </div>
 
-      <span>© {getYear(new Date())} Powered by JongHwan Jang</span>
+      <span>© Powered by JongHwan Jang</span>
     </footer>
   );
 }
