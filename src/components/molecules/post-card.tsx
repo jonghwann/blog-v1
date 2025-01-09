@@ -14,7 +14,7 @@ export default function PostCard({ post: { thumbnail, category, title, excerpt, 
     <li>
       <article className="group overflow-hidden rounded-2xl shadow-[0_9px_10px_-2px_rgba(0,0,0,0.1)] transition-[transform,box-shadow] duration-500 ease-in-out will-change-transform hover:translate-y-[-5px] hover:shadow-[0_17px_19px_-2px_rgba(0,0,0,0.2)]">
         <Link href={url}>
-          <div className="relative aspect-video">
+          <figure className="relative aspect-video">
             <Image
               src={thumbnail}
               alt={title}
@@ -23,21 +23,21 @@ export default function PostCard({ post: { thumbnail, category, title, excerpt, 
               priority
               className="object-cover duration-500 ease-in-out group-hover:scale-[1.03]"
             />
-          </div>
+          </figure>
 
           <div className="flex h-[174px] flex-col justify-between bg-white p-5 text-secondary-foreground dark:bg-[#1a1f24]">
             <div className="flex flex-col gap-2">
               <div className="w-fit rounded-full bg-accent px-2 py-[3px] text-xs text-white">{category}</div>
-              <div className="text-base font-medium text-foreground">{title}</div>
+              <h2 className="text-base font-medium text-foreground">{title}</h2>
 
-              <div className="line-clamp-2 text-xs">{excerpt}</div>
+              <p className="line-clamp-2 text-xs">{excerpt}</p>
             </div>
 
             <div className="flex items-center justify-between text-xs">
-              <div className="flex items-center gap-1">
+              <time className="flex items-center gap-1">
                 <CalendarDays className="mb-0.5 h-3.5 w-3.5" />
                 <span>{date}</span>
-              </div>
+              </time>
 
               <div className="flex items-center gap-1">
                 <Clock3 className="h-3.5 w-3.5" />
