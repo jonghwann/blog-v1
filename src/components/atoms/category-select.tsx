@@ -22,16 +22,20 @@ export default function CategorySelect({ classNames = {}, categories, defaultVal
   const router = useRouter();
 
   return (
-    <Select defaultValue={defaultValue} onValueChange={(value) => router.push(value === 'all' ? baseUrl : `${baseUrl}/${value}`)}>
+    <Select defaultValue={defaultValue} onValueChange={(value) => router.push(value === 'All' ? baseUrl : `${baseUrl}/${value}`)}>
       <SelectTrigger className={cn('h-10 w-[180px] select-none focus:ring-0', classNames.trigger)}>
         <SelectValue />
       </SelectTrigger>
 
       <SelectContent className="top-[-3px] border-none [&>div]:!p-0">
         <div className="rounded-md border bg-background p-1">
-          {categories.map(({ category, count }) => {
+          {categories.map(({ category, categoryPath, count }) => {
             return (
-              <SelectItem key={category} value={category} className={cn('h-10 select-none px-2 text-[13px] focus:bg-secondary-background', classNames.item)}>
+              <SelectItem
+                key={category}
+                value={categoryPath === 'all' ? 'All' : categoryPath}
+                className={cn('h-10 select-none px-2 text-[13px] focus:bg-secondary-background', classNames.item)}
+              >
                 {category} ({count})
               </SelectItem>
             );

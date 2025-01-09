@@ -6,6 +6,7 @@ export interface PostMatter {
 
 export interface Post extends PostMatter {
   category: string;
+  categoryPath: string;
   excerpt: string;
   content: string;
   readingMinutes: number;
@@ -14,5 +15,6 @@ export interface Post extends PostMatter {
 
 export interface Categories {
   category: string;
+  categoryPath: string;
   count: number;
 }

@@ -18,18 +18,18 @@ export default function CategoryTabs({ className, classNames = {}, defaultValue,
   return (
     <Tabs className={className} defaultValue={defaultValue}>
       <TabsList className="gap-2">
-        {categories.map(({ category, count }) => {
+        {categories.map(({ category, categoryPath, count }) => {
           return (
             <TabsTrigger
               key={category}
-              value={category}
+              value={categoryPath === 'all' ? 'All' : categoryPath}
               className={cn(
                 'py-2 hover:bg-secondary-background data-[state=active]:bg-contrast-background data-[state=active]:text-contrast-foreground data-[state=active]:shadow-none hover:data-[state=active]:bg-[#24292f] hover:data-[state=active]:dark:bg-[#f0f3f6]',
                 classNames.trigger,
               )}
               asChild
             >
-              <Link href={category === 'all' ? baseUrl : `${baseUrl}/${category}`}>
+              <Link href={category === 'All' ? baseUrl : `${baseUrl}/${categoryPath}`}>
                 {category} ({count})
               </Link>
             </TabsTrigger>
