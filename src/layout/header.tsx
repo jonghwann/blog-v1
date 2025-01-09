@@ -6,7 +6,7 @@ import { Github } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 
-import ThemeToggle from '@/components/atoms/theme-toggle';
+import ThemeToggleButton from '@/components/atoms/theme-toggle-button';
 
 const NAV_LINKS = [
   {
@@ -48,7 +48,7 @@ export default function Header() {
             <Github size={20} />
           </Link>
 
-          <ThemeToggle />
+          <ThemeToggleButton />
         </div>
       </div>
     </header>
