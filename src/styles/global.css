@@ -41,6 +41,8 @@
     --secondary-background: #818b981a;
     --secondary-foreground: #59636e;
 
+    --accent: #ff6666;
+
     --contrast-background: var(--black);
     --contrast-foreground: #f0f6fc;
   }

@@ -7,6 +7,9 @@ export default {
   theme: {
     extend: {
       colors: {
+        white: 'var(--white)',
+        black: 'var(--black)',
+
         border: 'var(--border)',
         background: 'var(--background)',
         foreground: 'var(--foreground)',
@@ -15,6 +18,8 @@ export default {
           background: 'var(--secondary-background)',
           foreground: 'var(--secondary-foreground)',
         },
+
+        accent: 'var(--accent)',
 
         contrast: {
           background: 'var(--contrast-background)',
