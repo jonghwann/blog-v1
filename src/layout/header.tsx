@@ -23,7 +23,7 @@ export default function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="fixed z-header w-full border-b border-[--color-border] bg-[--color-bg]">
+    <header className="fixed z-header w-full border-b border-border bg-background">
       <div className="mx-auto flex h-[64px] w-full max-w-[1280px] items-center justify-between px-4">
         <nav>
           <ul className="flex items-center">
@@ -32,8 +32,8 @@ export default function Header() {
                 <Link
                   href={href}
                   className={cn(
-                    'rounded-full px-4 py-1 text-sm text-[--color-text-muted] transition-colors hover:text-[--color-text]',
-                    pathname.startsWith(href) && 'bg-[--color-bg-muted] font-semibold text-[--color-text]',
+                    'rounded-full px-4 py-1.5 text-sm font-medium text-secondary-foreground transition-colors hover:text-foreground',
+                    pathname.startsWith(href) && 'bg-secondary-background text-foreground',
                   )}
                 >
                   {name}
