@@ -7,14 +7,14 @@ import LinkedIn from '@/components/icons/linked-in';
 
 export default function Footer() {
   return (
-    <footer className="flex flex-col items-center justify-center gap-4 bg-[--color-bg] py-16">
+    <footer className="flex flex-col items-center justify-center gap-4 bg-background py-16">
       <div className="flex items-center gap-4">
         <Link href="https://github.com/wkdwhdghks" target="_blank">
-          <Github className="fill-[--color-text]" width={30} height={30} />
+          <Github className="fill-foreground" width={30} height={30} />
         </Link>
 
         <Link href="/">
-          <LinkedIn className="fill-[--color-text]" width={30} height={30} />
+          <LinkedIn className="fill-foreground" width={30} height={30} />
         </Link>
       </div>
 

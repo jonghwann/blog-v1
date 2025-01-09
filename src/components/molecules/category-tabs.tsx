@@ -20,7 +20,7 @@ export default function CategoryTabs({ className, defaultValue, categories, base
             <Link key={category} href={category === 'all' ? baseUrl : `${baseUrl}/${category}`}>
               <TabsTrigger
                 value={category}
-                className="py-2 hover:bg-[--color-bg-muted] data-[state=active]:bg-[--color-bg-inverse] data-[state=active]:text-[--color-text-inverse] data-[state=active]:shadow-none hover:data-[state=active]:bg-[--color-bg-inverse-hover]"
+                className="data-[state=active]:text-contrast-foreground py-2 hover:bg-secondary-background data-[state=active]:bg-contrast-background data-[state=active]:shadow-none hover:data-[state=active]:bg-[#24292f] hover:data-[state=active]:dark:bg-[#f0f3f6]"
               >
                 {category} ({count})
               </TabsTrigger>

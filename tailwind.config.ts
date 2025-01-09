@@ -7,9 +7,19 @@ export default {
   theme: {
     extend: {
       colors: {
-        border: 'var(--color-border)',
-        background: 'var(--color-bg)',
-        foreground: 'var(--color-text)',
+        border: 'var(--border)',
+        background: 'var(--background)',
+        foreground: 'var(--foreground)',
+
+        secondary: {
+          background: 'var(--secondary-background)',
+          foreground: 'var(--secondary-foreground)',
+        },
+
+        contrast: {
+          background: 'var(--contrast-background)',
+          foreground: 'var(--contrast-foreground)',
+        },
       },
       zIndex: {
         header: '50',
