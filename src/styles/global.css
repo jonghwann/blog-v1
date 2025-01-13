@@ -69,3 +69,27 @@
     @apply rounded-md p-2 transition-colors hover:bg-secondary-background;
   }
 }
+
+/* 코드 블록 스타일 */
+pre {
+  overflow-x: auto;
+  padding: 1rem 0;
+}
+
+pre [data-line] {
+  padding: 0 1rem;
+}
+
+/* 라이트 모드 */
+code[data-theme*=' '],
+code[data-theme*=' '] span {
+  color: var(--shiki-light) !important;
+  background-color: var(--shiki-light-bg) !important;
+}
+
+/* 다크 모드 */
+.dark code[data-theme*=' '],
+.dark code[data-theme*=' '] span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+}

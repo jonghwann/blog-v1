@@ -6,14 +6,14 @@ import { format } from 'date-fns';
 import matter from 'gray-matter';
 import readingTime from 'reading-time';
 
-import { Categories, Post, PostMatter } from '@/types/post';
+import { Categories, HeadingItem, Post, PostMatter } from '@/types/post';
 
 const POSTS_BASE_PATH = '/src/posts';
 const POSTS_DIRECTORY = path.join(process.cwd(), POSTS_BASE_PATH);
 const MAX_EXCERPT_LENGTH = 150;
 
 // 포스트 파일 경로 조회
-const getPostPaths = (category: string): string[] => {
+export const getPostPaths = (category: string): string[] => {
   const categoryPath = category === 'All' ? '*' : category;
   return sync(`${POSTS_DIRECTORY}/${categoryPath}/**/*.mdx`);
 };
@@ -26,17 +26,17 @@ const parsePost = (filePath: string): Post => {
 };
 
 // 포스트 경로 정보 파싱
-const parsePostAbstract = (filePath: string): Pick<Post, 'category' | 'categoryPath' | 'url'> => {
+export const parsePostAbstract = (filePath: string): Pick<Post, 'category' | 'categoryPath' | 'url' | 'slug'> => {
   const postPath = path.relative(POSTS_DIRECTORY, filePath).replace('.mdx', '');
   const [categoryPath, slug] = postPath.split('/');
 
   const category = formatCategoryName(categoryPath);
-  const postUrl = `/posts/${categoryPath}/${slug}`;
-  return { category, categoryPath, url: postUrl };
+  const url = `/posts/${categoryPath}/${slug}`;
+  return { category, categoryPath, url, slug };
 };
 
 // 포스트 콘텐츠 파싱
-const parsePostDetail = (filePath: string): Omit<Post, 'category' | 'categoryPath' | 'url'> => {
+const parsePostDetail = (filePath: string): Omit<Post, 'category' | 'categoryPath' | 'url' | 'slug'> => {
   const fileContent = fs.readFileSync(filePath, 'utf8');
   const { data, content } = matter(fileContent);
   const postMatter = data as PostMatter;
@@ -101,4 +101,31 @@ export const getPosts = (category: string): Post[] => {
     const dateB = b.date ? new Date(b.date).getTime() : 0;
     return dateB - dateA;
   });
+};
+
+// 포스트 상세 페이지 조회
+export const getPostDetail = async (category: string, post: string) => {
+  const filePath = `${POSTS_DIRECTORY}/${category}/${post}/content.mdx`;
+  const detail = await parsePost(filePath);
+  return detail;
+};
+
+export const parseToc = (content: string): HeadingItem[] => {
+  const regex = /^(##|###) (.*$)/gim;
+  const headingList = content.match(regex);
+  return (
+    headingList?.map((heading: string) => ({
+      text: heading.replace('##', '').replace('#', ''),
+      link:
+        '#' +
+        heading
+          .replace('# ', '')
+          .replace('#', '')
+          .replace(/[\[\]:!@#$/%^&*()+=,.]/g, '')
+          .replace(/ /g, '-')
+          .toLowerCase()
+          .replace('?', ''),
+      indent: (heading.match(/#/g)?.length || 2) - 2,
+    })) || []
+  );
 };
