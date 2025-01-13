@@ -11,10 +11,17 @@ export interface Post extends PostMatter {
   content: string;
   readingMinutes: number;
   url: string;
+  slug: string;
 }
 
 export interface Categories {
   category: string;
   categoryPath: string;
   count: number;
+}
+
+export interface HeadingItem {
+  text: string;
+  link: string;
+  indent: number;
 }
