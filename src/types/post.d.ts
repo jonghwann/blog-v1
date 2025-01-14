@@ -1,27 +1,26 @@
+export interface PostInfo {
+  category: string;
+  postUrl: string;
+  categorySlug: string;
+  postSlug: string;
+}
+
 export interface PostMatter {
   thumbnail: string;
   title: string;
-  date: string;
+  createdAt: string;
 }
 
-export interface Post extends PostMatter {
-  category: string;
-  categoryPath: string;
+export interface PostDetail extends PostMatter {
   excerpt: string;
-  content: string;
   readingMinutes: number;
-  url: string;
-  slug: string;
+  content: string;
 }
 
-export interface Categories {
+export interface Post extends PostInfo, PostDetail {}
+
+export interface Category {
   category: string;
-  categoryPath: string;
+  categorySlug: string;
   count: number;
-}
-
-export interface HeadingItem {
-  text: string;
-  link: string;
-  indent: number;
 }

@@ -1,5 +1,5 @@
-import Link from 'next/link';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { CalendarDays, Clock3 } from 'lucide-react';
 
@@ -9,11 +9,11 @@ interface PostCardProps {
   post: Post;
 }
 
-export default function PostCard({ post: { thumbnail, category, title, excerpt, date, readingMinutes, url } }: PostCardProps) {
+export default function PostCard({ post: { thumbnail, title, category, excerpt, createdAt, readingMinutes, postUrl } }: PostCardProps) {
   return (
     <li>
       <article className="group overflow-hidden rounded-2xl shadow-[0_9px_10px_-2px_rgba(0,0,0,0.1)] transition-[transform,box-shadow] duration-500 ease-in-out will-change-transform hover:translate-y-[-5px] hover:shadow-[0_17px_19px_-2px_rgba(0,0,0,0.2)]">
-        <Link href={url}>
+        <Link href={postUrl}>
           <figure className="relative aspect-video">
             <Image
               src={thumbnail}
@@ -36,7 +36,7 @@ export default function PostCard({ post: { thumbnail, category, title, excerpt, 
             <div className="flex items-center justify-between text-xs">
               <time className="flex items-center gap-1">
                 <CalendarDays className="mb-0.5 h-3.5 w-3.5" />
-                <span>{date}</span>
+                <span>{createdAt}</span>
               </time>
 
               <div className="flex items-center gap-1">

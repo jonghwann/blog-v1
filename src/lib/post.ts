@@ -1,60 +1,33 @@
 import fs from 'fs';
 import path from 'path';
 
-import { sync } from 'glob';
-import { format } from 'date-fns';
+import { glob } from 'glob';
 import matter from 'gray-matter';
 import readingTime from 'reading-time';
 
-import { Categories, HeadingItem, Post, PostMatter } from '@/types/post';
+import { PostInfo, PostMatter, PostDetail, Post, Category } from '@/types/post';
 
-const POSTS_BASE_PATH = '/src/posts';
-const POSTS_DIRECTORY = path.join(process.cwd(), POSTS_BASE_PATH);
-const MAX_EXCERPT_LENGTH = 150;
+const POST_PATH = '/src/posts';
+const POST_DIRECTORY = path.join(process.cwd(), POST_PATH);
 
-// 포스트 파일 경로 조회
-export const getPostPaths = (category: string): string[] => {
-  const categoryPath = category === 'All' ? '*' : category;
-  return sync(`${POSTS_DIRECTORY}/${categoryPath}/**/*.mdx`);
-};
+/**
+ * 카테고리 슬러그를 카테고리로 변환합니다.
+ * @param categorySlug - 카테고리 슬러그 (예: 'next-js')
+ * @returns 카테고리 (예: 'Next Js')
+ */
+export const formatCategory = (categorySlug: string): string =>
+  categorySlug
+    .split('-')
+    .map((token) => token[0].toUpperCase() + token.slice(1))
+    .join(' ');
 
-// 포스트 파싱
-const parsePost = (filePath: string): Post => {
-  const postInfo = parsePostAbstract(filePath);
-  const postData = parsePostDetail(filePath);
-  return { ...postInfo, ...postData };
-};
-
-// 포스트 경로 정보 파싱
-export const parsePostAbstract = (filePath: string): Pick<Post, 'category' | 'categoryPath' | 'url' | 'slug'> => {
-  const postPath = path.relative(POSTS_DIRECTORY, filePath).replace('.mdx', '');
-  const [categoryPath, slug] = postPath.split('/');
-
-  const category = formatCategoryName(categoryPath);
-  const url = `/posts/${categoryPath}/${slug}`;
-  return { category, categoryPath, url, slug };
-};
-
-// 포스트 콘텐츠 파싱
-const parsePostDetail = (filePath: string): Omit<Post, 'category' | 'categoryPath' | 'url' | 'slug'> => {
-  const fileContent = fs.readFileSync(filePath, 'utf8');
-  const { data, content } = matter(fileContent);
-  const postMatter = data as PostMatter;
-
-  const excerpt = getExcerpt(content);
-  const date = postMatter.date ? format(new Date(postMatter.date), 'yyyy.MM.dd') : '';
-
-  return {
-    ...postMatter,
-    excerpt,
-    content,
-    date,
-    readingMinutes: Math.ceil(readingTime(content).minutes),
-  };
-};
-
-// 콘텐츠 미리보기 텍스트 추출
-const getExcerpt = (content: string, maxLength: number = MAX_EXCERPT_LENGTH): string => {
+/**
+ * 마크다운 콘텐츠에서 미리보기 텍스트를 추출합니다.
+ * @param content - 마크다운 콘텐츠
+ * @param maxLength - 최대 길이 (기본값: 150)
+ * @returns {string} 미리보기 텍스트 (예: 'Next.js는 React 프레임워크입니다...')
+ */
+const getExcerpt = (content: string, maxLength = 150): string => {
   const plainText = content
     .replace(/<[^>]*>/g, '')
     .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
@@ -66,66 +39,105 @@ const getExcerpt = (content: string, maxLength: number = MAX_EXCERPT_LENGTH): st
   return plainText.length > maxLength ? plainText.slice(0, maxLength).trim() + '...' : plainText;
 };
 
-// 카테고리 폴더명을 화면에 표시할 형식으로 변환 next_js -> Next Js
-export const formatCategoryName = (dirPath: string): string =>
-  dirPath
-    .split('_')
-    .map((token) => token[0].toUpperCase() + token.slice(1))
-    .join(' ');
+/**
+ * 특정 카테고리의 MDX 파일 경로들을 조회합니다.
+ * @param category - 조회할 카테고리 ('All'인 경우 모든 카테고리)
+ * @returns MDX 파일 경로 배열 (예: ['/posts/next-js/routing/content.mdx', ...])
+ */
+export const getMdxPaths = async (category: string): Promise<string[]> => {
+  const categoryPattern = category === 'All' ? '*' : category;
+  return await glob(`${POST_DIRECTORY}/${categoryPattern}/**/*.mdx`);
+};
 
-// 카테고리 조회
-export const getCategories = (): Categories[] => {
-  const allPosts = getPosts('All');
+/**
+ * MDX 파일을 파싱하여 포스트 데이터를 생성합니다.
+ * @param filePath - MDX 파일 경로 (예: '/posts/next_js/server-components.mdx')
+ * @returns {Promise<Post>} 포스트 데이터
+ */
+const parsePost = async (filePath: string): Promise<Post> => {
+  const postInfo = parsePostInfo(filePath);
+  const postDetail = await parsePostDetail(filePath);
+  return { ...postInfo, ...postDetail };
+};
 
-  const categoryCounts = allPosts.reduce<Record<string, number>>((counts, post) => {
-    counts[post.categoryPath] = (counts[post.categoryPath] || 0) + 1;
+/**
+ * 파일 경로에서 포스트 정보를 파싱합니다.
+ * @param filePath - MDX 파일 경로 (예: '/posts/next_js/server-components.mdx')
+ * @returns {PostInfo} 포스트 정보
+ */
+export const parsePostInfo = (filePath: string): PostInfo => {
+  const postPath = path.relative(POST_DIRECTORY, filePath).replace('.mdx', '');
+  const [categorySlug, postSlug] = postPath.split('/');
+
+  const category = formatCategory(categorySlug);
+  const postUrl = `/posts/${categorySlug}/${postSlug}`;
+  return { category, postUrl, categorySlug, postSlug };
+};
+
+/**
+ * MDX 파일에서 포스트 상세 정보를 파싱합니다.
+ * @param filePath - MDX 파일 경로 (예: '/posts/next_js/server-components.mdx')
+ * @returns {Promise<PostDetail>} 포스트 상세 정보
+ */
+const parsePostDetail = async (filePath: string): Promise<PostDetail> => {
+  const fileContent = await fs.promises.readFile(filePath, 'utf8');
+  const { data, content } = matter(fileContent);
+
+  const frontMatter = data as PostMatter;
+  const excerpt = getExcerpt(content);
+
+  return {
+    ...frontMatter,
+    excerpt,
+    readingMinutes: Math.ceil(readingTime(content).minutes),
+    content,
+  };
+};
+
+/**
+ * 모든 카테고리 정보를 조회합니다.
+ * @returns {Category[]} 카테고리 목록
+ */
+export const getCategoryList = async (): Promise<Category[]> => {
+  const postList = await getPostList('All');
+
+  const categoryCountMap = postList.reduce<Record<string, number>>((counts, post) => {
+    counts[post.categorySlug] = (counts[post.categorySlug] || 0) + 1;
     return counts;
   }, {});
 
-  const categories = Object.entries(categoryCounts).map(([categoryPath, count]) => ({
-    category: formatCategoryName(categoryPath),
-    categoryPath,
+  const categoryList = Object.entries(categoryCountMap).map(([categorySlug, count]) => ({
+    category: formatCategory(categorySlug),
+    categorySlug,
     count,
   }));
 
-  return [{ category: 'All', categoryPath: 'all', count: allPosts.length }, ...categories];
+  return [{ category: 'All', categorySlug: 'all', count: postList.length }, ...categoryList];
 };
 
-// 포스트 목록 조회
-export const getPosts = (category: string): Post[] => {
-  const postPaths = getPostPaths(category);
-  const posts = postPaths.map(parsePost);
+/**
+ * 특정 카테고리의 포스트 목록을 조회합니다.
+ * @param category - 조회할 카테고리 ('All'인 경우 모든 카테고리)
+ * @returns {Promise<Post[]>} 날짜순으로 정렬된 포스트 목록
+ */
+export const getPostList = async (category: string): Promise<Post[]> => {
+  const mdxPaths = await getMdxPaths(category);
+  const postList = await Promise.all(mdxPaths.map(parsePost));
 
-  return posts.sort((a, b) => {
-    const dateA = a.date ? new Date(a.date).getTime() : 0;
-    const dateB = b.date ? new Date(b.date).getTime() : 0;
-    return dateB - dateA;
+  return postList.sort((a, b) => {
+    const timestampA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+    const timestampB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+    return timestampB - timestampA;
   });
 };
 
-// 포스트 상세 페이지 조회
-export const getPostDetail = async (category: string, post: string) => {
-  const filePath = `${POSTS_DIRECTORY}/${category}/${post}/content.mdx`;
-  const detail = await parsePost(filePath);
-  return detail;
-};
-
-export const parseToc = (content: string): HeadingItem[] => {
-  const regex = /^(##|###) (.*$)/gim;
-  const headingList = content.match(regex);
-  return (
-    headingList?.map((heading: string) => ({
-      text: heading.replace('##', '').replace('#', ''),
-      link:
-        '#' +
-        heading
-          .replace('# ', '')
-          .replace('#', '')
-          .replace(/[\[\]:!@#$/%^&*()+=,.]/g, '')
-          .replace(/ /g, '-')
-          .toLowerCase()
-          .replace('?', ''),
-      indent: (heading.match(/#/g)?.length || 2) - 2,
-    })) || []
-  );
+/**
+ * 특정 포스트의 상세 정보를 조회합니다.
+ * @param categorySlug - 카테고리 슬러그 (예: 'next-js')
+ * @param postSlug - 포스트 슬러그 (예: 'server-components')
+ * @returns {Promise<Post>} 포스트 상세 정보
+ */
+export const getPostDetail = async (categorySlug: string, postSlug: string): Promise<Post> => {
+  const filePath = `${POST_DIRECTORY}/${categorySlug}/${postSlug}/content.mdx`;
+  return parsePost(filePath);
 };
