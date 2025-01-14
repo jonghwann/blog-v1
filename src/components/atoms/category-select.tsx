@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 
 import { cn } from '@/lib/utils';
 
-import { Categories } from '@/types/post';
+import { Category } from '@/types/post';
 
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select';
 
@@ -13,12 +13,12 @@ interface CategorySelectProps {
     trigger?: string;
     item?: string;
   };
-  categories: Categories[];
+  categoryList: Category[];
   defaultValue: string;
   baseUrl: string;
 }
 
-export default function CategorySelect({ classNames = {}, categories, defaultValue, baseUrl }: CategorySelectProps) {
+export default function CategorySelect({ classNames = {}, categoryList, defaultValue, baseUrl }: CategorySelectProps) {
   const router = useRouter();
 
   return (
@@ -29,11 +29,11 @@ export default function CategorySelect({ classNames = {}, categories, defaultVal
 
       <SelectContent className="top-[-3px] border-none [&>div]:!p-0">
         <div className="rounded-md border bg-background p-1">
-          {categories.map(({ category, categoryPath, count }) => {
+          {categoryList.map(({ category, categorySlug, count }) => {
             return (
               <SelectItem
                 key={category}
-                value={categoryPath === 'all' ? 'All' : categoryPath}
+                value={categorySlug === 'all' ? 'All' : categorySlug}
                 className={cn('h-10 select-none px-2 text-[13px] focus:bg-secondary-background', classNames.item)}
               >
                 {category} ({count})

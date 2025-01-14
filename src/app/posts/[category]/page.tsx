@@ -1,4 +1,4 @@
-import { getPosts, getCategories } from '@/lib/post';
+import { getCategoryList, getPostList } from '@/lib/post';
 
 import CategoryTabs from '@/components/atoms/category-tabs';
 import CategorySelect from '@/components/atoms/category-select';
@@ -11,17 +11,17 @@ interface Props {
 export default async function Page({ params }: Props) {
   const { category } = await params;
 
-  const [categories, posts] = await Promise.all([getCategories(), getPosts(category)]);
+  const [categoryList, postList] = await Promise.all([getCategoryList(), getPostList(category)]);
 
   return (
     <div className="w-full">
-      <CategoryTabs className="mb-10 hidden sm:block" defaultValue={category} categories={categories} baseUrl={'/posts'} />
+      <CategoryTabs className="mb-10 hidden sm:block" defaultValue={category} categoryList={categoryList} baseUrl={'/posts'} />
 
-      <CategorySelect classNames={{ trigger: 'mb-10 sm:hidden' }} defaultValue={category} categories={categories} baseUrl={'/posts'} />
+      <CategorySelect classNames={{ trigger: 'mb-10 sm:hidden' }} defaultValue={category} categoryList={categoryList} baseUrl={'/posts'} />
 
       <ul className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-        {posts.map((post) => {
-          return <PostCard key={post.url} post={post} />;
+        {postList.map((post) => {
+          return <PostCard key={post.postUrl} post={post} />;
         })}
       </ul>
     </div>

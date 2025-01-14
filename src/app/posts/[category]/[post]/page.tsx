@@ -1,4 +1,4 @@
-import { getPostDetail, getPostPaths, parsePostAbstract } from '@/lib/post';
+import { getPostDetail, getMdxPaths, parsePostInfo } from '@/lib/post';
 
 import Post from './components/post';
 
@@ -14,8 +14,11 @@ export default async function Page({ params }: Props) {
   return <Post post={postData} />;
 }
 
-export function generateStaticParams() {
-  const postPaths: string[] = getPostPaths('All');
-  const paramList = postPaths.map((path) => parsePostAbstract(path)).map((item) => ({ category: item.categoryPath, post: item.slug }));
-  return paramList;
+export async function generateStaticParams(): Promise<{ category: string; post: string }[]> {
+  const mdxPaths = await getMdxPaths('All');
+
+  return mdxPaths.map(parsePostInfo).map(({ categorySlug, postSlug }) => ({
+    category: categorySlug,
+    post: postSlug,
+  }));
 }
