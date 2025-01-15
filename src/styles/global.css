@@ -38,12 +38,12 @@
     --white: #ffffff;
     --black: #0d1117;
 
-    --border: #d1d9e0;
+    --border: #e7e7e7;
     --background: var(--white);
-    --foreground: #1f2328;
+    --foreground: #212529;
 
-    --secondary-background: #818b981a;
-    --secondary-foreground: #59636e;
+    --secondary-background: #f4f8f8;
+    --secondary-foreground: #c8c8c8;
 
     --accent: #ff6666;
 
