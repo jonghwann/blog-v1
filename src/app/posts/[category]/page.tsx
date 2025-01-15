@@ -19,7 +19,7 @@ export default async function Page({ params }: Props) {
 
       <CategorySelect classNames={{ trigger: 'mb-10 sm:hidden' }} defaultValue={category} categoryList={categoryList} baseUrl={'/posts'} />
 
-      <ul className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+      <ul className="grid grid-cols-1 gap-[50px_30px] md:grid-cols-2 lg:grid-cols-3">
         {postList.map((post) => {
           return <PostCard key={post.postUrl} post={post} />;
         })}
