@@ -6,7 +6,7 @@ interface Props {
   params: Promise<{ category: string; post: string }>;
 }
 
-export default async function Page({ params }: Props) {
+export default async function PostPage({ params }: Props) {
   const { category, post } = await params;
 
   const postData = await getPostDetail(category, post);

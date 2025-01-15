@@ -8,7 +8,7 @@ interface Props {
   params: Promise<{ category: string }>;
 }
 
-export default async function Page({ params }: Props) {
+export default async function CategoryPage({ params }: Props) {
   const { category } = await params;
 
   const [categoryList, postList] = await Promise.all([getCategoryList(), getPostList(category)]);
