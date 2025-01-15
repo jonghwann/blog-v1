@@ -16,7 +16,7 @@ export default function Footer() {
         </Link>
       </div>
 
-      <span>© Powered by JongHwan Jang</span>
+      <span>© Powered by Jonghwan Jang</span>
     </footer>
   );
 }
