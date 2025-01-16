@@ -21,19 +21,11 @@ export default async function CategoryPage({ params }: Props) {
 
       <ul className="grid grid-cols-1 gap-[50px_30px] md:grid-cols-2 lg:grid-cols-3">
         {postList.map((post) => {
-          return <PostCard key={post.postUrl} post={post} />;
-        })}
-
-        {postList.map((post) => {
-          return <PostCard key={post.postUrl} post={post} />;
-        })}
-
-        {postList.map((post) => {
-          return <PostCard key={post.postUrl} post={post} />;
-        })}
-
-        {postList.map((post) => {
-          return <PostCard key={post.postUrl} post={post} />;
+          return (
+            <li key={post.postUrl}>
+              <PostCard post={post} />
+            </li>
+          );
         })}
       </ul>
     </div>
