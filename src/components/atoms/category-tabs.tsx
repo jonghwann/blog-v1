@@ -24,7 +24,7 @@ export default function CategoryTabs({ className, classNames = {}, defaultValue,
               key={category}
               value={categorySlug === 'all' ? 'All' : categorySlug}
               className={cn(
-                'py-2 hover:bg-secondary-background data-[state=active]:bg-contrast-background data-[state=active]:text-contrast-foreground data-[state=active]:shadow-none hover:data-[state=active]:bg-[#24292f] hover:data-[state=active]:dark:bg-[#f0f3f6]',
+                'py-2 transition-none hover:bg-secondary-background data-[state=active]:bg-contrast-background data-[state=active]:text-contrast-foreground data-[state=active]:shadow-none hover:data-[state=active]:bg-[#19191be6] hover:data-[state=active]:dark:bg-[#fafafae6]',
                 classNames.trigger,
               )}
               asChild

@@ -36,37 +36,35 @@
 @layer base {
   :root {
     --white: #ffffff;
-    --black: #0d1117;
+    --black: #09090c;
 
-    --border: #e7e7e7;
+    --border: #e5e5e74d;
     --background: var(--white);
-    --foreground: #212529;
+    --foreground: #09090b;
 
-    --secondary-background: #f4f8f8;
-    --secondary-foreground: #c8c8c8;
-
-    --accent: #ff6666;
+    --secondary-background: #f4f4f5;
+    --secondary-foreground: #71717a;
 
     --contrast-background: var(--black);
-    --contrast-foreground: #f0f6fc;
+    --contrast-foreground: #fafafa;
   }
 
   .dark {
-    --border: #3d444d;
+    --border: #272729;
     --background: var(--black);
-    --foreground: #f0f6fc;
+    --foreground: #fafafa;
 
-    --secondary-background: #656c7633;
-    --secondary-foreground: #9198a1;
+    --secondary-background: #27272a;
+    --secondary-foreground: #a1a1aa;
 
     --contrast-background: var(--white);
-    --contrast-foreground: #1f2328;
+    --contrast-foreground: #09090b;
   }
 }
 
 @layer components {
   .icon-box {
-    @apply rounded-md p-2 transition-colors hover:bg-secondary-background;
+    @apply rounded-md p-[6px] hover:bg-secondary-background;
   }
 }
 

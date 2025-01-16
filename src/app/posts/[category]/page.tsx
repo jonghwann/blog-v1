@@ -23,6 +23,18 @@ export default async function CategoryPage({ params }: Props) {
         {postList.map((post) => {
           return <PostCard key={post.postUrl} post={post} />;
         })}
+
+        {postList.map((post) => {
+          return <PostCard key={post.postUrl} post={post} />;
+        })}
+
+        {postList.map((post) => {
+          return <PostCard key={post.postUrl} post={post} />;
+        })}
+
+        {postList.map((post) => {
+          return <PostCard key={post.postUrl} post={post} />;
+        })}
       </ul>
     </div>
   );

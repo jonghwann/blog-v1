@@ -1,4 +1,5 @@
 'use client';
+
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
@@ -10,12 +11,12 @@ import ThemeToggleButton from '@/components/atoms/theme-toggle-button';
 
 const NAV_LINKS = [
   {
-    name: 'About',
-    href: '/about',
-  },
-  {
     name: 'Posts',
     href: '/posts',
+  },
+  {
+    name: 'About',
+    href: '/about',
   },
 ];
 
@@ -23,8 +24,8 @@ export default function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="fixed z-header w-full border-b border-border bg-background">
-      <div className="mx-auto flex h-[64px] w-full max-w-[1280px] items-center justify-between px-4">
+    <header className="sticky top-0 z-header w-full border-b border-border backdrop-blur">
+      <div className="mx-auto flex h-[56px] w-full max-w-[1280px] items-center justify-between px-4">
         <nav>
           <ul className="flex items-center">
             {NAV_LINKS.map(({ name, href }) => (
@@ -32,7 +33,7 @@ export default function Header() {
                 <Link
                   href={href}
                   className={cn(
-                    'rounded-full px-4 py-1.5 text-sm font-medium text-secondary-foreground transition-colors hover:text-foreground',
+                    'rounded-full px-4 py-1.5 text-sm font-medium text-secondary-foreground hover:text-foreground',
                     pathname.startsWith(href) && 'bg-secondary-background text-foreground',
                   )}
                 >
@@ -45,7 +46,7 @@ export default function Header() {
 
         <div className="flex items-center">
           <Link href="https://github.com/wkdwhdghks" target="_blank" className="icon-box">
-            <Github size={20} />
+            <Github size={18} />
           </Link>
 
           <ThemeToggleButton />
