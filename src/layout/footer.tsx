@@ -5,18 +5,18 @@ import LinkedIn from '@/components/icons/linked-in';
 
 export default function Footer() {
   return (
-    <footer className="flex flex-col items-center justify-center gap-4 bg-background py-16">
-      <div className="flex items-center gap-4">
+    <footer className="flex h-14 items-center justify-center gap-3 border-t border-border bg-background">
+      <span className="text-sm">© Powered by Jonghwan Jang</span>
+
+      <div className="flex items-center gap-2">
         <Link href="https://github.com/wkdwhdghks" target="_blank">
-          <Github className="fill-foreground" width={30} height={30} />
+          <Github className="fill-foreground" width={20} height={20} />
         </Link>
 
         <Link href="/">
-          <LinkedIn className="fill-foreground" width={30} height={30} />
+          <LinkedIn className="fill-foreground" width={20} height={20} />
         </Link>
       </div>
-
-      <span>© Powered by Jonghwan Jang</span>
     </footer>
   );
 }
