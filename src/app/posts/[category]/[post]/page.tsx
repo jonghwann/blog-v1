@@ -1,6 +1,6 @@
 import { getPostDetail, getMdxPaths, parsePostInfo } from '@/lib/post';
 
-import PostHeader from './components/post-header';
+import PostHeader from '../../../../components/atoms/post-header';
 import Post from './components/post';
 
 interface Props {
@@ -14,14 +14,15 @@ export default async function PostPage({ params }: Props) {
 
   return (
     <section className="mx-auto w-full max-w-[768px] px-4">
+      <PostHeader className="my-[56px]" post={postData} />
+
       <div className="flex gap-8">
         <article className="w-full">
-          <PostHeader post={postData} />
           <Post post={postData} />
         </article>
 
-        <aside className="hidden w-[240px] shrink-0 lg:block">
-          <div className="sticky top-[80px] space-y-8">
+        <aside className="block w-[240px] shrink-0">
+          <div className="sticky top-[80px]">
             <nav>
               <h2 className="mb-4 font-semibold">목차</h2>
               <ul>...</ul>
