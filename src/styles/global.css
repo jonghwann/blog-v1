@@ -71,7 +71,10 @@
 /* 코드 블록 스타일 */
 pre {
   overflow-x: auto;
-  padding: 1rem 0;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  font-size: 14px;
+  padding: 12px 0px;
 }
 
 pre [data-line] {
@@ -79,15 +82,15 @@ pre [data-line] {
 }
 
 /* 라이트 모드 */
-code[data-theme*=' '],
-code[data-theme*=' '] span {
+pre[data-theme*=' '],
+pre[data-theme*=' '] span {
   color: var(--shiki-light) !important;
   background-color: var(--shiki-light-bg) !important;
 }
 
 /* 다크 모드 */
-.dark code[data-theme*=' '],
-.dark code[data-theme*=' '] span {
+.dark pre[data-theme*=' '],
+.dark pre[data-theme*=' '] span {
   color: var(--shiki-dark) !important;
   background-color: var(--shiki-dark-bg) !important;
 }
