@@ -1,7 +1,8 @@
 import { getPostDetail, getMdxPaths, parsePostInfo } from '@/lib/post';
 
 import PostHeader from '../../../../components/atoms/post-header';
-import Post from './components/post';
+import PostContent from '../../../../components/molecules/post-content';
+import PostAside from '@/components/atoms/post-aside';
 
 interface Props {
   params: Promise<{ category: string; post: string }>;
@@ -9,7 +10,6 @@ interface Props {
 
 export default async function PostPage({ params }: Props) {
   const { category, post } = await params;
-
   const postData = await getPostDetail(category, post);
 
   return (
@@ -18,22 +18,10 @@ export default async function PostPage({ params }: Props) {
 
       <div className="flex gap-8">
         <article className="w-full">
-          <Post post={postData} />
+          <PostContent post={postData} />
         </article>
 
-        <aside className="block w-[240px] shrink-0">
-          <div className="sticky top-[80px]">
-            <nav>
-              <h2 className="mb-4 font-semibold">목차</h2>
-              <ul>...</ul>
-            </nav>
-
-            <div>
-              <h2 className="mb-4 font-semibold">태그</h2>
-              <ul>...</ul>
-            </div>
-          </div>
-        </aside>
+        <PostAside />
       </div>
     </section>
   );
