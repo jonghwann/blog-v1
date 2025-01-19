@@ -1,4 +1,4 @@
-import { getPostDetail, getMdxPaths, parsePostInfo } from '@/lib/post';
+import { getPostDetail, getMdxPathList, parsePostInfo } from '@/lib/post';
 
 import PostHeader from '../../../../components/atoms/post-header';
 import PostContent from '../../../../components/molecules/post-content';
@@ -10,15 +10,16 @@ interface Props {
 
 export default async function PostPage({ params }: Props) {
   const { category, post } = await params;
-  const postData = await getPostDetail(category, post);
+
+  const postDetail = await getPostDetail(category, post);
 
   return (
     <section className="mx-auto w-full max-w-[768px] px-4">
-      <PostHeader className="my-[56px]" post={postData} />
+      <PostHeader className="my-[56px]" post={postDetail} />
 
       <div className="flex gap-8">
         <article className="w-full">
-          <PostContent post={postData} />
+          <PostContent post={postDetail} />
         </article>
 
         <PostAside />
@@ -28,7 +29,7 @@ export default async function PostPage({ params }: Props) {
 }
 
 export async function generateStaticParams(): Promise<{ category: string; post: string }[]> {
-  const mdxPaths = await getMdxPaths('All');
+  const mdxPaths = await getMdxPathList('All');
 
   return mdxPaths.map(parsePostInfo).map(({ categorySlug, postSlug }) => ({
     category: categorySlug,

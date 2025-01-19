@@ -22,7 +22,7 @@ export default function PostCard({ post: { thumbnail, title, category, createdAt
           />
         </figure>
 
-        <div className="flex h-[170px] flex-col justify-between bg-white p-[26px] dark:bg-[#1a1b1e]">
+        <div className="flex h-[170px] flex-col justify-between bg-white p-[26px] dark:bg-[#1e1e1e]">
           <div className="flex flex-col gap-[6px]">
             <div className="text-xs font-medium">{category}</div>
             <h2 className="text-xl font-bold">{title}</h2>

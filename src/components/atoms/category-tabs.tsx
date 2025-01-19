@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import { cn } from '@/lib/utils';
 
-import { Category } from '@/types/post';
+import { CategoryItem } from '@/types/post';
 
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
@@ -10,7 +10,7 @@ interface CategoryTabsProps {
   className?: string;
   classNames?: { trigger?: string };
   defaultValue: string;
-  categoryList: Category[];
+  categoryList: CategoryItem[];
   baseUrl: string;
 }
 
