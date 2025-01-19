@@ -17,7 +17,7 @@ interface CategoryTabsProps {
 export default function CategoryTabs({ className, classNames = {}, defaultValue, categoryList, baseUrl }: CategoryTabsProps) {
   return (
     <Tabs className={className} defaultValue={defaultValue}>
-      <TabsList className="gap-2">
+      <TabsList className="gap-2 p-0">
         {categoryList.map(({ category, categorySlug, count }) => {
           return (
             <TabsTrigger
