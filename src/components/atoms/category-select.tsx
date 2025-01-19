@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 
 import { cn } from '@/lib/utils';
 
-import { Category } from '@/types/post';
+import { CategoryItem } from '@/types/post';
 
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select';
 
@@ -13,7 +13,7 @@ interface CategorySelectProps {
     trigger?: string;
     item?: string;
   };
-  categoryList: Category[];
+  categoryList: CategoryItem[];
   defaultValue: string;
   baseUrl: string;
 }

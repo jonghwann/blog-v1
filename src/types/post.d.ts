@@ -18,8 +18,14 @@ export interface PostDetail extends PostMatter {
 
 export interface Post extends PostInfo, PostDetail {}
 
-export interface Category {
+export interface CategoryItem {
   category: string;
   categorySlug: string;
   count: number;
+}
+
+export interface TableOfContents {
+  title: string;
+  link: string;
+  depth: number;
 }
