@@ -16,7 +16,7 @@ export default async function PostPage({ params }: Props) {
   const tableOfContents = getTableOfContents(postDetail.content);
 
   return (
-    <section className="mx-auto w-full max-w-[768px] px-4">
+    <section className="mx-auto w-full max-w-screen-md px-4">
       <PostHeader className="mb-12" post={postDetail} />
 
       <div className="flex gap-16">
