@@ -12,6 +12,7 @@ export interface PostMatter {
 }
 
 export interface PostDetail extends PostMatter {
+  excerpt: string;
   readingMinutes: number;
   content: string;
 }
