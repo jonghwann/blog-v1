@@ -23,7 +23,7 @@ export default function CategorySelect({ classNames = {}, categoryList, defaultV
 
   return (
     <Select defaultValue={defaultValue} onValueChange={(value) => router.push(value === 'All' ? baseUrl : `${baseUrl}/${value}`)}>
-      <SelectTrigger className={cn('h-10 w-[180px] select-none focus:ring-0', classNames.trigger)}>
+      <SelectTrigger className={cn('h-10 w-[180px] select-none font-medium focus:ring-0', classNames.trigger)}>
         <SelectValue />
       </SelectTrigger>
 
@@ -34,7 +34,7 @@ export default function CategorySelect({ classNames = {}, categoryList, defaultV
               <SelectItem
                 key={category}
                 value={categorySlug === 'all' ? 'All' : categorySlug}
-                className={cn('h-10 select-none px-2 text-[13px] focus:bg-secondary-background', classNames.item)}
+                className={cn('h-10 cursor-pointer select-none px-2 font-medium text-tertiary-foreground focus:bg-secondary-background', classNames.item)}
               >
                 {category} ({count})
               </SelectItem>
