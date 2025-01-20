@@ -26,7 +26,7 @@ export default {
         },
 
         tertiary: {
-          foreground: 'var(--tertiary-foreground)',
+          background: 'var(--tertiary-background)',
         },
 
         accent: 'var(--accent)',
