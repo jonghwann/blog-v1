@@ -16,15 +16,18 @@ interface CategoryTabsProps {
 
 export default function CategoryTabs({ className, classNames = {}, defaultValue, categoryList, baseUrl }: CategoryTabsProps) {
   return (
-    <Tabs className={className} defaultValue={defaultValue}>
-      <TabsList className="gap-2 p-0">
+    <Tabs className={cn('h-10 border-b', className)} defaultValue={defaultValue}>
+      <TabsList className="h-full p-0">
         {categoryList.map(({ category, categorySlug, count }) => {
           return (
             <TabsTrigger
               key={category}
               value={categorySlug === 'all' ? 'All' : categorySlug}
               className={cn(
-                'py-2 transition-none hover:bg-secondary-background data-[state=active]:bg-contrast-background data-[state=active]:text-contrast-foreground data-[state=active]:shadow-none hover:data-[state=active]:bg-[#19191be6] hover:data-[state=active]:dark:bg-[#fafafae6]',
+                'text-tertiary-foreground relative h-full rounded-none px-4 py-[10px] transition-none',
+                'hover:text-foreground',
+                'data-[state=active]:text-foreground data-[state=active]:shadow-none data-[state=active]:after:bg-black dark:data-[state=active]:after:bg-white',
+                'after:absolute after:bottom-[0px] after:h-[2px] after:w-full after:rounded-full after:content-[""]',
                 classNames.trigger,
               )}
               asChild

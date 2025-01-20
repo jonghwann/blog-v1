@@ -40,12 +40,14 @@
     --white: #ffffff;
     --black: #09090c;
 
-    --border: #e5e5e74d;
+    --border: #e5e8eb;
     --background: var(--white);
-    --foreground: #09090b;
+    --foreground: #191f28;
 
     --secondary-background: #f4f4f5;
-    --secondary-foreground: #71717a;
+    --secondary-foreground: #4e5968;
+
+    --tertiary-foreground: #6b7684;
 
     --contrast-background: var(--black);
     --contrast-foreground: #fafafa;
