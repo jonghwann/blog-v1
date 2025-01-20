@@ -1,8 +1,8 @@
-import { getPostDetail, getMdxPathList, parsePostInfo } from '@/lib/post';
+import { getPostDetail, getMdxPathList, parsePostInfo, getTableOfContents } from '@/lib/post';
 
-import PostHeader from '../../../../components/atoms/post-header';
+import PostHeader from '../../../../components/molecules/post-header';
 import PostContent from '../../../../components/molecules/post-content';
-import PostAside from '@/components/atoms/post-aside';
+import PostTableOfContents from '@/components/molecules/post-table-of-contents';
 
 interface Props {
   params: Promise<{ category: string; post: string }>;
@@ -12,17 +12,18 @@ export default async function PostPage({ params }: Props) {
   const { category, post } = await params;
 
   const postDetail = await getPostDetail(category, post);
+  const tableOfContents = getTableOfContents(postDetail.content);
 
   return (
     <section className="mx-auto w-full max-w-[768px] px-4">
       <PostHeader className="my-[56px]" post={postDetail} />
 
-      <div className="flex gap-8">
+      <div className="flex gap-16">
         <article className="w-full">
           <PostContent post={postDetail} />
         </article>
 
-        <PostAside />
+        <PostTableOfContents tableOfContents={tableOfContents} />
       </div>
     </section>
   );

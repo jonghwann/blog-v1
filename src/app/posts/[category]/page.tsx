@@ -1,7 +1,7 @@
 import { getCategoryList, getPostList } from '@/lib/post';
 
-import CategoryTabs from '@/components/atoms/category-tabs';
-import CategorySelect from '@/components/atoms/category-select';
+import CategoryTabs from '@/components/molecules/category-tabs';
+import CategorySelect from '@/components/molecules/category-select';
 import PostCard from '@/components/molecules/post-card';
 
 interface Props {
