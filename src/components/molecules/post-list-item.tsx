@@ -17,7 +17,7 @@ export default function PostListItem({ post: { title, excerpt, category, created
             <p className="line-clamp-2 text-sm text-secondary-foreground">{excerpt}</p>
           </div>
 
-          <div className="flex items-center gap-2 text-xs text-tertiary-foreground">
+          <div className="flex items-center gap-2 text-xs text-secondary-foreground">
             <span>{category}</span>
             <span>·</span>
             <time>{createdAt}</time>

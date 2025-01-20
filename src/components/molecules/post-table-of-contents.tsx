@@ -18,17 +18,14 @@ export default function PostTableOfContents({ className, tableOfContents }: Post
 
   return (
     <aside className={cn('block w-[200px] shrink-0', className)}>
-      <div className="sticky top-[80px] text-sm">
+      <div className="sticky top-[128px] text-sm">
         <h2 className="mb-2 font-medium">On this page</h2>
 
         <nav>
           <ul className="flex flex-col gap-2">
             {tableOfContents.map(({ title, link, depth }) => (
               <li key={title} className={depth === 1 ? 'ml-4' : ''}>
-                <Link
-                  href={link}
-                  className={cn('transition-colors duration-200', activeIds.includes(link.slice(1)) ? 'text-accent' : 'text-secondary-foreground')}
-                >
+                <Link href={link} className={activeIds.includes(link.slice(1)) ? 'text-accent' : 'text-secondary-foreground'}>
                   {title}
                 </Link>
               </li>
