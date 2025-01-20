@@ -3,6 +3,7 @@ import { getCategoryList, getPostList } from '@/lib/post';
 import CategoryTabs from '@/components/molecules/category-tabs';
 import CategorySelect from '@/components/molecules/category-select';
 import PostListItem from '@/components/molecules/post-list-item';
+import TagGroup from '@/components/molecules/tag-group';
 
 interface Props {
   params: Promise<{ category: string }>;
@@ -32,7 +33,12 @@ export default async function CategoryPage({ params }: Props) {
         </ul>
       </div>
 
-      <aside className="flex-1 border-l pl-[16px]">123123</aside>
+      <aside className="hidden flex-1 border-l pl-[16px] md:block">
+        <section className="flex flex-col gap-3">
+          <h2 className="text-sm font-medium text-secondary-foreground">태그</h2>
+          <TagGroup tags={categoryList} activeTag={category} baseUrl={'/posts'} />
+        </section>
+      </aside>
     </section>
   );
 }
