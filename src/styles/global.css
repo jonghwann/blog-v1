@@ -5,13 +5,16 @@
 @tailwind utilities;
 
 @layer base {
+  /* 기본 스타일 */
   * {
     @apply border-border;
   }
+
   html body[data-scroll-locked] {
     overflow: visible !important;
     margin-right: 0 !important;
   }
+
   body {
     @apply bg-background text-foreground;
     font-family:
@@ -31,9 +34,8 @@
       'Segoe UI Symbol',
       sans-serif;
   }
-}
 
-@layer base {
+  /* 테마 변수 */
   :root {
     --white: #ffffff;
     --black: #09090c;
@@ -66,31 +68,30 @@
   .icon-box {
     @apply rounded-md p-[6px] hover:bg-secondary-background;
   }
-}
 
-/* 코드 블록 스타일 */
-pre {
-  overflow-x: auto;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  font-size: 14px;
-  padding: 12px 0px;
-}
+  /* 코드 블록 */
+  pre {
+    overflow-x: auto;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    font-size: 14px;
+    padding: 12px 0px;
+  }
 
-pre [data-line] {
-  padding: 0 1rem;
-}
+  pre [data-line] {
+    padding: 0 1rem;
+  }
 
-/* 라이트 모드 */
-pre[data-theme*=' '],
-pre[data-theme*=' '] span {
-  color: var(--shiki-light) !important;
-  background-color: var(--shiki-light-bg) !important;
-}
+  /* 코드 블록 테마 */
+  pre[data-theme*=' '],
+  pre[data-theme*=' '] span {
+    color: var(--shiki-light) !important;
+    background-color: var(--shiki-light-bg) !important;
+  }
 
-/* 다크 모드 */
-.dark pre[data-theme*=' '],
-.dark pre[data-theme*=' '] span {
-  color: var(--shiki-dark) !important;
-  background-color: var(--shiki-dark-bg) !important;
+  .dark pre[data-theme*=' '],
+  .dark pre[data-theme*=' '] span {
+    color: var(--shiki-dark) !important;
+    background-color: var(--shiki-dark-bg) !important;
+  }
 }
