@@ -48,7 +48,7 @@ const parsePost = async (filePath: string): Promise<Post> => {
  * @returns {PostInfo} 포스트 정보
  */
 export const parsePostInfo = (filePath: string): PostInfo => {
-  const postPath = path.relative(POST_DIRECTORY, filePath).replace('.mdx', '');
+  const postPath = path.relative(POST_DIRECTORY, filePath).replace(/\\/g, '/').replace('.mdx', '');
   const [categorySlug, postSlug] = postPath.split('/');
 
   const category = formatCategory(categorySlug);
