@@ -22,6 +22,23 @@ export const formatCategory = (categorySlug: string): string =>
     .join(' ');
 
 /**
+ * 마크다운 콘텐츠에서 미리보기 텍스트를 추출합니다.
+ * @param content - 마크다운 콘텐츠
+ * @param maxLength - 최대 길이 (기본값: 150)
+ * @returns {string} 미리보기 텍스트 (예: 'Next.js는 React 프레임워크입니다...')
+ */
+const getExcerpt = (content: string, maxLength = 150): string => {
+  const plainText = content
+    .replace(/<[^>]*>/g, '')
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/[#*`]/g, '')
+    .replace(/(?:^|\n)> /g, '')
+    .replace(/\n/g, ' ')
+    .trim();
+  return plainText.length > maxLength ? plainText.slice(0, maxLength).trim() + '...' : plainText;
+};
+
+/**
  * 특정 카테고리의 MDX 파일 경로들을 조회합니다.
  * @param category - 조회할 카테고리 ('All'인 경우 모든 카테고리)
  * @returns MDX 파일 경로 배열 (예: ['/posts/next-js/routing/content.mdx', ...])
@@ -66,9 +83,11 @@ const parsePostDetail = async (filePath: string): Promise<PostDetail> => {
   const { data, content } = matter(fileContent);
 
   const frontMatter = data as PostMatter;
+  const excerpt = getExcerpt(content);
 
   return {
     ...frontMatter,
+    excerpt,
     readingMinutes: Math.ceil(readingTime(content).minutes),
     content,
   };
