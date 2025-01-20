@@ -21,7 +21,7 @@ export default async function PostPage({ params }: Props) {
 
       <div className="flex gap-16">
         <PostContent className="mb-12 w-full border-b pb-12" post={postDetail} />
-        <PostTableOfContents tableOfContents={tableOfContents} />
+        <PostTableOfContents className="hidden xl:block" tableOfContents={tableOfContents} />
       </div>
 
       <Giscus />

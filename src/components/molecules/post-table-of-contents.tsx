@@ -9,14 +9,15 @@ import { cn } from '@/lib/utils';
 import { TableOfContents } from '@/types/post';
 
 interface PostTableOfContentsProps {
+  className?: string;
   tableOfContents: TableOfContents[];
 }
 
-export default function PostTableOfContents({ tableOfContents }: PostTableOfContentsProps) {
+export default function PostTableOfContents({ className, tableOfContents }: PostTableOfContentsProps) {
   const activeIds = useActiveHeadings(tableOfContents);
 
   return (
-    <aside className="block w-[200px] shrink-0">
+    <aside className={cn('block w-[200px] shrink-0', className)}>
       <div className="sticky top-[80px] text-sm">
         <h2 className="mb-2 font-medium">On this page</h2>
 
