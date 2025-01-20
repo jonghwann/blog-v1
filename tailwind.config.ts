@@ -25,6 +25,10 @@ export default {
           foreground: 'var(--secondary-foreground)',
         },
 
+        tertiary: {
+          foreground: 'var(--tertiary-foreground)',
+        },
+
         contrast: {
           background: 'var(--contrast-background)',
           foreground: 'var(--contrast-foreground)',
