@@ -6,9 +6,9 @@ export interface PostInfo {
 }
 
 export interface PostMatter {
-  thumbnail: string;
   title: string;
   createdAt: string;
+  thumbnail: string;
 }
 
 export interface PostDetail extends PostMatter {

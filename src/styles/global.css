@@ -49,6 +49,8 @@
 
     --tertiary-foreground: #6b7684;
 
+    --accent: #3182f6;
+
     --contrast-background: var(--black);
     --contrast-foreground: #fafafa;
   }

@@ -2,7 +2,7 @@ import { getCategoryList, getPostList } from '@/lib/post';
 
 import CategoryTabs from '@/components/molecules/category-tabs';
 import CategorySelect from '@/components/molecules/category-select';
-import PostCard from '@/components/molecules/post-card';
+import PostListItem from '@/components/molecules/post-list-item';
 
 interface Props {
   params: Promise<{ category: string }>;
@@ -17,23 +17,23 @@ export default async function CategoryPage({ params }: Props) {
     <section className="mx-auto w-full max-w-screen-xl px-4">
       <div className="flex gap-10">
         <div className="flex-[2]">
-          <div className="mb-10">
+          <div className="mb-[10px]">
             <CategoryTabs className="hidden sm:block" defaultValue={category} categoryList={categoryList} baseUrl={'/posts'} />
             <CategorySelect classNames={{ trigger: 'sm:hidden' }} defaultValue={category} categoryList={categoryList} baseUrl={'/posts'} />
           </div>
 
-          <ul className="grid grid-cols-1 gap-[50px_30px] md:grid-cols-2 lg:grid-cols-3">
+          <ul>
             {postList.map((post) => {
               return (
                 <li key={post.postUrl}>
-                  <PostCard post={post} />
+                  <PostListItem post={post} />
                 </li>
               );
             })}
           </ul>
         </div>
 
-        <aside className="flex-1 border-l">123123</aside>
+        <aside className="flex-1 border-l pl-[16px]">123123</aside>
       </div>
     </section>
   );
