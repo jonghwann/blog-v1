@@ -29,6 +29,8 @@ export default {
           foreground: 'var(--tertiary-foreground)',
         },
 
+        accent: 'var(--accent)',
+
         contrast: {
           background: 'var(--contrast-background)',
           foreground: 'var(--contrast-foreground)',

@@ -27,10 +27,7 @@ export default function PostTableOfContents({ className, tableOfContents }: Post
               <li key={title} className={depth === 1 ? 'ml-4' : ''}>
                 <Link
                   href={link}
-                  className={cn(
-                    'transition-colors duration-200',
-                    activeIds.includes(link.slice(1)) ? 'text-blue-500 dark:text-blue-400' : 'text-gray-500 dark:text-gray-400',
-                  )}
+                  className={cn('transition-colors duration-200', activeIds.includes(link.slice(1)) ? 'text-accent' : 'text-secondary-foreground')}
                 >
                   {title}
                 </Link>
