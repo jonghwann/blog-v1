@@ -3,6 +3,7 @@ import { getPostDetail, getMdxPathList, parsePostInfo, getTableOfContents } from
 import PostHeader from '../../../../components/molecules/post-header';
 import PostContent from '../../../../components/molecules/post-content';
 import PostTableOfContents from '@/components/molecules/post-table-of-contents';
+import Giscus from '@/components/molecules/giscus';
 
 interface Props {
   params: Promise<{ category: string; post: string }>;
@@ -16,15 +17,14 @@ export default async function PostPage({ params }: Props) {
 
   return (
     <section className="mx-auto w-full max-w-[768px] px-4">
-      <PostHeader className="my-[56px]" post={postDetail} />
+      <PostHeader className="mb-12" post={postDetail} />
 
       <div className="flex gap-16">
-        <article className="w-full">
-          <PostContent post={postDetail} />
-        </article>
-
+        <PostContent className="mb-12 w-full border-b pb-12" post={postDetail} />
         <PostTableOfContents tableOfContents={tableOfContents} />
       </div>
+
+      <Giscus />
     </section>
   );
 }

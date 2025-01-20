@@ -24,7 +24,7 @@ export default function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-header w-full border-b border-border backdrop-blur">
+    <header className="sticky top-0 z-header mb-[56px] w-full border-b border-border backdrop-blur">
       <div className="mx-auto flex h-[56px] w-full max-w-[1280px] items-center justify-between px-4">
         <nav>
           <ul className="flex items-center">

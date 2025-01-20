@@ -15,7 +15,7 @@ export default async function CategoryPage({ params }: Props) {
 
   return (
     <section className="mx-auto w-full max-w-[1024px] px-4">
-      <div className="mb-10 mt-[56px]">
+      <div className="mb-10">
         <CategoryTabs className="hidden sm:block" defaultValue={category} categoryList={categoryList} baseUrl={'/posts'} />
         <CategorySelect classNames={{ trigger: 'sm:hidden' }} defaultValue={category} categoryList={categoryList} baseUrl={'/posts'} />
       </div>
