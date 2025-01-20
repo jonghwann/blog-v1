@@ -38,33 +38,27 @@
   /* 테마 변수 */
   :root {
     --white: #ffffff;
-    --black: #09090c;
+    --black: #000000;
 
-    --border: #e5e8eb;
+    --border: #ebebeb;
     --background: var(--white);
-    --foreground: #191f28;
+    --foreground: #171717;
 
-    --secondary-background: #02204712;
-    --secondary-foreground: #4e5968;
+    --secondary-background: #f2f2f2;
+    --secondary-foreground: #666666;
 
-    --tertiary-foreground: #6b7684;
-
-    --accent: #3182f6;
-
-    --contrast-background: var(--black);
-    --contrast-foreground: #fafafa;
+    --accent: #0072f5;
   }
 
   .dark {
-    --border: #272729;
+    --border: #1f1f1f;
     --background: var(--black);
-    --foreground: #fafafa;
+    --foreground: #ededed;
 
-    --secondary-background: #27272a;
-    --secondary-foreground: #a1a1aa;
+    --secondary-background: #1a1a1a;
+    --secondary-foreground: #888888;
 
-    --contrast-background: var(--white);
-    --contrast-foreground: #09090b;
+    --accent: #52a8ff;
   }
 }
 

@@ -14,27 +14,25 @@ export default async function CategoryPage({ params }: Props) {
   const [categoryList, postList] = await Promise.all([getCategoryList(), getPostList(category)]);
 
   return (
-    <section className="mx-auto w-full max-w-screen-xl px-4">
-      <div className="flex gap-10">
-        <div className="flex-[2]">
-          <div className="mb-[10px]">
-            <CategoryTabs className="hidden sm:block" defaultValue={category} categoryList={categoryList} baseUrl={'/posts'} />
-            <CategorySelect classNames={{ trigger: 'sm:hidden' }} defaultValue={category} categoryList={categoryList} baseUrl={'/posts'} />
-          </div>
-
-          <ul>
-            {postList.map((post) => {
-              return (
-                <li key={post.postUrl}>
-                  <PostListItem post={post} />
-                </li>
-              );
-            })}
-          </ul>
+    <section className="mx-auto flex w-full max-w-screen-xl gap-10 px-4">
+      <div className="flex-[2]">
+        <div className="mb-[10px]">
+          <CategoryTabs className="hidden sm:block" defaultValue={category} categoryList={categoryList} baseUrl={'/posts'} />
+          <CategorySelect classNames={{ trigger: 'sm:hidden' }} defaultValue={category} categoryList={categoryList} baseUrl={'/posts'} />
         </div>
 
-        <aside className="flex-1 border-l pl-[16px]">123123</aside>
+        <ul>
+          {postList.map((post) => {
+            return (
+              <li key={post.postUrl}>
+                <PostListItem post={post} />
+              </li>
+            );
+          })}
+        </ul>
       </div>
+
+      <aside className="flex-1 border-l pl-[16px]">123123</aside>
     </section>
   );
 }

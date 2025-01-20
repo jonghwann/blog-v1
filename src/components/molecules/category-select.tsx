@@ -34,7 +34,7 @@ export default function CategorySelect({ classNames = {}, categoryList, defaultV
               <SelectItem
                 key={category}
                 value={categorySlug === 'all' ? 'All' : categorySlug}
-                className={cn('h-10 cursor-pointer select-none px-2 font-medium text-tertiary-foreground focus:bg-secondary-background', classNames.item)}
+                className={cn('h-10 cursor-pointer select-none px-2 font-medium text-secondary-foreground focus:bg-secondary-background', classNames.item)}
               >
                 {category} ({count})
               </SelectItem>
