@@ -49,6 +49,9 @@
 
     --tertiary-background: #ebebeb;
 
+    --contrast-background: var(--black);
+    --contrast-foreground: #ededed;
+
     --accent: #0072f5;
   }
 
@@ -61,6 +64,9 @@
     --secondary-foreground: #888888;
 
     --tertiary-background: #1f1f1f;
+
+    --contrast-background: var(--white);
+    --contrast-foreground: #171717;
 
     --accent: #52a8ff;
   }

@@ -29,6 +29,8 @@ export default async function PostPage({ params }: Props) {
   );
 }
 
+export const dynamicParams = false;
+
 export async function generateStaticParams(): Promise<{ category: string; post: string }[]> {
   const mdxPaths = await getMdxPathList('All');
 
