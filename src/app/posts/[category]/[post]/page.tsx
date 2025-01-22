@@ -5,11 +5,11 @@ import PostContent from '../../../../components/molecules/post-content';
 import PostTableOfContents from '@/components/molecules/post-table-of-contents';
 import Giscus from '@/components/molecules/giscus';
 
-interface Props {
+export interface PostPageProps {
   params: Promise<{ category: string; post: string }>;
 }
 
-export default async function PostPage({ params }: Props) {
+export default async function PostPage({ params }: PostPageProps) {
   const { category, post } = await params;
 
   const postDetail = await getPostDetail(category, post);
