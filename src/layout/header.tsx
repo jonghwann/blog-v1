@@ -8,6 +8,7 @@ import { Github } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 import ThemeToggleButton from '@/components/atoms/theme-toggle-button';
+import ScrollProgressBar from '@/components/molecules/scroll-progress-bar';
 
 const NAV_LINKS = [
   {
@@ -49,6 +50,8 @@ export default function Header() {
           <ThemeToggleButton />
         </div>
       </div>
+
+      <ScrollProgressBar />
     </header>
   );
 }
