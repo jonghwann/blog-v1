@@ -15,7 +15,7 @@ const POST_DIRECTORY = path.join(process.cwd(), POST_PATH);
  * @param categorySlug - 카테고리 슬러그 (예: 'next-js')
  * @returns 카테고리 (예: 'Next Js')
  */
-export const formatCategory = (categorySlug: string): string =>
+export const categorySlugToCategory = (categorySlug: string): string =>
   categorySlug
     .split('-')
     .map((token) => token[0].toUpperCase() + token.slice(1))
@@ -44,7 +44,7 @@ const getExcerpt = (content: string, maxLength = 150): string => {
  * @returns MDX 파일 경로 배열 (예: ['/posts/next-js/routing/content.mdx', ...])
  */
 export const getMdxPathList = async (category: string): Promise<string[]> => {
-  const categoryPattern = category === 'All' ? '*' : category;
+  const categoryPattern = category === 'all' ? '*' : category;
   return await glob(`${POST_DIRECTORY}/${categoryPattern}/**/*.mdx`);
 };
 
@@ -68,7 +68,7 @@ export const parsePostInfo = (filePath: string): PostInfo => {
   const postPath = path.relative(POST_DIRECTORY, filePath).replace(/\\/g, '/').replace('.mdx', '');
   const [categorySlug, postSlug] = postPath.split('/');
 
-  const category = formatCategory(categorySlug);
+  const category = categorySlugToCategory(categorySlug);
   const postUrl = `/posts/${categorySlug}/${postSlug}`;
   return { category, postUrl, categorySlug, postSlug };
 };
@@ -98,7 +98,7 @@ const parsePostDetail = async (filePath: string): Promise<PostDetail> => {
  * @returns {Category[]} 카테고리 목록
  */
 export const getCategoryList = async (): Promise<CategoryItem[]> => {
-  const postList = await getPostList('All');
+  const postList = await getPostList('all');
 
   const categoryCountMap = postList.reduce<Record<string, number>>((counts, post) => {
     counts[post.categorySlug] = (counts[post.categorySlug] || 0) + 1;
@@ -106,7 +106,7 @@ export const getCategoryList = async (): Promise<CategoryItem[]> => {
   }, {});
 
   const categoryList = Object.entries(categoryCountMap).map(([categorySlug, count]) => ({
-    category: formatCategory(categorySlug),
+    category: categorySlugToCategory(categorySlug),
     categorySlug,
     count,
   }));

@@ -7,26 +7,26 @@ import { PostPageProps } from './page';
 import { sharedMetadata } from '@/app/shared-metadata';
 
 export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
-  const { category, post } = await params;
+  const { 'category-slug': categorySlug, 'post-slug': postSlug } = await params;
 
-  const postDetail = await getPostDetail(category, post);
+  const post = await getPostDetail(categorySlug, postSlug);
 
-  const title = `${postDetail.title} | ${sharedMetadata.title}`;
+  const title = `${post.title} | ${sharedMetadata.title}`;
 
   return {
     title,
-    description: postDetail.excerpt,
+    description: post.excerpt,
     openGraph: {
       title,
-      description: postDetail.excerpt,
+      description: post.excerpt,
     },
     twitter: {
       title,
-      description: postDetail.excerpt,
+      description: post.excerpt,
     },
   };
 }
 
-export default function layout({ children }: { children: React.ReactNode }) {
+export default function PostLayout({ children }: { children: React.ReactNode }) {
   return children;
 }
