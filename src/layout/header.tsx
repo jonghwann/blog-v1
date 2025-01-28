@@ -5,10 +5,11 @@ import Link from 'next/link';
 
 import { Github } from 'lucide-react';
 
+import useScrollVisibility from '@/hooks/use-scroll-visibility';
+
 import { cn } from '@/lib/utils';
 
 import ThemeToggleButton from '@/components/atoms/theme-toggle-button';
-import ScrollProgressBar from '@/components/molecules/scroll-progress-bar';
 
 const NAV_LINKS = [
   {
@@ -24,8 +25,10 @@ const NAV_LINKS = [
 export default function Header() {
   const pathname = usePathname();
 
+  const marginTop = useScrollVisibility(64);
+
   return (
-    <header className="sticky top-0 z-header mb-16 w-full border-b border-border backdrop-blur-[5px]">
+    <header className="fixed top-0 z-header w-full border-b border-border backdrop-blur-[5px] transition-transform duration-300" style={{ marginTop }}>
       <div className="mx-auto flex h-16 w-full max-w-screen-xl items-center justify-between px-4">
         <nav>
           <ul className="flex items-center gap-6">
@@ -50,8 +53,6 @@ export default function Header() {
           <ThemeToggleButton />
         </div>
       </div>
-
-      <ScrollProgressBar />
     </header>
   );
 }

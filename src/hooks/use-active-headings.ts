@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 import { TableOfContents } from '@/types/post';
 
-export function useActiveHeadings(tableOfContents: TableOfContents[]) {
+export default function useActiveHeadings(tableOfContents: TableOfContents[]) {
   const observer = useRef<IntersectionObserver>();
 
   const [activeIdList, setActiveIdList] = useState<string[]>([]);
@@ -31,9 +31,7 @@ export function useActiveHeadings(tableOfContents: TableOfContents[]) {
 
     tableOfContents.forEach(({ link }) => {
       const element = document.getElementById(link.slice(1));
-      if (element) {
-        observer.current?.observe(element);
-      }
+      if (element) observer.current?.observe(element);
     });
 
     return () => observer.current?.disconnect();

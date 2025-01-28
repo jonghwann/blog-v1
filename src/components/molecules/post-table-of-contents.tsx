@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 
-import { useActiveHeadings } from '@/hooks/use-active-headings';
+import useActiveHeadings from '@/hooks/use-active-headings';
 
 import { cn } from '@/lib/utils';
 
