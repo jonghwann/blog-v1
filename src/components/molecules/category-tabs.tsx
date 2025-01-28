@@ -24,7 +24,7 @@ export default function CategoryTabs({ className, classNames = {}, defaultValue,
               key={categorySlug}
               value={categorySlug}
               className={cn(
-                'relative h-full rounded-none px-4 py-[10px] text-secondary-foreground transition-none',
+                'relative h-full rounded-none px-4 py-[10px] text-lg text-secondary-foreground transition-none',
                 'hover:text-foreground',
                 'data-[state=active]:text-foreground data-[state=active]:shadow-none data-[state=active]:after:bg-black dark:data-[state=active]:after:bg-white',
                 'after:absolute after:bottom-[0px] after:h-[2px] after:w-full after:rounded-full after:content-[""]',

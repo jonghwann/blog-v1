@@ -28,7 +28,10 @@ export default function Header() {
   const marginTop = useScrollVisibility(64);
 
   return (
-    <header className="fixed top-0 z-header w-full border-b border-border backdrop-blur-[5px] transition-transform duration-300" style={{ marginTop }}>
+    <header
+      className="fixed top-0 z-header w-full border-b border-border bg-[#ffffff]/80 backdrop-blur-[5px] backdrop-saturate-[180%] dark:bg-[#000000]/80"
+      style={{ marginTop }}
+    >
       <div className="mx-auto flex h-16 w-full max-w-screen-xl items-center justify-between px-4">
         <nav>
           <ul className="flex items-center gap-6">
