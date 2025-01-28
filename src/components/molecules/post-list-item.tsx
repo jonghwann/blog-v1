@@ -13,7 +13,7 @@ export default function PostListItem({ post: { title, excerpt, category, created
       <Link href={postUrl} className="group flex items-center gap-6 rounded-xl py-5">
         <div className="flex flex-col gap-3">
           <div className="flex flex-col gap-2">
-            <h2 className="line-clamp-1 text-lg font-semibold text-foreground group-hover:text-accent">{title}</h2>
+            <h2 className="line-clamp-1 text-xl font-semibold text-foreground group-hover:text-accent">{title}</h2>
             <p className="line-clamp-2 text-sm text-secondary-foreground">{excerpt}</p>
           </div>
 
