@@ -26,7 +26,7 @@ export default function CategoryTabs({ className, classNames = {}, defaultValue,
               className={cn(
                 'relative h-full rounded-none px-4 py-[10px] text-secondary-foreground transition-none',
                 'hover:text-foreground',
-                'data-[state=active]:text-foreground data-[state=active]:shadow-none data-[state=active]:after:bg-black dark:data-[state=active]:after:bg-white',
+                'data-[state=active]:text-foreground data-[state=active]:shadow-none data-[state=active]:after:bg-foreground',
                 'after:absolute after:bottom-[0px] after:h-[2px] after:w-full after:rounded-full after:content-[""]',
                 classNames.trigger,
               )}

@@ -29,11 +29,9 @@ export default {
           background: 'var(--tertiary-background)',
         },
 
-        accent: 'var(--accent)',
-
-        contrast: {
-          background: 'var(--contrast-background)',
-          foreground: 'var(--contrast-foreground)',
+        accent: {
+          foreground: 'var(--accent-foreground)',
+          background: 'var(--accent-background)',
         },
       },
       zIndex: {

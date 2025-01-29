@@ -13,7 +13,7 @@ export default function PostListItem({ post: { title, excerpt, createdAt, readin
       <Link href={postUrl} className="group flex items-center justify-between gap-5 rounded-xl py-5">
         <div className="flex w-[calc(100vw-182px)] flex-col gap-3 sm:w-full">
           <div className="flex flex-col gap-2">
-            <h2 className="line-clamp-1 text-base font-semibold text-foreground group-hover:text-accent sm:text-xl">{title}</h2>
+            <h2 className="line-clamp-1 text-base font-semibold text-foreground group-hover:text-accent-foreground sm:text-xl">{title}</h2>
             <p className="line-clamp-2 text-xs text-secondary-foreground sm:text-sm">{excerpt}</p>
           </div>
 

@@ -11,10 +11,7 @@ export default function NotFound() {
           <p className="text-lg">찾을 수 없는 페이지입니다.</p>
         </div>
 
-        <Button
-          asChild
-          className="h-10 bg-contrast-background px-10 text-contrast-foreground shadow-none transition-none hover:bg-[#383838] dark:hover:bg-[#ededed]"
-        >
+        <Button asChild className="h-10 bg-secondary-background px-10 text-secondary-foreground shadow-none transition-none hover:bg-tertiary-background">
           <Link href="/posts">홈으로</Link>
         </Button>
       </div>

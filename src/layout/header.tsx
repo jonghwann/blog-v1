@@ -29,7 +29,7 @@ export default function Header() {
 
   return (
     <header
-      className="fixed top-0 z-header w-full border-b border-border bg-[#ffffff]/80 backdrop-blur-[5px] backdrop-saturate-[180%] dark:bg-[#000000]/80"
+      className="fixed top-0 z-header w-full border-b border-border bg-[#ffffff]/80 backdrop-blur-[5px] backdrop-saturate-[180%] dark:bg-[#121212]/80"
       style={{ marginTop }}
     >
       <div className="mx-auto flex h-16 w-full max-w-screen-xl items-center justify-between px-4">
@@ -39,7 +39,10 @@ export default function Header() {
               <li key={href}>
                 <Link
                   href={href}
-                  className={cn('text-sm text-secondary-foreground hover:text-foreground', pathname.startsWith(href) && 'text-accent hover:text-accent')}
+                  className={cn(
+                    'text-sm text-secondary-foreground hover:text-foreground',
+                    pathname.startsWith(href) && 'text-accent-foreground hover:text-accent-foreground',
+                  )}
                 >
                   {name}
                 </Link>

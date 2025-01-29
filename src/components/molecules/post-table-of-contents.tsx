@@ -25,7 +25,7 @@ export default function PostTableOfContents({ className, tableOfContents }: Post
           <ul className="flex flex-col gap-2">
             {tableOfContents.map(({ title, link, depth }) => (
               <li key={title} className={depth === 1 ? 'ml-4' : ''}>
-                <Link href={link} className={activeIds.includes(link.slice(1)) ? 'text-accent' : 'text-secondary-foreground'}>
+                <Link href={link} className={activeIds.includes(link.slice(1)) ? 'text-accent-foreground' : 'text-secondary-foreground'}>
                   {title}
                 </Link>
               </li>
