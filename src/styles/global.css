@@ -90,6 +90,10 @@
     padding: 0 1rem;
   }
 
+  code {
+    overflow-wrap: break-word;
+  }
+
   /* 코드 블록 테마 */
   pre[data-theme*=' '],
   pre[data-theme*=' '] span {

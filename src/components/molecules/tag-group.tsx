@@ -21,7 +21,6 @@ export default function TagGroup({ className, tags, activeTag, baseUrl }: TagGro
               href={`${baseUrl}/${categorySlug}`}
               className={cn(
                 'rounded-full bg-secondary-background px-3 py-[6px] text-sm font-medium text-secondary-foreground hover:bg-tertiary-background',
-                categorySlug === 'all' && 'hidden',
                 categorySlug === activeTag && 'bg-[#e8f3ff] text-accent hover:bg-[#e8f3ff] dark:bg-[#1a2847] dark:hover:bg-[#1a2847]',
               )}
             >

@@ -7,19 +7,17 @@ interface PostListItemProps {
   post: Post;
 }
 
-export default function PostListItem({ post: { title, excerpt, category, createdAt, readingMinutes, thumbnail, postUrl } }: PostListItemProps) {
+export default function PostListItem({ post: { title, excerpt, createdAt, readingMinutes, thumbnail, postUrl } }: PostListItemProps) {
   return (
     <article>
-      <Link href={postUrl} className="group flex items-center gap-6 rounded-xl py-5">
-        <div className="flex flex-col gap-3">
+      <Link href={postUrl} className="group flex items-center justify-between gap-5 rounded-xl py-5">
+        <div className="flex w-[calc(100vw-182px)] flex-col gap-3 sm:w-full">
           <div className="flex flex-col gap-2">
-            <h2 className="line-clamp-1 text-xl font-semibold text-foreground group-hover:text-accent">{title}</h2>
-            <p className="line-clamp-2 text-sm text-secondary-foreground">{excerpt}</p>
+            <h2 className="line-clamp-1 text-base font-semibold text-foreground group-hover:text-accent sm:text-xl">{title}</h2>
+            <p className="line-clamp-2 text-xs text-secondary-foreground sm:text-sm">{excerpt}</p>
           </div>
 
           <div className="flex items-center gap-2 text-xs text-secondary-foreground">
-            <span>{category}</span>
-            <span>·</span>
             <time>{createdAt}</time>
             <span>·</span>
             <span>{readingMinutes} min read</span>
