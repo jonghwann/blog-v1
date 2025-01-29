@@ -7,7 +7,7 @@ export default function ScrollProgressBar() {
 
   return (
     <div className="fixed left-0 top-0 z-header h-1 w-full backdrop-blur-[5px]">
-      <div className="h-full bg-accent" style={{ width: `${scrollPercentage}%` }} />
+      <div className="h-full bg-accent-foreground" style={{ width: `${scrollPercentage}%` }} />
     </div>
   );
 }
