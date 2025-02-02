@@ -11,14 +11,14 @@ export default function PostHeader({ className, post }: PostHeaderProps) {
   const { category, title, createdAt, readingMinutes } = post;
 
   return (
-    <div className={cn('flex flex-col items-center gap-5 font-bold', className)}>
-      <span className="text-base">{category}</span>
-      <h1 className="text-center text-[30px]">{title}</h1>
+    <div className={cn('flex flex-col items-center gap-6 text-secondary-foreground', className)}>
+      <span className="text-sm font-semibold sm:text-base">{category}</span>
+      <h1 className="text-center text-[32px] font-bold text-foreground sm:text-[44px]">{title}</h1>
 
-      <div className="flex items-center gap-2">
-        <time className="text-sm font-normal text-secondary-foreground">{createdAt}</time>
-        <span className="text-sm font-normal text-secondary-foreground">·</span>
-        <span className="text-sm font-normal text-secondary-foreground">{readingMinutes} min read</span>
+      <div className="flex items-center gap-2 text-sm font-normal">
+        <time>{createdAt}</time>
+        <span>·</span>
+        <span>{readingMinutes} min read</span>
       </div>
     </div>
   );

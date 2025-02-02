@@ -5,6 +5,7 @@ import rehypeSlug from 'rehype-slug';
 import rehypePrettyCode from 'rehype-pretty-code';
 
 import { Post as PostType } from '@/types/post';
+import { MDXComponents as MDXComponentsType } from 'mdx/types';
 
 import { MDXComponents } from '@/components/mdx';
 
@@ -18,7 +19,7 @@ export default async function PostContent({ className, post }: PostProps) {
     <article className={className}>
       <MDXRemote
         source={post.content}
-        components={MDXComponents}
+        components={MDXComponents as unknown as MDXComponentsType}
         options={{
           mdxOptions: {
             remarkPlugins: [
