@@ -30,7 +30,7 @@ export default async function PostContent({ className, post }: PostProps) {
               rehypeSlug, // 모든 헤딩 태그에 id 자동 추가 (목차 링크용)
               [
                 rehypePrettyCode, // 코드 블록 구문 강조 및 테마 적용
-                { theme: { light: 'light-plus', dark: 'dark-plus' } },
+                { theme: { light: 'github-light', dark: 'github-dark' } },
               ],
             ],
           },
