@@ -74,12 +74,14 @@
   }
 
   /* 코드 블록 */
+
   pre {
-    overflow-x: auto;
     border-radius: 8px;
     border: 1px solid var(--border);
-    font-size: 14px;
     padding: 12px 0px;
+    margin: 24px 0px 4px;
+    font-size: 14px;
+    overflow-x: auto;
   }
 
   pre [data-line] {
@@ -88,6 +90,19 @@
 
   code {
     overflow-wrap: break-word;
+  }
+
+  p,
+  li {
+    code {
+      border-radius: 4px;
+      padding: 3px 6px;
+      margin: 0 3px;
+      background-color: hsla(44, 6%, 50%, 0.15);
+      color: #eb5757;
+      font-size: 14px;
+      overflow-wrap: break-word;
+    }
   }
 
   /* 코드 블록 테마 */
