@@ -20,7 +20,7 @@ export default async function PostPage({ params }: PostPageProps) {
       <PostHeader className="mb-6" post={post} />
 
       <div className="flex gap-16">
-        <PostContent className="mb-12 border-b pb-12 xl:min-w-[736px]" post={post} />
+        <PostContent className="w-full xl:min-w-[736px]" post={post} />
         <PostTableOfContents className="hidden xl:block" tableOfContents={tableOfContents} />
       </div>
 
