@@ -8,6 +8,16 @@ createdAt: '2024. 12. 08'
 
 ## 들어가며
 
+```ts {5-6}
+import fs from 'fs';
+import matter from 'gray-matter';
+
+const parsePost = async (postPath: string) => {
+  const file = fs.readFileSync(postPath, 'utf8');
+  const { data, content } = matter(file);
+};
+```
+
 전국민 코딩테스트인 카카오 공채에 지원해봤습니다.
 평소 알고리즘 문제 풀이에 자신이 있었기 때문에, 실력 체크도 해볼 겸..
 카카오에 입사하고 싶다! 는 마음은 딱히 없었고, 그래도 잘 봐서 붙게 되면 좋을 듯..? 하는 마인드였습니다.
