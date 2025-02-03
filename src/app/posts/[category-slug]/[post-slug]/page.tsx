@@ -17,7 +17,7 @@ export default async function PostPage({ params }: PostPageProps) {
 
   return (
     <section className="mx-auto w-full max-w-screen-md px-4">
-      <PostHeader className="mb-12" post={post} />
+      <PostHeader className="mb-6" post={post} />
 
       <div className="flex gap-16">
         <PostContent className="mb-12 border-b pb-12 xl:min-w-[736px]" post={post} />

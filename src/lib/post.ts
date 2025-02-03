@@ -31,7 +31,13 @@ const getExcerpt = (content: string, maxLength = 150): string => {
   const plainText = content
     .replace(/<[^>]*>/g, '')
     .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
-    .replace(/[#*`]/g, '')
+    .replace(/!\[.*?\]\(.*?\)/g, '')
+    .replace(/```[\s\S]*?```/g, '')
+    .replace(/`([^`]+)`/g, '$1')
+    .replace(/^#{1,6}\s+/gm, '')
+    .replace(/\|.*?\|/g, '')
+    .replace(/^\s*[-*]\s+/gm, '')
+    .replace(/^\s*\d+\.\s+/gm, '')
     .replace(/(?:^|\n)> /g, '')
     .replace(/\n/g, ' ')
     .trim();
