@@ -1,3 +1,13 @@
+export type HeadingProps = HTMLProps<HTMLHeadingElement>;
+export type ParagraphProps = HTMLProps<HTMLParagraphElement>;
+export type ListProps = React.HTMLProps<HTMLUListElement>;
+export type OrderedListProps = React.OlHTMLAttributes<HTMLOListElement>;
+export type ListItemProps = React.HTMLProps<HTMLLIElement>;
+export type TableProps = React.HTMLProps<HTMLTableElement>;
+export type TableRowProps = React.HTMLProps<HTMLTableRowElement>;
+export type TableHeaderProps = React.HTMLProps<HTMLTableHeaderCellElement>;
+export type TableCellProps = React.HTMLProps<HTMLTableCellElement>;
+
 export interface PostInfo {
   category: string;
   postUrl: string;

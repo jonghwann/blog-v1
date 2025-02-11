@@ -78,8 +78,8 @@
   pre {
     border-radius: 8px;
     border: 1px solid var(--border);
-    padding: 12px 0px;
-    margin: 24px 0px 4px;
+    padding: 16px 0px;
+    margin-bottom: 16px;
     font-size: 14px;
     overflow-x: auto;
   }
@@ -96,8 +96,8 @@
   li {
     code {
       border-radius: 4px;
-      padding: 3px 6px;
-      margin: 0 3px;
+      padding: 4px;
+      margin: 0 4px;
       background-color: hsla(44, 6%, 50%, 0.15);
       color: #eb5757;
       font-size: 14px;
