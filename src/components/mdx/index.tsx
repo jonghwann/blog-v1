@@ -1,23 +1,33 @@
-import { HTMLProps } from 'react';
-
 import Image, { ImageProps } from './image';
 
-type HeadingProps = HTMLProps<HTMLHeadingElement>;
-type ParagraphProps = HTMLProps<HTMLParagraphElement>;
-type ListProps = React.HTMLProps<HTMLUListElement>;
-type OrderedListProps = React.OlHTMLAttributes<HTMLOListElement>;
-type ListItemProps = React.HTMLProps<HTMLLIElement>;
+import {
+  HeadingProps,
+  ListItemProps,
+  ListProps,
+  OrderedListProps,
+  ParagraphProps,
+  TableCellProps,
+  TableHeaderProps,
+  TableProps,
+  TableRowProps,
+} from '@/types/post';
 
 export const MDXComponents = {
-  h1: (props: HeadingProps) => <h1 className="mb-1 mt-6 scroll-m-20 text-3xl font-bold leading-[1.6]" {...props} />,
-  h2: (props: HeadingProps) => <h2 className="mb-1 mt-6 scroll-m-20 text-2xl font-bold leading-[1.6]" {...props} />,
-  h3: (props: HeadingProps) => <h3 className="mb-1 mt-6 scroll-m-20 text-xl font-bold leading-[1.6]" {...props} />,
-  h4: (props: HeadingProps) => <h4 className="mb-1 mt-6 scroll-m-20 text-lg font-bold leading-[1.6]" {...props} />,
-  p: (props: ParagraphProps) => <p className="mb-1 mt-6 text-base leading-[1.6] text-secondary-foreground" {...props} />,
+  h2: (props: HeadingProps) => <h3 className="mb-[18px] scroll-m-20 text-2xl font-bold leading-[34px] tracking-[-1px]" {...props} />,
+  h3: (props: HeadingProps) => <h4 className="mb-[16px] scroll-m-20 text-xl font-semibold leading-[30px] tracking-[-0.5px]" {...props} />,
+
+  p: (props: ParagraphProps) => <p className="mb-4 text-base leading-7 text-secondary-foreground" {...props} />,
+
+  ul: (props: ListProps) => <ul className="mb-4 list-disc pl-5 text-base leading-7 text-secondary-foreground" {...props} />,
+  ol: (props: OrderedListProps) => <ol className="mb-4 list-decimal pl-5 text-base leading-7 text-secondary-foreground" {...props} />,
+  li: (props: ListItemProps) => <li className="mb-1.5" {...props} />,
+
   img: ({ src, alt }: ImageProps) => <Image src={src} alt={alt} />,
-  ul: (props: ListProps) => <ul className="mb-1 mt-6 list-disc pl-6" {...props} />,
-  ol: (props: OrderedListProps) => <ol className="mb-1 mt-6 list-decimal pl-6" {...props} />,
-  li: (props: ListItemProps) => <li className="mb-4 text-secondary-foreground" {...props} />,
+
   hr: () => <hr className="my-12" />,
-  br: () => <br className="my-3" />,
+
+  table: (props: TableProps) => <table className="w-full border-collapse border border-border text-sm text-secondary-foreground">{props.children}</table>,
+  tr: (props: TableRowProps) => <tr className="hover:bg-accent">{props.children}</tr>,
+  th: (props: TableHeaderProps) => <th className="border border-border px-3 py-2 text-left font-bold">{props.children}</th>,
+  td: (props: TableCellProps) => <td className="border border-border px-3 py-2">{props.children}</td>,
 };
