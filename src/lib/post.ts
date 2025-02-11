@@ -29,18 +29,21 @@ export const categorySlugToCategory = (categorySlug: string): string =>
  */
 const getExcerpt = (content: string, maxLength = 150): string => {
   const plainText = content
-    .replace(/<[^>]*>/g, '')
-    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
-    .replace(/!\[.*?\]\(.*?\)/g, '')
-    .replace(/```[\s\S]*?```/g, '')
-    .replace(/`([^`]+)`/g, '$1')
-    .replace(/^#{1,6}\s+/gm, '')
-    .replace(/\|.*?\|/g, '')
-    .replace(/^\s*[-*]\s+/gm, '')
-    .replace(/^\s*\d+\.\s+/gm, '')
-    .replace(/(?:^|\n)> /g, '')
-    .replace(/\n/g, ' ')
+    .replace(/<[^>]*>/g, '') // HTML 태그 제거
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // 마크다운 링크 텍스트만 남김
+    .replace(/!\[.*?\]\(.*?\)/g, '') // 이미지 제거
+    .replace(/```[\s\S]*?```/g, '') // 코드 블록 제거
+    .replace(/`([^`]+)`/g, '$1') // 인라인 코드 제거
+    .replace(/\*\*(.*?)\*\*/g, '$1') // 굵은 글씨 제거 (강조표시)
+    .replace(/\*(.*?)\*/g, '$1') // 기울임꼴 제거
+    .replace(/^#{1,6}\s+/gm, '') // 제목 제거
+    .replace(/\|.*?\|/g, '') // 테이블 제거
+    .replace(/^\s*[-*]\s+/gm, '') // 리스트 제거
+    .replace(/^\s*\d+\.\s+/gm, '') // 번호 리스트 제거
+    .replace(/(?:^|\n)> /g, '') // 인용문 제거
+    .replace(/\n/g, ' ') // 개행문자 공백으로 변환
     .trim();
+
   return plainText.length > maxLength ? plainText.slice(0, maxLength).trim() + '...' : plainText;
 };
 
