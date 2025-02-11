@@ -13,7 +13,7 @@ export default function Footer() {
           <Github className="fill-foreground" width={20} height={20} />
         </Link>
 
-        <Link href="/">
+        <Link href="https://www.linkedin.com/in/jonghwan" target="_blank">
           <LinkedIn className="fill-foreground" width={20} height={20} />
         </Link>
       </div>
