@@ -31,7 +31,7 @@ export default async function PostPage({ params }: PostPageProps) {
 
 export const dynamicParams = false;
 
-export async function generateStaticParams(): Promise<{ 'category-slug': string; 'post-slug': string }[]> {
+export async function generateStaticParams() {
   const mdxPaths = await getMdxPathList('All');
 
   return mdxPaths.map(parsePostInfo).map(({ categorySlug, postSlug }) => ({
