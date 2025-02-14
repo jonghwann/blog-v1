@@ -18,11 +18,11 @@ export default function TagGroup({ className, tags, activeTag, baseUrl }: TagGro
         {tags.map(({ categoryPublicName, category }) => (
           <li key={category}>
             <Link
-              href={`${baseUrl}/${category}`}
               className={cn(
                 'rounded-full bg-secondary-background px-3 py-[6px] text-sm text-secondary-foreground hover:bg-tertiary-background',
                 category === activeTag && 'bg-accent-background text-accent-foreground hover:bg-accent-background',
               )}
+              href={`${baseUrl}/${category}`}
             >
               {categoryPublicName}
             </Link>
