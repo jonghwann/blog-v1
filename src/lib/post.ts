@@ -11,12 +11,12 @@ const POST_PATH = '/src/posts';
 const POST_DIRECTORY = path.join(process.cwd(), POST_PATH);
 
 /**
- * 카테고리 슬러그를 카테고리로 변환합니다.
- * @param categorySlug - 카테고리 슬러그 (예: 'next-js')
- * @returns 카테고리 (예: 'Next Js')
+ * 카테고리를 카테고리 퍼블릭 네임으로 변환합니다.
+ * @param category - 카테고리 (예: 'next-js')
+ * @returns 카테고리 퍼블릭 네임 (예: 'Next Js')
  */
-export const categorySlugToCategory = (categorySlug: string): string =>
-  categorySlug
+export const getCategoryPublicName = (category: string): string =>
+  category
     .split('-')
     .map((token) => token[0].toUpperCase() + token.slice(1))
     .join(' ');
@@ -75,11 +75,11 @@ const parsePost = async (filePath: string): Promise<Post> => {
  */
 export const parsePostInfo = (filePath: string): PostInfo => {
   const postPath = path.relative(POST_DIRECTORY, filePath).replace(/\\/g, '/').replace('.mdx', '');
-  const [categorySlug, postSlug] = postPath.split('/');
+  const [category, post] = postPath.split('/');
 
-  const category = categorySlugToCategory(categorySlug);
-  const postUrl = `/posts/${categorySlug}/${postSlug}`;
-  return { category, postUrl, categorySlug, postSlug };
+  const categoryPublicName = getCategoryPublicName(category);
+  const postUrl = `/posts/${category}/${post}`;
+  return { categoryPublicName, postUrl, category, post };
 };
 
 /**
@@ -110,17 +110,17 @@ export const getCategoryList = async (): Promise<CategoryItem[]> => {
   const postList = await getPostList('all');
 
   const categoryCountMap = postList.reduce<Record<string, number>>((counts, post) => {
-    counts[post.categorySlug] = (counts[post.categorySlug] || 0) + 1;
+    counts[post.category] = (counts[post.category] || 0) + 1;
     return counts;
   }, {});
 
-  const categoryList = Object.entries(categoryCountMap).map(([categorySlug, count]) => ({
-    category: categorySlugToCategory(categorySlug),
-    categorySlug,
+  const categoryList = Object.entries(categoryCountMap).map(([category, count]) => ({
+    category,
+    categoryPublicName: getCategoryPublicName(category),
     count,
   }));
 
-  return [{ category: 'All', categorySlug: 'all', count: postList.length }, ...categoryList];
+  return [{ categoryPublicName: 'All', category: 'all', count: postList.length }, ...categoryList];
 };
 
 /**

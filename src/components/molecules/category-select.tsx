@@ -29,17 +29,17 @@ export default function CategorySelect({ classNames = {}, categoryList, defaultV
 
       <SelectContent className="top-[-3px] border-none [&>div]:!p-0">
         <div className="rounded-md border bg-background p-1">
-          {categoryList.map(({ category, categorySlug, count }) => {
+          {categoryList.map(({ categoryPublicName, category, count }) => {
             return (
               <SelectItem
-                key={categorySlug}
-                value={categorySlug}
+                key={category}
+                value={category}
                 className={cn(
                   'h-10 cursor-pointer select-none px-2 font-medium text-secondary-foreground focus:bg-secondary-background focus:text-foreground',
                   classNames.item,
                 )}
               >
-                {category} ({count})
+                {categoryPublicName} ({count})
               </SelectItem>
             );
           })}
