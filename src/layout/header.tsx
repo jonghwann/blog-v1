@@ -38,11 +38,11 @@ export default function Header() {
             {NAV_LINKS.map(({ name, href }) => (
               <li key={href}>
                 <Link
-                  href={href}
                   className={cn(
                     'text-sm text-secondary-foreground hover:text-foreground',
                     pathname.startsWith(href) && 'text-accent-foreground hover:text-accent-foreground',
                   )}
+                  href={href}
                 >
                   {name}
                 </Link>
@@ -52,7 +52,7 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center">
-          <Link href="https://github.com/wkdwhdghks" target="_blank" className="icon-box">
+          <Link className="icon-box" href="https://github.com/wkdwhdghks" target="_blank">
             <Github size={20} />
           </Link>
 

@@ -21,8 +21,6 @@ export default function CategoryTabs({ className, classNames = {}, defaultValue,
         {categoryList.map(({ categoryPublicName, category, count }) => {
           return (
             <TabsTrigger
-              key={category}
-              value={category}
               className={cn(
                 'relative h-full rounded-none px-4 py-[10px] text-secondary-foreground transition-none',
                 'hover:text-foreground',
@@ -30,6 +28,8 @@ export default function CategoryTabs({ className, classNames = {}, defaultValue,
                 'after:absolute after:bottom-[0px] after:h-[2px] after:w-full after:rounded-full after:content-[""]',
                 classNames.trigger,
               )}
+              key={category}
+              value={category}
               asChild
             >
               <Link href={category === 'all' ? baseUrl : `${baseUrl}/${category}`}>

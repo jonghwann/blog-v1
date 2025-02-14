@@ -32,12 +32,12 @@ export default function CategorySelect({ classNames = {}, categoryList, defaultV
           {categoryList.map(({ categoryPublicName, category, count }) => {
             return (
               <SelectItem
-                key={category}
-                value={category}
                 className={cn(
                   'h-10 cursor-pointer select-none px-2 font-medium text-secondary-foreground focus:bg-secondary-background focus:text-foreground',
                   classNames.item,
                 )}
+                key={category}
+                value={category}
               >
                 {categoryPublicName} ({count})
               </SelectItem>

@@ -16,7 +16,7 @@ export default function ThemeToggleButton() {
   if (!mounted) return null;
 
   return (
-    <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')} className="icon-box">
+    <button className="icon-box" onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
       {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
     </button>
   );

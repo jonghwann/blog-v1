@@ -7,7 +7,7 @@ export interface ImageProps {
 export default function Image({ src, alt }: ImageProps) {
   return (
     <>
-      <img src={src} alt={alt} className="w-full rounded-xl border" />
+      <img className="w-full rounded-xl border" src={src} alt={alt} />
       {alt && <span className="mt-[6px] block w-full text-center text-xs text-secondary-foreground">{alt}</span>}
     </>
   );
