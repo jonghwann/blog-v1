@@ -1,17 +1,17 @@
 import { Metadata } from 'next';
 
-import { categorySlugToCategory } from '@/lib/post';
+import { getCategoryPublicName } from '@/lib/post';
 
 import { CategoryPageProps } from './page';
 
 import { sharedMetadata } from '@/app/shared-metadata';
 
 export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
-  const { 'category-slug': categorySlug } = await params;
+  const { category } = await params;
 
-  const category = await categorySlugToCategory(categorySlug);
+  const categoryPublicName = await getCategoryPublicName(category);
 
-  const title = `${category} | ${sharedMetadata.title}`;
+  const title = `${categoryPublicName} | ${sharedMetadata.title}`;
 
   return {
     title,

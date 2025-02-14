@@ -1,5 +1,5 @@
-import CategoryPage from './[category-slug]/page';
+import CategoryPage from './[category]/page';
 
 export default async function PostsPage() {
-  return <CategoryPage params={Promise.resolve({ 'category-slug': 'all' })} />;
+  return <CategoryPage params={Promise.resolve({ category: 'all' })} />;
 }

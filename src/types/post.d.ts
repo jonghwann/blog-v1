@@ -9,10 +9,10 @@ export type TableHeaderProps = React.HTMLProps<HTMLTableHeaderCellElement>;
 export type TableCellProps = React.HTMLProps<HTMLTableCellElement>;
 
 export interface PostInfo {
+  categoryPublicName: string;
+  post: string;
   category: string;
   postUrl: string;
-  categorySlug: string;
-  postSlug: string;
 }
 
 export interface PostMatter {
@@ -30,8 +30,8 @@ export interface PostDetail extends PostMatter {
 export interface Post extends PostInfo, PostDetail {}
 
 export interface CategoryItem {
+  categoryPublicName: string;
   category: string;
-  categorySlug: string;
   count: number;
 }
 

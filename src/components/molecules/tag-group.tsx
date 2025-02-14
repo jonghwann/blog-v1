@@ -15,16 +15,16 @@ export default function TagGroup({ className, tags, activeTag, baseUrl }: TagGro
   return (
     <nav className={className}>
       <ul className="flex flex-wrap gap-[8px_6px]">
-        {tags.map(({ category, categorySlug }) => (
-          <li key={categorySlug}>
+        {tags.map(({ categoryPublicName, category }) => (
+          <li key={category}>
             <Link
-              href={`${baseUrl}/${categorySlug}`}
+              href={`${baseUrl}/${category}`}
               className={cn(
                 'rounded-full bg-secondary-background px-3 py-[6px] text-sm text-secondary-foreground hover:bg-tertiary-background',
-                categorySlug === activeTag && 'bg-accent-background text-accent-foreground hover:bg-accent-background',
+                category === activeTag && 'bg-accent-background text-accent-foreground hover:bg-accent-background',
               )}
             >
-              {category}
+              {categoryPublicName}
             </Link>
           </li>
         ))}
