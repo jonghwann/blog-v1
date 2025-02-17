@@ -1,7 +1,5 @@
 import { Metadata } from 'next';
 
-import { sharedMetadata } from './shared-metadata';
-
 import ThemeProvider from '@/providers/theme-provider';
 import Layout from '@/layout/layout';
 
@@ -9,10 +7,13 @@ import '@/styles/global.css';
 
 export const metadata: Metadata = {
   icons: {
-    icon: sharedMetadata.icons.icon,
+    icon: '/favicon.ico',
   },
   verification: {
-    google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION,
+    google: '8xDBxjisJf8zvExurVacaEB03X9EM6aTA4B3v9bLi3E',
+    other: {
+      'naver-site-verification': '2a083bc985abfcfc26d841f19d0b6acb31d37f6e',
+    },
   },
 };
 
