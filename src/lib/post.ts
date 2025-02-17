@@ -49,7 +49,7 @@ const getExcerpt = (content: string, maxLength = 150): string => {
 
 /**
  * 특정 카테고리의 MDX 파일 경로들을 조회합니다.
- * @param category - 조회할 카테고리 ('All'인 경우 모든 카테고리)
+ * @param category - 조회할 카테고리 ('all'인 경우 모든 카테고리)
  * @returns MDX 파일 경로 배열 (예: ['/posts/next-js/routing/content.mdx', ...])
  */
 export const getMdxPathList = async (category: string): Promise<string[]> => {
@@ -125,7 +125,7 @@ export const getCategoryList = async (): Promise<CategoryItem[]> => {
 
 /**
  * 특정 카테고리의 포스트 목록을 조회합니다.
- * @param category - 조회할 카테고리 ('All'인 경우 모든 카테고리)
+ * @param category - 조회할 카테고리 ('all'인 경우 모든 카테고리)
  * @returns {Promise<Post[]>} 날짜순으로 정렬된 포스트 목록
  */
 export const getPostList = async (category: string): Promise<Post[]> => {

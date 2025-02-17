@@ -11,6 +11,9 @@ export const metadata: Metadata = {
   icons: {
     icon: sharedMetadata.icons.icon,
   },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION,
+  },
 };
 
 export default function RootLayout({
