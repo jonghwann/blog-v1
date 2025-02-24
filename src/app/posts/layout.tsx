@@ -4,7 +4,6 @@ import { sharedMetadata } from '../shared-metadata';
 
 export const metadata: Metadata = {
   title: sharedMetadata.title,
-  description: sharedMetadata.description,
   openGraph: {
     title: sharedMetadata.title,
     description: sharedMetadata.description,

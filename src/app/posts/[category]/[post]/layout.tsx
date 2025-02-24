@@ -11,17 +11,15 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
 
   const postDetail = await getPostDetail(category, post);
 
-  const title = `${postDetail.title} | ${sharedMetadata.title}`;
-
   return {
-    title,
+    title: `${postDetail.title} | ${sharedMetadata.title}`,
     description: postDetail.excerpt,
     openGraph: {
-      title,
+      title: `${postDetail.title} | ${sharedMetadata.title}`,
       description: postDetail.excerpt,
     },
     twitter: {
-      title,
+      title: `${postDetail.title} | ${sharedMetadata.title}`,
       description: postDetail.excerpt,
     },
   };

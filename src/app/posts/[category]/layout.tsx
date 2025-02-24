@@ -11,10 +11,14 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
 
   const categoryPublicName = await getCategoryPublicName(category);
 
-  const title = `${categoryPublicName} | ${sharedMetadata.title}`;
-
   return {
-    title,
+    title: `${categoryPublicName} | ${sharedMetadata.title}`,
+    openGraph: {
+      title: `${categoryPublicName} | ${sharedMetadata.title}`,
+    },
+    twitter: {
+      title: `${categoryPublicName} | ${sharedMetadata.title}`,
+    },
   };
 }
 
