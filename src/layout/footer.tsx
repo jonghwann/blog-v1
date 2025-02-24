@@ -5,7 +5,7 @@ import LinkedIn from '@/components/icons/linked-in';
 
 export default function Footer() {
   return (
-    <footer className="mt-16 flex h-16 items-center justify-center gap-3 border-t border-border bg-background">
+    <footer className="mt-16 flex h-16 items-center justify-center gap-3 border-t border-border bg-background px-4">
       <span className="text-sm">© Powered by Jonghwan Jang</span>
 
       <div className="flex items-center gap-2">
