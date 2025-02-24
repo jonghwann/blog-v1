@@ -10,8 +10,8 @@ interface PostListItemProps {
 export default function PostListItem({ post: { title, excerpt, createdAt, readingMinutes, thumbnail, postUrl } }: PostListItemProps) {
   return (
     <article>
-      <Link className="group flex items-center justify-between gap-5 rounded-xl py-5" href={postUrl} prefetch={true}>
-        <div className="flex w-[calc(100vw-182px)] flex-col gap-3 sm:w-full">
+      <Link className="group flex items-center justify-between gap-5 py-5" href={postUrl} prefetch={true}>
+        <div className="flex w-full flex-col gap-3 sm:w-full">
           <div className="flex flex-col gap-2">
             <h2 className="line-clamp-1 text-base font-semibold text-foreground group-hover:text-accent-foreground sm:text-xl">{title}</h2>
             <p className="line-clamp-2 text-xs text-secondary-foreground sm:text-sm">{excerpt}</p>
