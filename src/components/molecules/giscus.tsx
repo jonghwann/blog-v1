@@ -12,7 +12,7 @@ export default function Giscus() {
   const theme = resolvedTheme === 'dark' ? 'dark' : 'light';
 
   useEffect(() => {
-    if (!ref.current || ref.current.hasChildNodes()) return;
+    if (resolvedTheme === 'system' || !ref.current || ref.current.hasChildNodes()) return;
 
     const scriptElem = document.createElement('script');
     scriptElem.src = 'https://giscus.app/client.js';

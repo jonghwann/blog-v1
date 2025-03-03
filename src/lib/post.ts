@@ -41,6 +41,7 @@ const getExcerpt = (content: string, maxLength = 150): string => {
     .replace(/^\s*[-*]\s+/gm, '') // 리스트 제거
     .replace(/^\s*\d+\.\s+/gm, '') // 번호 리스트 제거
     .replace(/(?:^|\n)> /g, '') // 인용문 제거
+    .replace(/---/g, '') // 구분선 제거
     .replace(/\n/g, ' ') // 개행문자 공백으로 변환
     .trim();
 
