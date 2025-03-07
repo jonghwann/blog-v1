@@ -13,13 +13,13 @@ const POST_DIRECTORY = path.join(process.cwd(), POST_PATH);
 /**
  * 카테고리를 카테고리 퍼블릭 네임으로 변환합니다.
  * @param category - 카테고리 (예: 'next-js')
- * @returns 카테고리 퍼블릭 네임 (예: 'Next Js')
+ * @returns 카테고리 퍼블릭 네임 (예: 'NextJs')
  */
 export const getCategoryPublicName = (category: string): string =>
   category
     .split('-')
-    .map((token) => token[0].toUpperCase() + token.slice(1))
-    .join(' ');
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join('');
 
 /**
  * 마크다운 콘텐츠에서 미리보기 텍스트를 추출합니다.
@@ -115,11 +115,13 @@ export const getCategoryList = async (): Promise<CategoryItem[]> => {
     return counts;
   }, {});
 
-  const categoryList = Object.entries(categoryCountMap).map(([category, count]) => ({
-    category,
-    categoryPublicName: getCategoryPublicName(category),
-    count,
-  }));
+  const categoryList = Object.entries(categoryCountMap)
+    .map(([category, count]) => ({
+      category,
+      categoryPublicName: getCategoryPublicName(category),
+      count,
+    }))
+    .sort((a, b) => a.category.localeCompare(b.category));
 
   return [{ categoryPublicName: 'All', category: 'all', count: postList.length }, ...categoryList];
 };
