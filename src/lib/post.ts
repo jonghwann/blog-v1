@@ -10,16 +10,19 @@ import { PostInfo, PostMatter, PostDetail, Post, CategoryItem, TableOfContents }
 const POST_PATH = '/src/posts';
 const POST_DIRECTORY = path.join(process.cwd(), POST_PATH);
 
+const categoryName: Record<string, string> = {
+  javascript: 'JavaScript',
+};
+
 /**
  * 카테고리를 카테고리 퍼블릭 네임으로 변환합니다.
- * @param category - 카테고리 (예: 'next-js')
- * @returns 카테고리 퍼블릭 네임 (예: 'NextJs')
+ * @param category - 카테고리 (예: 'web')
+ * @returns 카테고리 퍼블릭 네임 (예: 'Web')
+ *
+ * 주의: 카테고리 이름이 categoryName에 정의되어 있으면 해당 값을 반환하고,
+ * 그렇지 않으면 첫 글자만 대문자로 변환하여 반환합니다.
  */
-export const getCategoryPublicName = (category: string): string =>
-  category
-    .split('-')
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join('');
+export const getCategoryPublicName = (category: string): string => categoryName[category] || category.charAt(0).toUpperCase() + category.slice(1);
 
 /**
  * 마크다운 콘텐츠에서 미리보기 텍스트를 추출합니다.
@@ -117,7 +120,7 @@ export const getCategoryList = async (): Promise<CategoryItem[]> => {
 
   const categoryList = Object.entries(categoryCountMap)
     .map(([category, count]) => ({
-      category,
+      category: category,
       categoryPublicName: getCategoryPublicName(category),
       count,
     }))
