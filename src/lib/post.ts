@@ -153,12 +153,12 @@ export const getPostDetail = async (category: string, post: string): Promise<Pos
 };
 
 /**
- * 마크다운 내용에서 h2(##)와 h3(###) 제목을 추출하여 목차를 생성합니다.
+ * 마크다운 내용에서 h2(##) 제목을 추출하여 목차를 생성합니다.
  * @param content - 마크다운 문자열
  * @returns {TableOfContents[]} 목차 정보
  */
 export const getTableOfContents = (content: string): TableOfContents[] => {
-  const headingRegex = /^(#{2,3})\s+(.+)$/gm;
+  const headingRegex = /^(#{2})\s+(.+)$/gm;
   const matches = Array.from(content.matchAll(headingRegex));
 
   return matches.map(([, marker, text]) => {
