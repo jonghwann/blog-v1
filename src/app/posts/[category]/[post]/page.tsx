@@ -17,14 +17,14 @@ export default async function PostPage({ params }: PostPageProps) {
 
   return (
     <section className="mx-auto w-full max-w-screen-md px-4">
-      <PostHeader className="mb-6" post={postDetail} />
+      <PostHeader post={postDetail} />
 
       <div className="flex gap-16">
         <PostContent className="w-full xl:min-w-[736px]" post={postDetail} />
         <PostTableOfContents className="hidden xl:block" tableOfContents={tableOfContents} />
       </div>
 
-      <Giscus />
+      <Giscus className="mt-12 border-t pt-10" />
     </section>
   );
 }

@@ -4,7 +4,11 @@ import { useEffect, useRef } from 'react';
 
 import { useTheme } from 'next-themes';
 
-export default function Giscus() {
+interface GiscusProps {
+  className?: string;
+}
+
+export default function Giscus({ className }: GiscusProps) {
   const ref = useRef<HTMLDivElement>(null);
 
   const { resolvedTheme } = useTheme();
@@ -39,5 +43,5 @@ export default function Giscus() {
     iframe?.contentWindow?.postMessage({ giscus: { setConfig: { theme } } }, 'https://giscus.app');
   }, [theme]);
 
-  return <section ref={ref} />;
+  return <section className={className} ref={ref} />;
 }
