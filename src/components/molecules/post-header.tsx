@@ -1,17 +1,14 @@
-import { cn } from '@/lib/utils';
-
 import { Post } from '@/types/post';
 
 interface PostHeaderProps {
-  className?: string;
   post: Post;
 }
 
-export default function PostHeader({ className, post }: PostHeaderProps) {
+export default function PostHeader({ post }: PostHeaderProps) {
   const { categoryPublicName, title, createdAt, readingMinutes } = post;
 
   return (
-    <div className={cn('flex flex-col items-center gap-6 text-secondary-foreground', className)}>
+    <div className="flex flex-col items-center gap-6 text-secondary-foreground">
       <span className="text-sm font-semibold sm:text-base">{categoryPublicName}</span>
       <h1 className="text-center text-[32px] font-bold text-foreground sm:text-[44px]">{title}</h1>
 
