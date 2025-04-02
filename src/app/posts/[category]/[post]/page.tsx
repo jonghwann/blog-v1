@@ -24,7 +24,7 @@ export default async function PostPage({ params }: PostPageProps) {
         <PostTableOfContents className="hidden xl:block" tableOfContents={tableOfContents} />
       </div>
 
-      <Giscus className="mt-12 border-t pt-10" />
+      <Giscus className="mt-12 min-h-[372px] border-t pt-10" />
     </section>
   );
 }
