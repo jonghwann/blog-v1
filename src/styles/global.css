@@ -69,10 +69,6 @@
 }
 
 @layer components {
-  .icon-box {
-    @apply rounded-md p-[6px] hover:bg-secondary-background;
-  }
-
   /* 코드 블록 */
 
   pre {
