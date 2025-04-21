@@ -1,9 +1,9 @@
 import { getPostDetail, getMdxPathList, parsePostInfo, getTableOfContents } from '@/lib/post';
 
-import PostHeader from '../../../../components/molecules/post-header';
-import PostContent from '../../../../components/molecules/post-content';
-import PostTableOfContents from '@/components/molecules/post-table-of-contents';
-import Giscus from '@/components/molecules/giscus';
+import PostHeader from '../../../../components/post/post-header';
+import PostContent from '../../../../components/post/post-content';
+import PostTableOfContents from '@/components/post/post-table-of-contents';
+import Giscus from '@/components/shared/giscus';
 
 export interface PostPageProps {
   params: Promise<{ category: string; post: string }>;
