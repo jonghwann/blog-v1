@@ -3,6 +3,7 @@ import remarkGfm from 'remark-gfm';
 import remarkBreaks from 'remark-breaks';
 import rehypeSlug from 'rehype-slug';
 import rehypePrettyCode from 'rehype-pretty-code';
+import rehypePrism from 'rehype-prism-plus';
 
 import { Post as PostType } from '@/types/post';
 import { MDXComponents as MDXComponentsType } from 'mdx/types';
@@ -30,8 +31,9 @@ export default async function PostContent({ className, post }: PostProps) {
               rehypeSlug, // 모든 헤딩 태그에 id 자동 추가 (목차 링크용)
               [
                 rehypePrettyCode, // 코드 블록 구문 강조 및 테마 적용
-                { theme: { light: 'min-light', dark: 'dark-plus' } },
+                { theme: { light: 'min-light', dark: 'github-dark' } },
               ],
+              rehypePrism,
             ],
           },
         }}

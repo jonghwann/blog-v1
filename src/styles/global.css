@@ -51,6 +51,9 @@
 
     --accent-foreground: #0072f5;
     --accent-background: hsla(212, 100%, 97%, 1);
+
+    --highlight-border: oklch(53.18% 0.2399 256.9900584162342);
+    --highlight-background: oklch(94.58% 0.0293 249.84870859673202);
   }
 
   .dark {
@@ -65,29 +68,56 @@
 
     --accent-foreground: #52a8ff;
     --accent-background: hsla(216, 50%, 12%, 1);
+
+    --highlight-border: oklch(71.7% 0.1648 250.79360374054167);
+    --highlight-background: oklch(30.86% 0.1022 255.21);
   }
 }
 
 @layer components {
   /* 코드 블록 */
-
   pre {
-    border-radius: 8px;
+    border-radius: 6px;
     border: 1px solid var(--border);
     padding: 20px 0px;
     margin: 16px 0px;
     font-size: 14px;
     overflow-x: auto;
+
+    .code-line {
+      display: block;
+      padding: 0px 20px;
+      border-left: 2px solid var(--background);
+    }
+
+    .highlight-line {
+      display: block !important;
+      border-left: 2px solid var(--highlight-border);
+      background-color: var(--highlight-background);
+    }
+
+    .line-number::before {
+      display: inline-block;
+      width: 1rem;
+      text-align: right;
+      margin-right: 20px;
+      color: var(--secondary-foreground);
+      content: attr(line);
+    }
   }
 
-  pre [data-line] {
-    padding: 0 1rem;
+  /* 코드 블록 테마 */
+  pre[data-theme*=' '],
+  pre[data-theme*=' '] span {
+    color: var(--shiki-light);
   }
 
-  code {
-    overflow-wrap: break-word;
+  .dark pre[data-theme*=' '],
+  .dark pre[data-theme*=' '] span {
+    color: var(--shiki-dark);
   }
 
+  /* 코드 스타일 */
   p,
   li {
     code {
@@ -99,18 +129,5 @@
       font-size: 14px;
       overflow-wrap: break-word;
     }
-  }
-
-  /* 코드 블록 테마 */
-  pre[data-theme*=' '],
-  pre[data-theme*=' '] span {
-    color: var(--shiki-light) !important;
-    background-color: var(--shiki-light-bg) !important;
-  }
-
-  .dark pre[data-theme*=' '],
-  .dark pre[data-theme*=' '] span {
-    color: var(--shiki-dark) !important;
-    background-color: var(--shiki-dark-bg) !important;
   }
 }
