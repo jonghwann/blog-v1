@@ -118,7 +118,7 @@ SSG(Static Site Generation)는 빌드 타임에 미리 HTML을 생성하고, 이
 
 Next.js에서는 `generateStaticParams`를 활용해 동적 경로를 미리 생성하고, `fetch()`를 통해 데이터를 가져와 정적 페이지를 생성할 수 있습니다.
 
-```tsx
+```tsx showLineNumbers
 // [slug] 동적 세그먼트를 채우기 위한 `params` 목록을 반환합니다.
 export async function generateStaticParams() {
   const posts = await fetch('https://.../posts').then((res) => res.json());
@@ -172,7 +172,7 @@ ISR(Incremental Static Regeneration)은 **SSG처럼 정적 페이지를 생성�
 ISR(Incremental Static Regeneration)은 **정적 페이지를 생성하면서도, 일정 주기로 데이터를 갱신**할 수 있습니다.  
 Next.js에서는 `revalidate` 옵션을 활용하여 페이지를 정기적으로 업데이트할 수 있습니다.
 
-```tsx
+```tsx showLineNumbers
 // [id] 동적 세그먼트를 채우기 위한 `params` 목록을 반환합니다.
 export async function generateStaticParams() {
   const posts = await fetch('https://.../posts').then((res) => res.json());
