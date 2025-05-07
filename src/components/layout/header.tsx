@@ -24,17 +24,14 @@ export default function Header() {
   const marginTop = useScrollVisibility(64);
 
   return (
-    <header
-      className="fixed top-0 z-header w-full border-b border-border bg-[#ffffff]/80 backdrop-blur-[5px] backdrop-saturate-[180%] dark:bg-[#000000]/80"
-      style={{ marginTop }}
-    >
-      <nav className="mx-auto flex h-16 w-full max-w-screen-xl items-center px-4">
+    <header className="bg-background/80 fixed top-0 w-full border-b backdrop-blur-[5px] backdrop-saturate-[180%]" style={{ marginTop }}>
+      <nav className="mx-auto flex h-16 w-full max-w-(--breakpoint-xl) items-center px-4">
         <ul className="flex items-center gap-6">
           {NAV_LINKS.map(({ name, href }) => (
             <li key={href}>
               <Link
                 className={cn(
-                  'text-sm text-secondary-foreground hover:text-foreground',
+                  'text-secondary-foreground hover:text-foreground text-sm',
                   pathname.startsWith(href) && 'text-accent-foreground hover:text-accent-foreground',
                 )}
                 href={href}

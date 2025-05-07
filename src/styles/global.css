@@ -1,70 +1,65 @@
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css');
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-border: var(--border);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --font-sans: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo',
+    'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+}
 
 @layer base {
-  /* 기본 스타일 */
   * {
     @apply border-border;
   }
 
   html body[data-scroll-locked] {
-    overflow: visible !important;
-    margin-right: 0 !important;
+    @apply mr-0! overflow-visible!;
   }
 
   body {
-    @apply bg-background text-foreground;
-    font-family:
-      'Pretendard Variable',
-      Pretendard,
-      -apple-system,
-      BlinkMacSystemFont,
-      system-ui,
-      Roboto,
-      'Helvetica Neue',
-      'Segoe UI',
-      'Apple SD Gothic Neo',
-      'Noto Sans KR',
-      'Malgun Gothic',
-      'Apple Color Emoji',
-      'Segoe UI Emoji',
-      'Segoe UI Symbol',
-      sans-serif;
+    @apply bg-background;
   }
 
-  /* 테마 변수 */
   :root {
-    --white: #ffffff;
-    --black: #000000;
-
     --border: hsla(0, 0%, 92%, 1);
-    --background: var(--white);
+    --background: #ffffff;
     --foreground: #171717;
 
-    --secondary-background: #f2f2f2;
+    --secondary: #f2f2f2;
     --secondary-foreground: #666666;
 
-    --tertiary-background: #ebebeb;
+    --muted: #ebebeb;
 
+    --accent: hsla(212, 100%, 97%, 1);
     --accent-foreground: #0072f5;
-    --accent-background: hsla(212, 100%, 97%, 1);
   }
 
   .dark {
     --border: hsla(0, 0%, 12%, 1);
-    --background: var(--black);
+    --background: #000000;
     --foreground: #ededed;
 
-    --secondary-background: #1a1a1a;
+    --secondary: #1a1a1a;
     --secondary-foreground: #888888;
 
-    --tertiary-background: #1f1f1f;
+    --muted: #1f1f1f;
 
+    --accent: hsla(216, 50%, 12%, 1);
     --accent-foreground: #52a8ff;
-    --accent-background: hsla(216, 50%, 12%, 1);
   }
 }
 
@@ -112,13 +107,13 @@
   }
 
   /* 코드 블록 테마 */
-  pre[data-theme*=' '],
-  pre[data-theme*=' '] span {
+  pre[data-theme],
+  pre[data-theme] span {
     color: var(--shiki-light);
   }
 
-  .dark pre[data-theme*=' '],
-  .dark pre[data-theme*=' '] span {
+  .dark pre[data-theme],
+  .dark pre[data-theme] span {
     color: var(--shiki-dark);
   }
 
@@ -138,7 +133,7 @@
   .dark p,
   .dark li {
     code {
-      background-color: #2a2828;
+      background-color: hsl(359, 2%, 16%);
       border: 1px solid hsl(359, 2%, 24%);
     }
   }
