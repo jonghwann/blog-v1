@@ -22,11 +22,11 @@ export default function ThemeButton() {
     <div className="flex h-10 w-[104px] items-center rounded-full border p-[3px]">
       {themeOptions.map(({ mode, icon: Icon }) => (
         <button
-          className={cn('flex h-8 w-8 items-center justify-center rounded-full', theme === mode && 'bg-secondary-background')}
+          className={cn('group flex size-8 cursor-pointer items-center justify-center rounded-full', theme === mode && 'bg-secondary')}
           key={mode}
           onClick={() => setTheme(mode)}
         >
-          <Icon className={cn('h-4 w-4 hover:text-foreground', theme === mode ? 'text-foreground' : 'text-secondary-foreground')} />
+          <Icon className={cn('group-hover:text-foreground size-4', theme === mode ? 'text-foreground' : 'text-secondary-foreground')} />
         </button>
       ))}
     </div>

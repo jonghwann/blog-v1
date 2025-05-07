@@ -16,7 +16,7 @@ export default async function PostPage({ params }: PostPageProps) {
   const tableOfContents = getTableOfContents(postDetail.content);
 
   return (
-    <section className="mx-auto w-full max-w-screen-md px-4">
+    <section className="mx-auto w-full max-w-(--breakpoint-md) px-4">
       <PostHeader post={postDetail} />
 
       <div className="flex gap-16">

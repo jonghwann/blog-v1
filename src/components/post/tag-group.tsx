@@ -19,8 +19,8 @@ export default function TagGroup({ className, tags, activeTag, baseUrl }: TagGro
           <li key={category}>
             <Link
               className={cn(
-                'rounded-full bg-secondary-background px-3 py-[6px] text-sm text-secondary-foreground hover:bg-tertiary-background',
-                category === activeTag && 'bg-accent-background text-accent-foreground hover:bg-accent-background',
+                'bg-secondary text-secondary-foreground hover:bg-muted rounded-full px-3 py-[6px] text-sm',
+                category === activeTag && 'bg-accent text-accent-foreground hover:bg-accent-background',
               )}
               href={`${baseUrl}/${category}`}
             >
