@@ -13,20 +13,20 @@ export default function useActiveHeadings(tableOfContents: TableOfContents[]) {
       entries.forEach((entry) => {
         const targetId = entry.target.id;
 
-        if (entry.isIntersecting) {
-          setActiveIdList((prev) => [...prev, targetId]);
-          setLastActiveId(() => '');
-        } else {
-          setActiveIdList((prev) => {
-            if (prev.length === 1) setLastActiveId(targetId);
+        setActiveIdList((prev) => {
+          if (entry.isIntersecting) {
+            setLastActiveId('');
+            return [...prev, targetId];
+          } else {
+            if (prev.length === 1) setLastActiveId(prev[0]);
             return prev.filter((activeId) => activeId !== targetId);
-          });
-        }
+          }
+        });
       });
     };
 
     observer.current = new IntersectionObserver(handleIntersection, {
-      threshold: 0,
+      threshold: 1,
     });
 
     tableOfContents.forEach(({ link }) => {

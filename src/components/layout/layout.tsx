@@ -1,4 +1,4 @@
-import ScrollProgressBar from '@/components/molecules/scroll-progress-bar';
+import ScrollProgressBar from '@/components/shared/scroll-progress-bar';
 import Header from './header';
 import Footer from './footer';
 

@@ -23,17 +23,17 @@ export default function CategorySelect({ classNames = {}, categoryList, defaultV
 
   return (
     <Select defaultValue={defaultValue} onValueChange={(value) => router.push(value === 'all' ? baseUrl : `${baseUrl}/${value}`)}>
-      <SelectTrigger className={cn('h-10 w-[180px] select-none font-medium focus:ring-0', classNames.trigger)}>
+      <SelectTrigger className={cn('h-10 w-[180px] cursor-pointer font-medium select-none focus-visible:ring-0', classNames.trigger)}>
         <SelectValue />
       </SelectTrigger>
 
-      <SelectContent className="top-[-3px] border-none [&>div]:!p-0">
-        <div className="rounded-md border bg-background p-1">
+      <SelectContent className="top-[-3px] border-none [&>div]:p-0!">
+        <div className="bg-background rounded-md border p-1">
           {categoryList.map(({ categoryPublicName, category, count }) => {
             return (
               <SelectItem
                 className={cn(
-                  'h-10 cursor-pointer select-none px-2 font-medium text-secondary-foreground focus:bg-secondary-background focus:text-foreground',
+                  'text-secondary-foreground focus:bg-secondary focus:text-foreground h-10 cursor-pointer px-2 font-medium select-none',
                   classNames.item,
                 )}
                 key={category}

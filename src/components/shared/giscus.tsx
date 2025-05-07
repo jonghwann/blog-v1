@@ -36,7 +36,7 @@ export default function Giscus({ className }: GiscusProps) {
     scriptElem.setAttribute('data-lang', 'ko');
 
     ref.current.appendChild(scriptElem);
-  }, [theme]);
+  }, [resolvedTheme, theme]);
 
   useEffect(() => {
     const iframe = document.querySelector<HTMLIFrameElement>('iframe.giscus-frame');

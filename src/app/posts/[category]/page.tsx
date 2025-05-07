@@ -1,9 +1,9 @@
 import { getCategoryList, getPostList } from '@/lib/post';
 
-import CategoryTabs from '@/components/molecules/category-tabs';
-import CategorySelect from '@/components/molecules/category-select';
-import PostListItem from '@/components/molecules/post-list-item';
-import TagGroup from '@/components/molecules/tag-group';
+import CategoryTabs from '@/components/category/category-tabs';
+import CategorySelect from '@/components/category/category-select';
+import PostListItem from '@/components/post/post-list-item';
+import TagGroup from '@/components/post/tag-group';
 
 export interface CategoryPageProps {
   params: Promise<{ category: string }>;
@@ -15,8 +15,8 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   const [categoryList, postList] = await Promise.all([getCategoryList(), getPostList(category)]);
 
   return (
-    <section className="mx-auto flex w-full max-w-screen-xl lg:gap-10">
-      <div className="flex-[2] px-4">
+    <section className="mx-auto flex w-full max-w-(--breakpoint-xl) lg:gap-10">
+      <div className="flex-2 px-4">
         <div className="mb-[10px]">
           <CategoryTabs className="hidden sm:block" defaultValue={category} categoryList={categoryList} baseUrl={'/posts'} />
           <CategorySelect classNames={{ trigger: 'sm:hidden' }} defaultValue={category} categoryList={categoryList} baseUrl={'/posts'} />

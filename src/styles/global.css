@@ -1,120 +1,140 @@
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css');
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-border: var(--border);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --font-sans: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo',
+    'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+}
 
 @layer base {
-  /* 기본 스타일 */
   * {
     @apply border-border;
   }
 
   html body[data-scroll-locked] {
-    overflow: visible !important;
-    margin-right: 0 !important;
+    @apply mr-0! overflow-visible!;
   }
 
   body {
-    @apply bg-background text-foreground;
-    font-family:
-      'Pretendard Variable',
-      Pretendard,
-      -apple-system,
-      BlinkMacSystemFont,
-      system-ui,
-      Roboto,
-      'Helvetica Neue',
-      'Segoe UI',
-      'Apple SD Gothic Neo',
-      'Noto Sans KR',
-      'Malgun Gothic',
-      'Apple Color Emoji',
-      'Segoe UI Emoji',
-      'Segoe UI Symbol',
-      sans-serif;
+    @apply bg-background;
   }
 
-  /* 테마 변수 */
   :root {
-    --white: #ffffff;
-    --black: #121212;
+    --border: hsla(0, 0%, 92%, 1);
+    --background: #ffffff;
+    --foreground: #171717;
 
-    --border: #e5e8eb;
-    --background: var(--white);
-    --foreground: #191f28;
+    --secondary: #f2f2f2;
+    --secondary-foreground: #666666;
 
-    --secondary-background: #f2f4f6;
-    --secondary-foreground: #333d4b;
+    --muted: #ebebeb;
 
-    --tertiary-background: #e5e8eb;
-
-    --accent-foreground: #3182f6;
-    --accent-background: #e8f3ff;
+    --accent: hsla(212, 100%, 97%, 1);
+    --accent-foreground: #0072f5;
   }
 
   .dark {
-    --border: #2a2a2a;
-    --background: var(--black);
-    --foreground: #e0e0e0;
+    --border: hsla(0, 0%, 12%, 1);
+    --background: #000000;
+    --foreground: #ededed;
 
-    --secondary-background: #1a1a1a;
-    --secondary-foreground: #a3a3a3;
+    --secondary: #1a1a1a;
+    --secondary-foreground: #888888;
 
-    --tertiary-background: #1f1f1f;
+    --muted: #1f1f1f;
 
-    --accent-foreground: #4a90e2;
-    --accent-background: #1a2847;
+    --accent: hsla(216, 50%, 12%, 1);
+    --accent-foreground: #52a8ff;
   }
 }
 
 @layer components {
-  .icon-box {
-    @apply rounded-md p-[6px] hover:bg-secondary-background;
-  }
-
   /* 코드 블록 */
-
   pre {
-    border-radius: 8px;
+    border-radius: 6px;
     border: 1px solid var(--border);
     padding: 20px 0px;
     margin: 16px 0px;
     font-size: 14px;
     overflow-x: auto;
+
+    .code-line {
+      display: block;
+      padding: 0px 20px;
+      border-left: 2px solid var(--background);
+    }
+
+    .highlight-line {
+      display: block !important;
+      border-left: 2px solid oklch(53.18% 0.2399 256.9900584162342);
+      background-color: oklch(94.58% 0.0293 249.84870859673202);
+    }
+
+    .line-number::before {
+      display: inline-block;
+      width: 1rem;
+      text-align: right;
+      margin-right: 20px;
+      color: hsla(0, 0%, 66%);
+      content: attr(line);
+    }
   }
 
-  pre [data-line] {
-    padding: 0 1rem;
+  .dark pre {
+    .highlight-line {
+      border-left: 2px solid oklch(71.7% 0.1648 250.79360374054167);
+      background-color: oklch(30.86% 0.1022 255.21);
+    }
+
+    .line-number::before {
+      color: hsla(0, 0%, 53%);
+    }
   }
 
-  code {
-    overflow-wrap: break-word;
+  /* 코드 블록 테마 */
+  pre[data-theme],
+  pre[data-theme] span {
+    color: var(--shiki-light);
   }
 
+  .dark pre[data-theme],
+  .dark pre[data-theme] span {
+    color: var(--shiki-dark);
+  }
+
+  /* 코드 스타일 */
   p,
   li {
     code {
-      border-radius: 4px;
-      padding: 4px;
-      margin: 0 4px;
-      background-color: hsla(44, 6%, 50%, 0.15);
-      color: #eb5757;
+      border-radius: 0.374rem;
+      padding: 0.12em 0.25em;
+      background-color: #f7f7f7;
+      border: 1px solid hsl(210, 0%, 93%);
       font-size: 14px;
       overflow-wrap: break-word;
     }
   }
 
-  /* 코드 블록 테마 */
-  pre[data-theme*=' '],
-  pre[data-theme*=' '] span {
-    color: var(--shiki-light) !important;
-    background-color: var(--shiki-light-bg) !important;
-  }
-
-  .dark pre[data-theme*=' '],
-  .dark pre[data-theme*=' '] span {
-    color: var(--shiki-dark) !important;
-    background-color: var(--shiki-dark-bg) !important;
+  .dark p,
+  .dark li {
+    code {
+      background-color: hsl(359, 2%, 16%);
+      border: 1px solid hsl(359, 2%, 24%);
+    }
   }
 }

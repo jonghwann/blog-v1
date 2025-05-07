@@ -1,9 +1,9 @@
 import { getPostDetail, getMdxPathList, parsePostInfo, getTableOfContents } from '@/lib/post';
 
-import PostHeader from '../../../../components/molecules/post-header';
-import PostContent from '../../../../components/molecules/post-content';
-import PostTableOfContents from '@/components/molecules/post-table-of-contents';
-import Giscus from '@/components/molecules/giscus';
+import PostHeader from '../../../../components/post/post-header';
+import PostContent from '../../../../components/post/post-content';
+import PostTableOfContents from '@/components/post/post-table-of-contents';
+import Giscus from '@/components/shared/giscus';
 
 export interface PostPageProps {
   params: Promise<{ category: string; post: string }>;
@@ -16,7 +16,7 @@ export default async function PostPage({ params }: PostPageProps) {
   const tableOfContents = getTableOfContents(postDetail.content);
 
   return (
-    <section className="mx-auto w-full max-w-screen-md px-4">
+    <section className="mx-auto w-full max-w-(--breakpoint-md) px-4">
       <PostHeader post={postDetail} />
 
       <div className="flex gap-16">
@@ -24,7 +24,7 @@ export default async function PostPage({ params }: PostPageProps) {
         <PostTableOfContents className="hidden xl:block" tableOfContents={tableOfContents} />
       </div>
 
-      <Giscus className="mt-12 border-t pt-10" />
+      <Giscus className="mt-12 min-h-[372px] border-t pt-10" />
     </section>
   );
 }
