@@ -22,18 +22,6 @@
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
-
-  html body[data-scroll-locked] {
-    @apply mr-0! overflow-visible!;
-  }
-
-  body {
-    @apply bg-background;
-  }
-
   :root {
     --border: hsla(0, 0%, 92%, 1);
     --background: #ffffff;
@@ -61,52 +49,43 @@
     --accent: hsla(216, 50%, 12%, 1);
     --accent-foreground: #52a8ff;
   }
-}
 
-@layer components {
-  /* 코드 블록 */
+  * {
+    @apply border-border;
+  }
+
+  html body[data-scroll-locked] {
+    @apply !mr-0 !overflow-visible;
+  }
+
+  body {
+    @apply bg-background;
+  }
+
   pre {
-    border-radius: 6px;
-    border: 1px solid var(--border);
-    padding: 20px 0px;
-    margin: 16px 0px;
-    font-size: 14px;
-    overflow-x: auto;
-
-    .code-line {
-      display: block;
-      padding: 0px 20px;
-      border-left: 2px solid var(--background);
-    }
-
-    .highlight-line {
-      display: block !important;
-      border-left: 2px solid oklch(53.18% 0.2399 256.9900584162342);
-      background-color: oklch(94.58% 0.0293 249.84870859673202);
-    }
-
-    .line-number::before {
-      display: inline-block;
-      width: 1rem;
-      text-align: right;
-      margin-right: 20px;
-      color: hsla(0, 0%, 66%);
-      content: attr(line);
-    }
+    @apply border-border my-4 overflow-x-auto rounded-md border px-0 py-5 text-sm;
   }
 
-  .dark pre {
-    .highlight-line {
-      border-left: 2px solid oklch(71.7% 0.1648 250.79360374054167);
-      background-color: oklch(30.86% 0.1022 255.21);
-    }
-
-    .line-number::before {
-      color: hsla(0, 0%, 53%);
-    }
+  .code-line {
+    @apply border-l-background block border-l-2 px-5;
   }
 
-  /* 코드 블록 테마 */
+  .highlight-line {
+    @apply block border-l-2 border-l-[oklch(53.18%_0.2399_256.99)] bg-[oklch(94.58%_0.0293_249.85)];
+  }
+
+  .line-number::before {
+    @apply mr-5 inline-block w-[1rem] text-right text-[hsla(0,0%,66%)] content-[attr(line)];
+  }
+
+  .dark .highlight-line {
+    @apply block border-l-2 border-l-[oklch(71.7%_0.1648_250.79)] bg-[oklch(30.86%_0.1022_255.21)];
+  }
+
+  .dark .line-number::before {
+    @apply text-[hsla(0,0%,53%)];
+  }
+
   pre[data-theme],
   pre[data-theme] span {
     color: var(--shiki-light);
@@ -117,24 +96,13 @@
     color: var(--shiki-dark);
   }
 
-  /* 코드 스타일 */
-  p,
-  li {
-    code {
-      border-radius: 0.374rem;
-      padding: 0.12em 0.25em;
-      background-color: #f7f7f7;
-      border: 1px solid hsl(210, 0%, 93%);
-      font-size: 14px;
-      overflow-wrap: break-word;
-    }
+  p code,
+  li code {
+    @apply rounded-sm border border-[hsl(210,0%,93%)] bg-[#f7f7f7] px-1 py-[0.12em] text-sm break-words;
   }
 
-  .dark p,
-  .dark li {
-    code {
-      background-color: hsl(359, 2%, 16%);
-      border: 1px solid hsl(359, 2%, 24%);
-    }
+  .dark p code,
+  .dark li code {
+    @apply border border-[hsl(359,2%,24%)] bg-[hsl(359,2%,16%)];
   }
 }
