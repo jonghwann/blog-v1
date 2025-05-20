@@ -34,7 +34,7 @@
   --muted: #ebebeb;
 
   --accent: hsla(212, 100%, 97%, 1);
-  --accent-foreground: #0072f5;
+  --accent-foreground: oklch(57.61% 0.2508 258.23);
 }
 
 .dark {

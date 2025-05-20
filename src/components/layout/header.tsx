@@ -28,7 +28,7 @@ export default function Header() {
             <li key={href}>
               <Link
                 className={cn(
-                  'text-secondary-foreground hover:text-foreground text-sm',
+                  'text-secondary-foreground hover:text-foreground text-sm transition-colors duration-150 ease-in-out',
                   pathname.startsWith(href) && 'text-accent-foreground hover:text-accent-foreground',
                 )}
                 href={href}
