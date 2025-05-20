@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 
+import ThemeProvider from '@/providers/theme-provider';
 import Layout from '@/components/layout/layout';
 
 import './globals.css';
@@ -8,9 +9,11 @@ export const metadata: Metadata = { title: 'Create Next App', description: 'Gene
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="ko">
+    <html lang="ko" className="scroll-smooth" suppressHydrationWarning>
       <body className="antialiased">
-        <Layout>{children}</Layout>
+        <ThemeProvider>
+          <Layout>{children}</Layout>
+        </ThemeProvider>
       </body>
     </html>
   );
