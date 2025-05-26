@@ -16,7 +16,7 @@ export default function Input({ className, errorClassName, name, errors, ...rest
     <div className="flex flex-col gap-2">
       <InputUI
         className={cn(
-          'autofill:bg-background h-12 rounded-lg py-0 text-base! shadow-none focus-visible:ring-2',
+          'h-12 rounded-lg py-0 text-base! shadow-none autofill:shadow-[0_0_0_1000px_var(--background)_inset] focus-visible:ring-2',
           className,
         )}
         name={name}

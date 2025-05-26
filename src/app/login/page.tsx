@@ -6,13 +6,14 @@ import Form from 'next/form';
 import { loginAction } from './action';
 
 import Input from '@/components/common/input';
+import Button from '@/components/common/button';
 
 export default function LoginPage() {
   const [state, formAction] = useActionState(loginAction, null);
 
   return (
     <Form
-      className="absolute top-1/2 left-1/2 flex -translate-x-1/2 -translate-y-1/2 transform flex-col gap-4 rounded bg-gray-950 p-8 shadow-md"
+      className="absolute top-1/2 left-1/2 flex w-[320px] -translate-x-1/2 -translate-y-1/2 transform flex-col gap-3"
       action={formAction}
     >
       <Input
@@ -31,7 +32,7 @@ export default function LoginPage() {
         errors={state?.fieldErrors.password}
       />
 
-      <button className="rounded bg-blue-600 py-2 text-white transition hover:bg-blue-700">로그인</button>
+      <Button variant="secondary">로그인</Button>
     </Form>
   );
 }
