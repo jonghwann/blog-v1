@@ -1,3 +1,7 @@
+import { useFormStatus } from 'react-dom';
+
+import { Loader2 } from 'lucide-react';
+
 import { cn } from '@/lib/utils';
 
 import { Button as UIButton } from '@/components/ui/button';
@@ -9,6 +13,8 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export default function Button({ variant = 'default', className, children, ...props }: ButtonProps) {
+  const { pending } = useFormStatus();
+
   return (
     <UIButton
       className={cn(
@@ -16,9 +22,10 @@ export default function Button({ variant = 'default', className, children, ...pr
         className,
       )}
       variant={variant}
+      disabled={pending}
       {...props}
     >
-      {children}
+      {pending ? <Loader2 className="animate-spin" /> : children}
     </UIButton>
   );
 }
