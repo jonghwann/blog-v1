@@ -12,15 +12,19 @@
 
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary-inverse: var(--secondary-inverse);
 
   --color-muted: var(--muted);
 
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
 
-  --font-sans: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto,
-    'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji',
-    'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+  --color-error: var(--error);
+
+  --font-sans:
+    'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue',
+    'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', sans-serif;
 }
 
 :root {
@@ -30,11 +34,14 @@
 
   --secondary: #f2f2f2;
   --secondary-foreground: #666666;
+  --secondary-inverse: #383838;
 
   --muted: #ebebeb;
 
   --accent: hsla(212, 100%, 97%, 1);
   --accent-foreground: oklch(57.61% 0.2508 258.23);
+
+  --error: #f24040;
 }
 
 .dark {
@@ -44,11 +51,14 @@
 
   --secondary: #1a1a1a;
   --secondary-foreground: #888888;
+  --secondary-inverse: #cccccc;
 
   --muted: #1f1f1f;
 
   --accent: hsla(216, 50%, 12%, 1);
   --accent-foreground: #52a8ff;
+
+  --error: #f24040;
 }
 
 @layer base {
