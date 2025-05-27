@@ -18,7 +18,7 @@ export default function ClientHeader({ id }: ClientHeaderProps) {
   const pathname = usePathname();
 
   return (
-    <header className="bg-background/80 sticky top-0 mb-16 w-full border-b backdrop-blur-[5px] backdrop-saturate-[180%]">
+    <header className="bg-background/80 sticky top-0 z-[var(--z-header)] mb-16 w-full border-b backdrop-blur-[5px] backdrop-saturate-[180%]">
       <nav className="mx-auto flex h-16 w-full max-w-(--breakpoint-xl) items-center justify-between px-4">
         <ul className="flex items-center gap-6">
           {NAV_LINKS.map(({ name, href }) => (
