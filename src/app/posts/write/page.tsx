@@ -1,3 +1,9 @@
+import Editor from '@/components/common/editor';
+
 export default function WritePage() {
-  return <div>WritePage</div>;
+  return (
+    <section className="mx-auto w-full max-w-(--breakpoint-xl) px-4">
+      <Editor />
+    </section>
+  );
 }
