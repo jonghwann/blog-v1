@@ -72,3 +72,37 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  .tiptap h2 {
+    @apply text-foreground mt-12 mb-6 scroll-m-20 border-t pt-10 text-2xl leading-[1.3em] font-semibold;
+  }
+
+  .tiptap h3 {
+    @apply text-foreground mt-8 mb-3 scroll-m-20 text-xl leading-[1.6em] font-semibold;
+  }
+
+  .tiptap p {
+    @apply text-foreground my-5 text-base leading-7;
+  }
+
+  .tiptap ul {
+    @apply text-foreground mb-5 list-disc pl-5 text-base leading-7;
+  }
+
+  .tiptap ol {
+    @apply text-foreground mb-5 list-decimal pl-5 text-base leading-7;
+  }
+
+  .tiptap li {
+    @apply text-foreground mb-2;
+  }
+
+  .tiptap p code {
+    @apply rounded-md border border-[hsl(210,0%,93%)] bg-[#f7f7f7] px-[3.5px] py-[1.68px] text-sm break-words;
+  }
+
+  .dark .tiptap p code {
+    @apply border border-[hsl(359,2%,24%)] bg-[#2a2828];
+  }
+}
