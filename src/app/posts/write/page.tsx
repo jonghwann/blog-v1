@@ -1,4 +1,4 @@
-import Editor from '@/components/common/editor';
+import Editor from '@/components/editor/editor';
 
 export default function WritePage() {
   return (
