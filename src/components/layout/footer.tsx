@@ -1,4 +1,4 @@
-import ThemeButton from '../common/theme-button';
+import ThemeButton from '../theme/theme-button';
 
 export default function Footer() {
   return (

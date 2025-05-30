@@ -1,6 +1,6 @@
 import getSession from '@/lib/session';
 
-import FabLink from '@/components/common/fab-link';
+import FabLink from '@/components/fab/fab-link';
 
 export default async function PostsPage() {
   const { id } = await getSession();
