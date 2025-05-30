@@ -102,7 +102,63 @@
     @apply rounded-md border border-[hsl(210,0%,93%)] bg-[#f7f7f7] px-[3.5px] py-[1.68px] text-sm break-words;
   }
 
+  .tiptap .is-empty.is-editor-empty[data-placeholder]::before {
+    content: attr(data-placeholder);
+    @apply text-secondary-foreground pointer-events-none absolute;
+  }
+
   .dark .tiptap p code {
     @apply border border-[hsl(359,2%,24%)] bg-[#2a2828];
+  }
+
+  .tiptap pre {
+    .hljs-keyword {
+      color: oklch(53.5% 0.2058 2.84);
+    }
+
+    .hljs-title,
+    .hljs-attr,
+    .hljs-built_in {
+      color: oklch(47.18% 0.2579 304);
+    }
+
+    .hljs-name,
+    .hljs-string {
+      color: oklch(51.75% 0.1453 147.65);
+    }
+
+    .hljs-comment {
+      color: hsla(0, 0%, 40%, 1);
+    }
+  }
+
+  .dark .tiptap pre {
+    .hljs-keyword {
+      color: oklch(69.36% 0.2223 3.91);
+    }
+
+    .hljs-title,
+    .hljs-attr,
+    .hljs-built_in {
+      color: oklch(69.87% 0.2037 309.51);
+    }
+
+    .hljs-name,
+    .hljs-string {
+      color: oklch(73.1% 0.2158 148.29);
+    }
+
+    .hljs-comment {
+      color: hsla(0, 0%, 63%, 1);
+    }
+  }
+
+  .tiptap pre,
+  .dark .tiptap pre {
+    @apply bg-background text-foreground rounded-[6px] border p-5 font-mono text-[13px];
+
+    .class_ {
+      @apply text-foreground;
+    }
   }
 }
