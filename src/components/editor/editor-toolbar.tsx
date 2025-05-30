@@ -1,11 +1,29 @@
 'use client';
 
+import { useRef } from 'react';
+
 import type { Editor } from '@tiptap/react';
-import { Undo2, Redo2 } from 'lucide-react';
-import { Heading2, Heading3 } from 'lucide-react';
-import { List, ListOrdered } from 'lucide-react';
-import { Code, CodeXml } from 'lucide-react';
-import { Bold, Italic, Strikethrough } from 'lucide-react';
+
+import {
+  Undo2,
+  Redo2,
+  Heading2,
+  Heading3,
+  List,
+  ListOrdered,
+  Code,
+  CodeXml,
+  Bold,
+  Italic,
+  Strikethrough,
+  AlignLeft,
+  AlignCenter,
+  AlignRight,
+  AlignJustify,
+  ImagePlus,
+} from 'lucide-react';
+
+import { uploadImage } from '@/api/upload/api';
 
 import EditorToolbarButton from './editor-toolbar-button';
 
@@ -14,6 +32,8 @@ interface EditorToolbarProps {
 }
 
 export default function EditorToolbar({ editor }: EditorToolbarProps) {
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
   const isUndoDisabled = !editor?.can().undo();
   const isRedoDisabled = !editor?.can().redo();
   const isHeading2Active = editor?.isActive('heading', { level: 2 });
@@ -25,6 +45,18 @@ export default function EditorToolbar({ editor }: EditorToolbarProps) {
   const isItalicActive = editor?.isActive('italic');
   const isStrikeActive = editor?.isActive('strike');
   const isCodeActive = editor?.isActive('code');
+  const isAlignLeftActive = editor?.isActive({ textAlign: 'left' });
+  const isAlignCenterActive = editor?.isActive({ textAlign: 'center' });
+  const isAlignRightActive = editor?.isActive({ textAlign: 'right' });
+  const isAlignJustifyActive = editor?.isActive({ textAlign: 'justify' });
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const url = await uploadImage(file);
+    editor?.chain().focus().setImage({ src: url }).run();
+  };
 
   return (
     <div className="bg-background/80 sticky top-[65px] z-[var(--z-header)] flex h-10 items-center backdrop-blur-[5px] backdrop-saturate-[180%]">
@@ -93,6 +125,37 @@ export default function EditorToolbar({ editor }: EditorToolbarProps) {
         disabled={!isCodeActive}
         onClick={() => editor?.chain().focus().toggleCode().run()}
       />
+
+      <EditorToolbarButton
+        Icon={AlignLeft}
+        disabled={!isAlignLeftActive}
+        onClick={() => editor?.chain().focus().setTextAlign('left').run()}
+      />
+
+      <EditorToolbarButton
+        Icon={AlignCenter}
+        disabled={!isAlignCenterActive}
+        onClick={() => editor?.chain().focus().setTextAlign('center').run()}
+      />
+
+      <EditorToolbarButton
+        Icon={AlignRight}
+        disabled={!isAlignRightActive}
+        onClick={() => editor?.chain().focus().setTextAlign('right').run()}
+      />
+
+      <EditorToolbarButton
+        Icon={AlignJustify}
+        disabled={!isAlignJustifyActive}
+        onClick={() => editor?.chain().focus().setTextAlign('justify').run()}
+      />
+
+      <EditorToolbarButton
+        className="hover:text-foreground text-secondary-foreground"
+        Icon={ImagePlus}
+        onClick={() => fileInputRef.current?.click()}
+      />
+      <input className="hidden" ref={fileInputRef} type="file" onChange={handleImageUpload} />
     </div>
   );
 }
