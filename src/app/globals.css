@@ -83,7 +83,7 @@
   }
 
   .tiptap p {
-    @apply text-foreground my-5 text-base leading-7;
+    @apply text-foreground mb-5 text-base leading-7;
   }
 
   .tiptap ul {
@@ -112,6 +112,8 @@
   }
 
   .tiptap pre {
+    @apply mb-4;
+
     .hljs-keyword {
       color: oklch(53.5% 0.2058 2.84);
     }
