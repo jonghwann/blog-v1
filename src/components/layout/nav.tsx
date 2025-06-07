@@ -21,7 +21,7 @@ export default function Nav() {
             <Link
               className={cn(
                 'text-secondary-foreground hover:text-foreground text-sm transition-colors duration-150 ease-in-out',
-                pathname.startsWith(href) && 'text-accent-foreground hover:text-accent-foreground',
+                href === pathname && 'text-accent-foreground hover:text-accent-foreground',
               )}
               href={href}
             >

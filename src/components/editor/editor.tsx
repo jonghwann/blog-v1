@@ -10,20 +10,30 @@ import { createLowlight, common } from 'lowlight';
 import TextAlign from '@tiptap/extension-text-align';
 import Image from '@tiptap/extension-image';
 
+import { cn } from '@/lib/utils';
+
 import EditorToolbar from './editor-toolbar';
 
-export default function Editor() {
+interface EditorProps {
+  className?: string;
+}
+
+export default function Editor({ className }: EditorProps) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const editor = useEditor({
     extensions: [
       StarterKit.configure({ codeBlock: false }),
-      Placeholder.configure({ placeholder: '내용을 입력해주세요.' }),
+      Placeholder.configure({ placeholder: '내용을 입력해 주세요.' }),
       CustomCodeBlockLowlight.configure({ lowlight: createLowlight(common), defaultLanguage: 'typescript' }),
       TextAlign.configure({ types: ['heading', 'paragraph', 'image'] }),
       Image,
     ],
-    editorProps: { attributes: { class: 'outline-none p-2' } },
+    editorProps: {
+      attributes: {
+        class: cn('outline-none min-h-[calc(100vh-64px-64px-64px-64px-48px-40px-40px-20px-2px)] pb-12 pt-5', className),
+      },
+    },
     content: '',
     immediatelyRender: false,
     onUpdate: ({ editor }) => {
