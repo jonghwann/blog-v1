@@ -1,5 +1,7 @@
 import { getPost } from '@/api/post/[id]/api';
 
+import PostContent from '@/components/post/post-content';
+
 interface PostPageProps {
   params: Promise<{ id: string }>;
 }
@@ -16,11 +18,8 @@ export default async function PostPage({ params }: PostPageProps) {
   return (
     <section className="mx-auto w-full max-w-(--breakpoint-md) px-4">
       <div className="flex gap-16">
-        {/* <PostContent className="w-full xl:min-w-[736px]" post={postDetail} /> */}
-        {/* <PostTableOfContents className="hidden xl:block" tableOfContents={tableOfContents} /> */}
+        <PostContent html={post.content} />
       </div>
-
-      {/* <Giscus className="mt-12 min-h-[372px] border-t pt-10" /> */}
     </section>
   );
 }
