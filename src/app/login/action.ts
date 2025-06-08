@@ -19,7 +19,7 @@ const loginSchema = z.object({
 });
 
 export async function loginAction(_prevState: unknown, formData: FormData) {
-  const data = { email: formData.get('email') as string, password: formData.get('password') as string };
+  const data = { email: formData.get('email')?.toString() ?? '', password: formData.get('password')?.toString() ?? '' };
   const result = await loginSchema.spa(data);
 
   if (!result.success) {
