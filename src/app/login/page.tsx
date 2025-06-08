@@ -19,6 +19,7 @@ export default function LoginPage() {
       <Input
         name="email"
         type="email"
+        autoComplete="email"
         defaultValue={state?.values.email}
         placeholder="이메일"
         errors={state?.fieldErrors.email}

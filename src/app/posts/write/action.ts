@@ -4,10 +4,12 @@ import { redirect } from 'next/navigation';
 
 import { PrismaClient } from '@prisma/client';
 
+import { highlightCodeBlocks } from '@/lib/highlight-code-blocks';
+
 const prisma = new PrismaClient();
 
 export async function writeAction(formData: FormData) {
-  const content = formData.get('content')?.toString() ?? '';
+  const content = highlightCodeBlocks(formData.get('content')?.toString() ?? '');
   const summary = content.replace(/<[^>]+>/g, '').slice(0, 100) + '...';
 
   const data = {
