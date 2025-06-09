@@ -24,14 +24,17 @@ export default function Editor({ className }: EditorProps) {
   const editor = useEditor({
     extensions: [
       StarterKit.configure({ codeBlock: false }),
-      Placeholder.configure({ placeholder: '내용을 입력해 주세요.' }),
+      Placeholder.configure({ placeholder: 'Write your story...' }),
       CustomCodeBlockLowlight.configure({ lowlight: createLowlight(common), defaultLanguage: 'typescript' }),
       TextAlign.configure({ types: ['heading', 'paragraph', 'image'] }),
       Image,
     ],
     editorProps: {
       attributes: {
-        class: cn('outline-none min-h-[calc(100vh-64px-64px-64px-64px-48px-40px-40px-20px-2px)] pb-12 pt-5', className),
+        class: cn(
+          'outline-none min-h-[calc(100vh-64px-64px-64px-64px-84px-48px-40px-40px-20px-2px)] pb-12 pt-5',
+          className,
+        ),
       },
     },
     content: '',

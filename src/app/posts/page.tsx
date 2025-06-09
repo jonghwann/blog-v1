@@ -17,7 +17,7 @@ export default async function PostsPage() {
 
       <aside className="hidden flex-1 border-l px-4 md:block">
         <section className="flex flex-col gap-3">
-          <h2 className="text-secondary-foreground text-sm font-medium">태그</h2>
+          <h2 className="text-secondary-foreground text-sm font-medium">Tags</h2>
         </section>
       </aside>
     </section>

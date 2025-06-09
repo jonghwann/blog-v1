@@ -17,7 +17,7 @@ export default async function Header() {
 
         {id && (
           <Form action={logoutAction}>
-            <Button className="h-8 rounded-md text-sm">Log out</Button>
+            <Button className="h-8 rounded-md text-sm">Logout</Button>
           </Form>
         )}
       </div>
