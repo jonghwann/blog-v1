@@ -60,7 +60,7 @@ export default function EditorTags({ className }: EditorTagsProps) {
         <AutosizeInput
           className="placeholder:text-secondary-foreground focus-visible:outline-none"
           name="tag"
-          placeholder="태그입력"
+          placeholder="Add a tag"
           value={input}
           onChange={handleChange}
           onKeyDown={handleKeyDown}

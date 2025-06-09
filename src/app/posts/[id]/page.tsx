@@ -1,5 +1,6 @@
 import { getPost } from '@/api/post/[id]/api';
 
+import BackButton from '@/components/common/back-button';
 import PostContent from '@/components/post/post-content';
 
 interface PostPageProps {
@@ -11,14 +12,12 @@ export default async function PostPage({ params }: PostPageProps) {
 
   const post = await getPost(id);
 
-  if (!post) {
-    return <div>Not found!</div>;
-  }
-
   return (
     <section className="mx-auto w-full max-w-(--breakpoint-md) px-4">
+      <BackButton />
+
       <div className="flex gap-16">
-        <PostContent html={post.content} />
+        <PostContent className="w-full xl:min-w-[736px]" html={post.content} />
       </div>
     </section>
   );

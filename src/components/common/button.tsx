@@ -19,10 +19,7 @@ export default function Button({ variant = 'default', className, children, ...pr
 
   return (
     <UIButton
-      className={cn(
-        'hover:bg-secondary h-12 cursor-pointer rounded-lg border px-3 py-0 text-base shadow-none transition-none',
-        className,
-      )}
+      className={cn('h-12 cursor-pointer rounded-lg px-3 py-0 text-base', className)}
       variant={variant}
       disabled={pending}
       {...props}

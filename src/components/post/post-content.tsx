@@ -1,7 +1,10 @@
+import { cn } from '@/lib/utils';
+
 interface PostContentProps {
+  className?: string;
   html: string;
 }
 
-export default function PostContent({ html }: PostContentProps) {
-  return <div className="tiptap" dangerouslySetInnerHTML={{ __html: html }} />;
+export default function PostContent({ className, html }: PostContentProps) {
+  return <div className={cn('tiptap', className)} dangerouslySetInnerHTML={{ __html: html }} />;
 }

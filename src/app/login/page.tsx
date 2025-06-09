@@ -21,7 +21,7 @@ export default function LoginPage() {
         type="email"
         autoComplete="email"
         defaultValue={state?.values.email}
-        placeholder="이메일"
+        placeholder="Email"
         errors={state?.fieldErrors.email}
       />
 
@@ -29,11 +29,11 @@ export default function LoginPage() {
         name="password"
         type="password"
         defaultValue={state?.values.password}
-        placeholder="비밀번호"
+        placeholder="Password"
         errors={state?.fieldErrors.password}
       />
 
-      <Button variant="secondary">로그인</Button>
+      <Button variant="secondary">Login</Button>
     </Form>
   );
 }

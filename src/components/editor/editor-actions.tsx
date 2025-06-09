@@ -1,31 +1,40 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-import { useFormStatus } from 'react-dom';
-
-import { Loader2 } from 'lucide-react';
+import { useState } from 'react';
 
 import { cn } from '@/lib/utils';
 
+import Alert from '../common/alert';
+
 interface EditorActionsProps {
   className?: string;
-  cancelText?: string;
-  submitText?: string;
+  alertDescription?: string;
+  actionText?: string;
 }
 
-export default function EditorActions({ className, cancelText, submitText }: EditorActionsProps) {
-  const router = useRouter();
-
-  const { pending } = useFormStatus();
-
-  const handleCancel = () => {
-    router.back();
-  };
+export default function EditorActions({
+  className,
+  alertDescription = 'Are you sure you want to publish?',
+  actionText = 'Publish',
+}: EditorActionsProps) {
+  const [isAlertOpen, setIsAlertOpen] = useState(false);
 
   return (
     <div className={cn('flex gap-2 text-sm *:cursor-pointer', className)}>
-      <button onClick={handleCancel}>{cancelText}</button>
-      <button>{pending ? <Loader2 className="size-3 animate-spin" /> : submitText}</button>
+      <button
+        className="hover:text-foreground text-secondary-foreground"
+        type="button"
+        onClick={() => setIsAlertOpen(true)}
+      >
+        {actionText}
+      </button>
+
+      <Alert
+        open={isAlertOpen}
+        description={alertDescription}
+        onCancel={() => setIsAlertOpen(false)}
+        actionText={actionText}
+      />
     </div>
   );
 }
