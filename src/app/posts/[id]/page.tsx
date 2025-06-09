@@ -12,7 +12,7 @@ export default async function PostPage({ params }: PostPageProps) {
   const post = await getPost(id);
 
   if (!post) {
-    return <div>Not found</div>;
+    return <div>Not found!</div>;
   }
 
   return (
