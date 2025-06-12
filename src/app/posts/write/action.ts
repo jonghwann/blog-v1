@@ -4,12 +4,15 @@ import { redirect } from 'next/navigation';
 
 import { PrismaClient } from '@prisma/client';
 
-import { highlightCodeBlocks } from '@/lib/highlight-code-blocks';
+import { highlightCodeBlocks, addHeadingIds } from '@/lib/post';
 
 const prisma = new PrismaClient();
 
 export async function writeAction(formData: FormData) {
-  const content = highlightCodeBlocks(formData.get('content')?.toString() ?? '');
+  let content = formData.get('content')?.toString() ?? '';
+  content = highlightCodeBlocks(content);
+  content = addHeadingIds(content);
+
   const summary = content.replace(/<[^>]+>/g, '').slice(0, 100) + '...';
 
   const data = {
