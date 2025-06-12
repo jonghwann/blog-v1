@@ -2,6 +2,7 @@ import { getPost } from '@/api/post/[id]/api';
 
 import BackButton from '@/components/common/back-button';
 import PostContent from '@/components/post/post-content';
+import PostTableOfContents from '@/components/post/post-table-of-contents';
 
 interface PostPageProps {
   params: Promise<{ id: string }>;
@@ -18,6 +19,7 @@ export default async function PostPage({ params }: PostPageProps) {
 
       <div className="flex gap-16">
         <PostContent className="w-full xl:min-w-[736px]" html={post.content} />
+        <PostTableOfContents className="hidden xl:block" content={post.content} />
       </div>
     </section>
   );
