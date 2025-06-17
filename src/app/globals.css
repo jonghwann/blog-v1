@@ -27,6 +27,7 @@
     'Segoe UI Symbol', sans-serif;
 
   --z-header: 100;
+  --z-scroll-progress-bar: 200;
   --z-alert: 1000;
 }
 

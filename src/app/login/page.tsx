@@ -1,7 +1,10 @@
 'use client';
 
 import { useActionState } from 'react';
+import { useRouter } from 'next/navigation';
 import Form from 'next/form';
+
+import { useAuthStore } from '@/store/auth';
 
 import { loginAction } from './action';
 
@@ -9,7 +12,20 @@ import Input from '@/components/common/input';
 import Button from '@/components/common/button';
 
 export default function LoginPage() {
-  const [state, formAction] = useActionState(loginAction, null);
+  const router = useRouter();
+
+  const setLogin = useAuthStore((state) => state.setLogin);
+
+  const [state, formAction] = useActionState(async (prev: unknown, formData: FormData) => {
+    const result = await loginAction(prev, formData);
+
+    if (result?.success) {
+      setLogin();
+      router.push('/posts');
+    } else {
+      return result;
+    }
+  }, null);
 
   return (
     <Form
@@ -20,17 +36,17 @@ export default function LoginPage() {
         name="email"
         type="email"
         autoComplete="email"
-        defaultValue={state?.values.email}
+        defaultValue={state?.values?.email}
         placeholder="Email"
-        errors={state?.fieldErrors.email}
+        errors={state?.fieldErrors?.email}
       />
 
       <Input
         name="password"
         type="password"
-        defaultValue={state?.values.password}
+        defaultValue={state?.values?.password}
         placeholder="Password"
-        errors={state?.fieldErrors.password}
+        errors={state?.fieldErrors?.password}
       />
 
       <Button variant="secondary">Login</Button>
