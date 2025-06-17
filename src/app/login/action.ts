@@ -1,7 +1,5 @@
 'use server';
 
-import { redirect } from 'next/navigation';
-
 import { PrismaClient } from '@prisma/client';
 import { z } from 'zod';
 import bcrypt from 'bcrypt';
@@ -35,7 +33,7 @@ export async function loginAction(_prevState: unknown, formData: FormData) {
         const session = await getSession();
         session.id = user.id;
         await session.save();
-        redirect('/posts');
+        return { success: true };
       }
     }
   }

@@ -59,7 +59,7 @@ export default function EditorToolbar({ editor }: EditorToolbarProps) {
   };
 
   return (
-    <div className="bg-background/80 sticky top-[65px] z-[var(--z-header)] flex min-h-10 flex-wrap items-center gap-4 backdrop-blur-[5px] backdrop-saturate-[180%]">
+    <div className="bg-background/80 flex min-h-10 flex-wrap items-center gap-4 backdrop-blur-[5px] backdrop-saturate-[180%]">
       <EditorToolbarButton
         Icon={Undo2}
         disabled={isUndoDisabled}
