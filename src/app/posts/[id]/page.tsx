@@ -1,5 +1,7 @@
 import { getPost } from '@/api/post/[id]/api';
 
+import { postIdsAction } from './action';
+
 import BackButton from '@/components/common/back-button';
 import PostContent from '@/components/post/post-content';
 import PostTableOfContents from '@/components/post/post-table-of-contents';
@@ -23,4 +25,11 @@ export default async function PostPage({ params }: PostPageProps) {
       </div>
     </section>
   );
+}
+
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  const ids = await postIdsAction();
+  return ids.map((id) => ({ id: String(id) }));
 }

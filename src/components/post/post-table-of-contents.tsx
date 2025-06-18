@@ -1,5 +1,6 @@
 'use client';
 
+import { useMemo } from 'react';
 import Link from 'next/link';
 
 import useActiveHeadings from '@/hooks/use-active-headings';
@@ -13,7 +14,7 @@ interface PostTableOfContentsProps {
 }
 
 export default function PostTableOfContents({ className, content }: PostTableOfContentsProps) {
-  const tableOfContents = createTableOfContents(content);
+  const tableOfContents = useMemo(() => createTableOfContents(content), [content]);
   const activeIds = useActiveHeadings(tableOfContents);
 
   return (
