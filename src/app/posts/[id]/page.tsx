@@ -1,6 +1,5 @@
-import { getPost } from '@/api/post/[id]/api';
-
-import { postIdsAction } from './action';
+import { getPost } from '@/api/posts/[id]/api';
+import { getPosts } from '@/api/posts/api';
 
 import BackButton from '@/components/common/back-button';
 import PostContent from '@/components/post/post-content';
@@ -30,6 +29,6 @@ export default async function PostPage({ params }: PostPageProps) {
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
-  const ids = await postIdsAction();
-  return ids.map((id) => ({ id: String(id) }));
+  const posts = await getPosts();
+  return posts.map((post) => ({ id: String(post.id) }));
 }

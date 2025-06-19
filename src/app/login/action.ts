@@ -1,12 +1,10 @@
 'use server';
 
-import { PrismaClient } from '@prisma/client';
 import { z } from 'zod';
 import bcrypt from 'bcrypt';
 
+import { findUserByEmail } from '@/lib/db/login';
 import getSession from '@/lib/session';
-
-const prisma = new PrismaClient();
 
 const loginSchema = z.object({
   email: z.string().min(1, { message: 'Email is required.' }).email({ message: 'Invalid email address.' }),
@@ -20,7 +18,7 @@ export async function loginAction(_prevState: unknown, formData: FormData) {
   if (!result.success) {
     return { fieldErrors: result.error.flatten().fieldErrors, values: data };
   } else {
-    const user = await prisma.user.findUnique({ where: { email: data.email } });
+    const user = await findUserByEmail(data.email);
 
     if (!user) {
       return { fieldErrors: { email: ['No account found with this email.'] }, values: data };
