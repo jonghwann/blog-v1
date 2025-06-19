@@ -1,19 +1,15 @@
 import { NextResponse } from 'next/server';
 
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import { findPostById } from '@/lib/db/posts';
 
 export async function GET(_request: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
 
-  const post = await prisma.post.findUnique({
-    where: { id: Number(id) },
-  });
-
-  if (!post) {
-    return NextResponse.json({ error: 'Not found' }, { status: 404 });
+  try {
+    const post = await findPostById(Number(id));
+    return NextResponse.json(post);
+  } catch (error) {
+    console.error('Error in GET:', error);
+    return NextResponse.json({ error: 'Failed to find post' }, { status: 500 });
   }
-
-  return NextResponse.json(post);
 }
