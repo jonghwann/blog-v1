@@ -22,14 +22,9 @@ export async function createPost(data: Omit<Post, 'id' | 'createdAt' | 'updatedA
   }
 }
 
-export async function findPostById(id: number): Promise<Post> {
+export async function findPostById(id: number): Promise<Post | null> {
   try {
     const post = await prisma.post.findUnique({ where: { id } });
-
-    if (!post) {
-      throw new Error('Post not found');
-    }
-
     return post;
   } catch (error) {
     console.error('Error in findPostById:', error);
