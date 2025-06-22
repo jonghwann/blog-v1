@@ -1,5 +1,6 @@
-import { findPosts } from '@/lib/db/posts';
 import { getPost } from '@/api/posts/[id]/api';
+
+import { findPosts } from '@/lib/db/posts';
 
 import BackButton from '@/components/common/back-button';
 import PostContent from '@/components/post/post-content';
