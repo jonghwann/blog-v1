@@ -1,6 +1,4 @@
-import { getPost } from '@/api/posts/[id]/api';
-
-import { findPosts } from '@/lib/db/posts';
+import { findPostById, findPosts } from '@/lib/db/posts';
 
 import BackButton from '@/components/common/back-button';
 import PostContent from '@/components/post/post-content';
@@ -13,7 +11,7 @@ interface PostPageProps {
 export default async function PostPage({ params }: PostPageProps) {
   const { id } = await params;
 
-  const post = await getPost(id);
+  const post = await findPostById(Number(id));
 
   return (
     <section className="mx-auto w-full max-w-(--breakpoint-md) px-4">
@@ -26,8 +24,6 @@ export default async function PostPage({ params }: PostPageProps) {
     </section>
   );
 }
-
-export const dynamicParams = false;
 
 export async function generateStaticParams() {
   const posts = await findPosts();
