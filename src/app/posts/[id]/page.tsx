@@ -1,3 +1,5 @@
+import { notFound } from 'next/navigation';
+
 import { findPostById, findPosts } from '@/lib/db/posts';
 
 import BackButton from '@/components/common/back-button';
@@ -13,19 +15,21 @@ export default async function PostPage({ params }: PostPageProps) {
 
   const post = await findPostById(Number(id));
 
+  if (!post) {
+    notFound();
+  }
+
   return (
     <section className="mx-auto w-full max-w-(--breakpoint-md) px-4">
       <BackButton />
 
       <div className="flex gap-16">
-        <PostContent className="w-full xl:min-w-[736px]" html={post?.content ?? ''} />
-        <PostTableOfContents className="hidden xl:block" content={post?.content ?? ''} />
+        <PostContent className="w-full xl:min-w-[736px]" html={post.content} />
+        <PostTableOfContents className="hidden xl:block" content={post.content} />
       </div>
     </section>
   );
 }
-
-export const dynamicParams = false;
 
 export async function generateStaticParams() {
   const posts = await findPosts();

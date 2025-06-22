@@ -23,7 +23,7 @@ import {
   ImagePlus,
 } from 'lucide-react';
 
-import { uploadImage } from '@/api/upload/api';
+import { uploadImageAction } from '@/app/posts/action';
 
 import EditorToolbarButton from './editor-toolbar-button';
 
@@ -54,8 +54,12 @@ export default function EditorToolbar({ editor }: EditorToolbarProps) {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    const url = await uploadImage(file);
-    editor?.chain().focus().setImage({ src: url }).run();
+    try {
+      const url = await uploadImageAction(file);
+      editor?.chain().focus().setImage({ src: url }).run();
+    } catch (error) {
+      console.error('Error in handleImageUpload:', error);
+    }
   };
 
   return (
