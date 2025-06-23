@@ -1,4 +1,4 @@
-import FabLink from '@/components/fab/fab-link';
+import FabLink from '@/components/common/fab-link';
 
 export default async function PostsPage() {
   return (
