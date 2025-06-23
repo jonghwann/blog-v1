@@ -3,9 +3,9 @@ import { notFound } from 'next/navigation';
 import { findPostById, findPosts } from '@/lib/db/posts';
 
 import BackButton from '@/components/common/back-button';
+import PostHeader from '@/components/post/post-header';
 import PostContent from '@/components/post/post-content';
 import PostTableOfContents from '@/components/post/post-table-of-contents';
-import PostHeader from '@/components/post/post-header';
 
 interface PostPageProps {
   params: Promise<{ id: string }>;
@@ -23,7 +23,7 @@ export default async function PostPage({ params }: PostPageProps) {
   return (
     <section className="mx-auto w-full max-w-(--breakpoint-md) px-4">
       <BackButton />
-      <PostHeader createdAt={post.createdAt} title={post.title} tags={post.tags} />
+      <PostHeader id={post.id} createdAt={post.createdAt} title={post.title} tags={post.tags} />
 
       <div className="flex gap-16">
         <PostContent className="w-full xl:min-w-[736px]" html={post.content} />
