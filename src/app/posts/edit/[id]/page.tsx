@@ -3,7 +3,7 @@ import Form from 'next/form';
 
 import { editAction } from './action';
 
-import { findPostById } from '@/lib/db/posts';
+import { findPostById } from '@/db/posts';
 
 import BackButton from '@/components/common/back-button';
 import Input from '@/components/common/input';

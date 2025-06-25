@@ -1,6 +1,6 @@
 import { Post } from '@prisma/client';
 
-import prisma from '@/lib/db';
+import prisma from '@/db/client';
 
 export async function findPosts(): Promise<Post[]> {
   try {

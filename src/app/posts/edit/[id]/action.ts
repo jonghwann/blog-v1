@@ -3,7 +3,7 @@
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
-import { updatePost } from '@/lib/db/posts';
+import { updatePost } from '@/db/posts';
 import { highlightCodeBlocks, addHeadingIds } from '@/lib/post';
 
 export async function editAction(formData: FormData) {
