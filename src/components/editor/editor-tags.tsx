@@ -10,10 +10,11 @@ import AutosizeInput from '../common/autosize-input';
 
 interface EditorTagsProps {
   className?: string;
+  defaultValue?: string;
 }
 
-export default function EditorTags({ className }: EditorTagsProps) {
-  const [tags, setTags] = useState<string[]>([]);
+export default function EditorTags({ className, defaultValue }: EditorTagsProps) {
+  const [tags, setTags] = useState<string[]>(defaultValue ? defaultValue.split(',') : []);
   const [input, setInput] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
