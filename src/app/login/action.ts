@@ -3,7 +3,7 @@
 import { z } from 'zod';
 import bcrypt from 'bcrypt';
 
-import { findUserByEmail } from '@/lib/db/login';
+import { findUserByEmail } from '@/db/login';
 import getSession from '@/lib/session';
 
 const loginSchema = z.object({

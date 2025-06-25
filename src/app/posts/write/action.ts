@@ -3,7 +3,7 @@
 import { redirect } from 'next/navigation';
 
 import { highlightCodeBlocks, addHeadingIds } from '@/lib/post';
-import { createPost } from '@/lib/db/posts';
+import { createPost } from '@/db/posts';
 
 export async function writeAction(formData: FormData) {
   let content = formData.get('content')?.toString() ?? '';

@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 
-import { findPostById, findPosts } from '@/lib/db/posts';
+import { findPostById, findPosts } from '@/db/posts';
 
 import BackButton from '@/components/common/back-button';
 import PostHeader from '@/components/post/post-header';
