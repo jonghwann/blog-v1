@@ -31,3 +31,12 @@ export async function findPostById(id: number): Promise<Post | null> {
     throw new Error('Failed to find post by id');
   }
 }
+
+export async function updatePost(data: Omit<Post, 'createdAt' | 'updatedAt'>) {
+  try {
+    await prisma.post.update({ where: { id: data.id }, data });
+  } catch (error) {
+    console.error('Error in updatePost:', error);
+    throw new Error('Failed to update post');
+  }
+}

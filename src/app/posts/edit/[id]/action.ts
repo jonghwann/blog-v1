@@ -1,11 +1,12 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
+import { updatePost } from '@/lib/db/posts';
 import { highlightCodeBlocks, addHeadingIds } from '@/lib/post';
-import { createPost } from '@/lib/db/posts';
 
-export async function writeAction(formData: FormData) {
+export async function editAction(formData: FormData) {
   let content = formData.get('content')?.toString() ?? '';
   content = highlightCodeBlocks(content);
   content = addHeadingIds(content);
@@ -13,12 +14,16 @@ export async function writeAction(formData: FormData) {
   const summary = content.replace(/<[^>]+>/g, '').slice(0, 100) + '...';
 
   const data = {
+    id: Number(formData.get('id')),
     title: formData.get('title')?.toString() ?? '',
     content,
     summary,
     tags: formData.get('tags')?.toString().split(',').filter(Boolean).sort().join(',') ?? '',
   };
 
-  const post = await createPost(data);
-  redirect(`/posts/${post.id}`);
+  await updatePost(data);
+
+  const path = `/posts/${data.id}`;
+  revalidatePath(path);
+  redirect(path);
 }

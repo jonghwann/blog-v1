@@ -23,7 +23,7 @@ export default async function PostPage({ params }: PostPageProps) {
   return (
     <section className="mx-auto w-full max-w-(--breakpoint-md) px-4">
       <BackButton />
-      <PostHeader id={post.id} createdAt={post.createdAt} title={post.title} tags={post.tags} />
+      <PostHeader {...post} />
 
       <div className="flex gap-16">
         <PostContent className="w-full xl:min-w-[736px]" html={post.content} />

@@ -16,9 +16,10 @@ import EditorToolbar from './editor-toolbar';
 
 interface EditorProps {
   className?: string;
+  defaultValue?: string;
 }
 
-export default function Editor({ className }: EditorProps) {
+export default function Editor({ className, defaultValue }: EditorProps) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const editor = useEditor({
@@ -37,18 +38,15 @@ export default function Editor({ className }: EditorProps) {
         ),
       },
     },
-    content: '',
+    content: defaultValue ?? '',
     immediatelyRender: false,
-    onUpdate: ({ editor }) => {
-      inputRef.current!.value = editor.getHTML();
-    },
   });
 
   return (
     <div>
       <EditorToolbar editor={editor} />
       <EditorContent className="tiptap" editor={editor} />
-      <input ref={inputRef} type="hidden" name="content" />
+      <input ref={inputRef} type="hidden" name="content" value={editor?.getHTML() ?? ''} />
     </div>
   );
 }
