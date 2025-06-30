@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 
+import SessionSyncProvider from '@/providers/session-sync-provider';
 import ThemeProvider from '@/providers/theme-provider';
 import Layout from '@/components/layout/layout';
 
@@ -11,9 +12,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="ko" className="scroll-smooth" suppressHydrationWarning>
       <body className="antialiased">
-        <ThemeProvider>
-          <Layout>{children}</Layout>
-        </ThemeProvider>
+        <SessionSyncProvider>
+          <ThemeProvider>
+            <Layout>{children}</Layout>
+          </ThemeProvider>
+        </SessionSyncProvider>
       </body>
     </html>
   );
