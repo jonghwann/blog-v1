@@ -2,6 +2,8 @@
 
 import { useRouter } from 'next/navigation';
 
+import { useShallow } from 'zustand/react/shallow';
+
 import { useAuthStore } from '@/store/auth';
 
 import { logoutAction } from '@/app/logout/action';
@@ -14,8 +16,9 @@ import Button from '../common/button';
 export default function Header() {
   const router = useRouter();
 
-  const isLogin = useAuthStore((state) => state.isLogin);
-  const setLogout = useAuthStore((state) => state.setLogout);
+  const { isLogin, setLogout } = useAuthStore(
+    useShallow((state) => ({ isLogin: state.isLogin, setLogout: state.setLogout })),
+  );
 
   const marginTop = useScrollVisibility(64);
 
