@@ -1,6 +1,6 @@
 'use client';
 
-import { useActionState } from 'react';
+import { useActionState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Form from 'next/form';
 
@@ -16,40 +16,33 @@ export default function LoginPage() {
 
   const setLogin = useAuthStore((state) => state.setLogin);
 
-  const [state, formAction] = useActionState(async (prev: unknown, formData: FormData) => {
-    const result = await loginAction(prev, formData);
+  const [state, formAction, isPending] = useActionState(loginAction, null);
 
-    if (result?.success) {
+  useEffect(() => {
+    if (state?.success) {
       setLogin();
-      router.push('/posts');
-    } else {
-      return result;
+      router.replace('/posts');
     }
-  }, null);
+  }, [state]);
 
   return (
     <Form
       className="absolute top-1/2 left-1/2 flex w-[320px] -translate-x-1/2 -translate-y-1/2 transform flex-col gap-3"
       action={formAction}
     >
-      <Input
-        name="email"
-        type="email"
-        autoComplete="email"
-        defaultValue={state?.values?.email}
-        placeholder="Email"
-        errors={state?.fieldErrors?.email}
-      />
+      <Input name="email" defaultValue={state?.values?.email} placeholder="Email" errors={state?.errors?.email} />
 
       <Input
         name="password"
         type="password"
         defaultValue={state?.values?.password}
         placeholder="Password"
-        errors={state?.fieldErrors?.password}
+        errors={state?.errors?.password}
       />
 
-      <Button variant="secondary">Login</Button>
+      <Button variant="secondary" size="lg" isLoading={isPending}>
+        Login
+      </Button>
     </Form>
   );
 }
