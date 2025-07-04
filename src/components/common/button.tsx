@@ -1,30 +1,19 @@
-'use client';
-
-import { useFormStatus } from 'react-dom';
-
 import { Loader2 } from 'lucide-react';
 
-import { cn } from '@/lib/utils';
+import { type VariantProps } from 'class-variance-authority';
 
-import { Button as UIButton } from '@/components/ui/button';
+import { Button as UIButton, buttonVariants } from '@/components/ui/button';
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends React.ComponentProps<'button'>, VariantProps<typeof buttonVariants> {
   className?: string;
-  variant?: 'default' | 'secondary';
+  isLoading?: boolean;
   children: React.ReactNode;
 }
 
-export default function Button({ variant = 'default', className, children, ...props }: ButtonProps) {
-  const { pending } = useFormStatus();
-
+export default function Button({ className, variant = 'default', isLoading, children, ...props }: ButtonProps) {
   return (
-    <UIButton
-      className={cn('h-12 cursor-pointer rounded-lg px-3 py-0 text-base', className)}
-      variant={variant}
-      disabled={pending}
-      {...props}
-    >
-      {pending ? <Loader2 className="animate-spin" /> : children}
+    <UIButton className={className} variant={variant} disabled={isLoading} {...props}>
+      {isLoading ? <Loader2 className="animate-spin" /> : children}
     </UIButton>
   );
 }
