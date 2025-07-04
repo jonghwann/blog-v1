@@ -4,35 +4,47 @@ import { z } from 'zod';
 import bcrypt from 'bcrypt';
 
 import { findUserByEmail } from '@/db/login';
+
 import getSession from '@/lib/session';
 
-const loginSchema = z.object({
+const schema = z.object({
   email: z.string().min(1, { message: 'Email is required.' }).email({ message: 'Invalid email address.' }),
   password: z.string().min(1, { message: 'Password is required.' }),
 });
 
-export async function loginAction(_prevState: unknown, formData: FormData) {
+interface LoginAction {
+  errors?: { email?: string[]; password?: string[] };
+  values?: { email: string; password: string };
+  success?: boolean;
+}
+
+export async function loginAction(_previousState: unknown, formData: FormData): Promise<LoginAction> {
   const data = { email: formData.get('email')?.toString() ?? '', password: formData.get('password')?.toString() ?? '' };
-  const result = await loginSchema.spa(data);
+  const validatedFields = schema.safeParse(data);
 
-  if (!result.success) {
-    return { fieldErrors: result.error.flatten().fieldErrors, values: data };
+  if (!validatedFields.success) {
+    return { errors: validatedFields.error.flatten().fieldErrors, values: data };
   } else {
-    const user = await findUserByEmail(data.email);
+    try {
+      const user = await findUserByEmail(data.email);
 
-    if (!user) {
-      return { fieldErrors: { email: ['No account found with this email.'] }, values: data };
-    } else {
-      const ok = await bcrypt.compare(data.password, user.password);
-
-      if (!ok) {
-        return { fieldErrors: { password: ['Incorrect password.'] }, values: data };
+      if (!user) {
+        return { errors: { email: ['No account found with this email.'] }, values: data };
       } else {
-        const session = await getSession();
-        session.id = user.id;
-        await session.save();
-        return { success: true };
+        const isPasswordMatch = await bcrypt.compare(data.password, user.password);
+
+        if (!isPasswordMatch) {
+          return { errors: { password: ['Incorrect password.'] }, values: data };
+        } else {
+          const session = await getSession();
+          session.id = user.id;
+          await session.save();
+          return { success: true };
+        }
       }
+    } catch (error) {
+      console.error('Error in loginAction:', error);
+      return { errors: { email: ['Something went wrong. Please try again later.'] }, values: data };
     }
   }
 }
