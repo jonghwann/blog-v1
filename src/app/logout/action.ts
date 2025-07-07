@@ -2,7 +2,17 @@
 
 import getSession from '@/lib/session';
 
-export async function logoutAction() {
-  const session = await getSession();
-  session.destroy();
+interface LogoutActionState {
+  success: boolean;
+}
+
+export async function logoutAction(): Promise<LogoutActionState> {
+  try {
+    const session = await getSession();
+    session.destroy();
+    return { success: true };
+  } catch (error) {
+    console.error('Error in logoutAction:', error);
+    return { success: false };
+  }
 }

@@ -1,6 +1,8 @@
 'use client';
 
+import { useActionState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Form from 'next/form';
 
 import { useShallow } from 'zustand/react/shallow';
 
@@ -20,13 +22,16 @@ export default function Header() {
     useShallow((state) => ({ isLogin: state.isLogin, setLogout: state.setLogout })),
   );
 
+  const [state, formAction, isPending] = useActionState(logoutAction, null);
+
   const marginTop = useScrollVisibility(64);
 
-  const handleLogout = async () => {
-    await logoutAction();
-    setLogout();
-    router.push('/posts');
-  };
+  useEffect(() => {
+    if (state?.success) {
+      setLogout();
+      router.push('/posts');
+    }
+  }, [state]);
 
   return (
     <header
@@ -37,9 +42,9 @@ export default function Header() {
         <Nav />
 
         {isLogin && (
-          <Button className="h-8 rounded-md text-sm" onClick={handleLogout}>
-            Logout
-          </Button>
+          <Form action={formAction}>
+            <Button isLoading={isPending}>Logout</Button>
+          </Form>
         )}
       </div>
     </header>
