@@ -13,30 +13,13 @@ export async function findPosts(): Promise<Post[]> {
 }
 
 export async function createPost(data: Omit<Post, 'id' | 'createdAt' | 'updatedAt'>): Promise<{ id: number }> {
-  try {
-    const post = await prisma.post.create({ data, select: { id: true } });
-    return post;
-  } catch (error) {
-    console.error('Error in createPost:', error);
-    throw new Error('Failed to create post');
-  }
+  return await prisma.post.create({ data, select: { id: true } });
 }
 
 export async function findPostById(id: number): Promise<Post | null> {
-  try {
-    const post = await prisma.post.findUnique({ where: { id } });
-    return post;
-  } catch (error) {
-    console.error('Error in findPostById:', error);
-    throw new Error('Failed to find post by id');
-  }
+  return await prisma.post.findUnique({ where: { id } });
 }
 
 export async function updatePost(data: Omit<Post, 'createdAt' | 'updatedAt'>) {
-  try {
-    await prisma.post.update({ where: { id: data.id }, data });
-  } catch (error) {
-    console.error('Error in updatePost:', error);
-    throw new Error('Failed to update post');
-  }
+  await prisma.post.update({ where: { id: data.id }, data });
 }

@@ -1,29 +1,25 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import { redirect } from 'next/navigation';
 
 import { updatePost } from '@/db/posts';
-import { highlightCodeBlocks, addHeadingIds } from '@/lib/post';
+import { parsePostFormData } from '@/lib/post';
 
-export async function editAction(formData: FormData) {
-  let content = formData.get('content')?.toString() ?? '';
-  content = highlightCodeBlocks(content);
-  content = addHeadingIds(content);
+interface EditActionState {
+  success: boolean;
+  postId?: number;
+}
 
-  const summary = content.replace(/<[^>]+>/g, '').slice(0, 100) + '...';
+export async function editAction(_prevState: unknown, formData: FormData): Promise<EditActionState> {
+  const data = parsePostFormData(formData);
+  const id = Number(formData.get('id'));
 
-  const data = {
-    id: Number(formData.get('id')),
-    title: formData.get('title')?.toString() ?? '',
-    content,
-    summary,
-    tags: formData.get('tags')?.toString().split(',').filter(Boolean).sort().join(',') ?? '',
-  };
-
-  await updatePost(data);
-
-  const path = `/posts/${data.id}`;
-  revalidatePath(path);
-  redirect(path);
+  try {
+    await updatePost({ ...data, id });
+    revalidatePath(`/posts/${id}`);
+    return { success: true, postId: id };
+  } catch (error) {
+    console.error('Error in editAction:', error);
+    return { success: false };
+  }
 }

@@ -1,40 +1,28 @@
 'use client';
 
-import { useState } from 'react';
-
 import { cn } from '@/lib/utils';
 
-import Alert from '../common/alert';
+interface EditorAction {
+  type?: 'button' | 'submit';
+  text: string;
+  onClick: () => void;
+}
 
 interface EditorActionsProps {
   className?: string;
-  alertDescription?: string;
-  actionText?: string;
+  actions: EditorAction[];
 }
 
-export default function EditorActions({
-  className,
-  alertDescription = 'Are you sure you want to publish?',
-  actionText = 'Publish',
-}: EditorActionsProps) {
-  const [isAlertOpen, setIsAlertOpen] = useState(false);
-
+export default function EditorActions({ className, actions }: EditorActionsProps) {
   return (
     <div className={cn('flex gap-2 text-sm *:cursor-pointer', className)}>
-      <button
-        className="hover:text-foreground text-secondary-foreground"
-        type="button"
-        onClick={() => setIsAlertOpen(true)}
-      >
-        {actionText}
-      </button>
-
-      <Alert
-        open={isAlertOpen}
-        description={alertDescription}
-        onCancel={() => setIsAlertOpen(false)}
-        actionText={actionText}
-      />
+      {actions.map(({ type = 'button', text, onClick }) => {
+        return (
+          <button className="hover:text-foreground text-secondary-foreground" key={text} type={type} onClick={onClick}>
+            {text}
+          </button>
+        );
+      })}
     </div>
   );
 }
