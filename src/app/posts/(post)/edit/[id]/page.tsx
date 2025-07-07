@@ -25,20 +25,18 @@ export default async function EditPage({ params }: EditPageProps) {
   }
 
   return (
-    <section className="relative mx-auto w-full max-w-(--breakpoint-md) px-4">
-      <Form action={editAction}>
-        <BackButton href={`/posts/${id}`} />
-        <input type="hidden" name="id" value={id} />
-        <Input
-          className="border-none px-0 focus-visible:ring-0"
-          name="title"
-          placeholder="Title"
-          defaultValue={post.title}
-        />
-        <Editor defaultValue={post.content} />
-        <EditorTags className="mb-5" defaultValue={post.tags} />
-        <EditorActions />
-      </Form>
-    </section>
+    <Form action={editAction}>
+      <BackButton href={`/posts/${id}`} />
+      <input type="hidden" name="id" value={id} />
+      <Input
+        className="border-none px-0 focus-visible:ring-0"
+        name="title"
+        placeholder="Title"
+        defaultValue={post.title}
+      />
+      <Editor defaultValue={post.content} />
+      <EditorTags className="mb-5" defaultValue={post.tags} />
+      <EditorActions />
+    </Form>
   );
 }
