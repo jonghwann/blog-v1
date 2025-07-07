@@ -10,14 +10,12 @@ import EditorActions from '@/components/editor/editor-actions';
 
 export default function WritePage() {
   return (
-    <section className="relative mx-auto w-full max-w-(--breakpoint-md) px-4">
-      <Form action={writeAction}>
-        <BackButton />
-        <Input className="border-none px-0 focus-visible:ring-0" name="title" placeholder="Title" />
-        <Editor />
-        <EditorTags className="mb-5" />
-        <EditorActions />
-      </Form>
-    </section>
+    <Form action={writeAction}>
+      <BackButton />
+      <Input className="border-none px-0 focus-visible:ring-0" name="title" placeholder="Title" />
+      <Editor />
+      <EditorTags className="mb-5" />
+      <EditorActions />
+    </Form>
   );
 }

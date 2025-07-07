@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 
 import { findPostById, findPosts } from '@/db/posts';
 
+import ScrollProgressBar from '@/components/common/scroll-progress-bar';
 import BackButton from '@/components/common/back-button';
 import PostHeader from '@/components/post/post-header';
 import PostContent from '@/components/post/post-content';
@@ -21,7 +22,8 @@ export default async function PostPage({ params }: PostPageProps) {
   }
 
   return (
-    <section className="mx-auto w-full max-w-(--breakpoint-md) px-4">
+    <div>
+      <ScrollProgressBar />
       <BackButton />
       <PostHeader {...post} />
 
@@ -29,7 +31,7 @@ export default async function PostPage({ params }: PostPageProps) {
         <PostContent className="w-full xl:min-w-[736px]" html={post.content} />
         <PostTableOfContents className="hidden xl:block" content={post.content} />
       </div>
-    </section>
+    </div>
   );
 }
 
