@@ -5,21 +5,25 @@ import { useEffect } from 'react';
 import Button from './button';
 
 interface AlertProps {
-  open?: boolean;
+  open: boolean;
   title?: string;
   description?: string;
+  isLoading?: boolean;
   cancelText?: string;
   onCancel?: () => void;
   actionText?: string;
+  onAction?: () => void;
 }
 
 export default function Alert({
   open,
   title,
   description,
+  isLoading,
   cancelText = 'Cancel',
   onCancel,
   actionText = 'Continue',
+  onAction,
 }: AlertProps) {
   useEffect(() => {
     if (open) {
@@ -44,11 +48,13 @@ export default function Alert({
         </div>
 
         <div className="mt-4 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
-          <Button className="h-9 px-4 py-2 text-sm font-medium" variant="secondary" type="button" onClick={onCancel}>
+          <Button variant="secondary" type="button" onClick={onCancel}>
             {cancelText}
           </Button>
 
-          <Button className="h-9 px-4 py-2 text-sm font-medium">{actionText}</Button>
+          <Button type="submit" isLoading={isLoading} onClick={onAction}>
+            {actionText}
+          </Button>
         </div>
       </div>
     </div>

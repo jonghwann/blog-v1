@@ -1,24 +1,21 @@
 'use server';
 
-import { redirect } from 'next/navigation';
-
-import { highlightCodeBlocks, addHeadingIds } from '@/lib/post';
 import { createPost } from '@/db/posts';
+import { parsePostFormData } from '@/lib/post';
 
-export async function writeAction(formData: FormData) {
-  let content = formData.get('content')?.toString() ?? '';
-  content = highlightCodeBlocks(content);
-  content = addHeadingIds(content);
+interface WriteActionState {
+  success: boolean;
+  postId?: number;
+}
 
-  const summary = content.replace(/<[^>]+>/g, '').slice(0, 100) + '...';
+export async function writeAction(_prevState: unknown, formData: FormData): Promise<WriteActionState> {
+  const data = parsePostFormData(formData);
 
-  const data = {
-    title: formData.get('title')?.toString() ?? '',
-    content,
-    summary,
-    tags: formData.get('tags')?.toString().split(',').filter(Boolean).sort().join(',') ?? '',
-  };
-
-  const post = await createPost(data);
-  redirect(`/posts/${post.id}`);
+  try {
+    const post = await createPost(data);
+    return { success: true, postId: post.id };
+  } catch (error) {
+    console.error('Error in writeAction:', error);
+    return { success: false };
+  }
 }

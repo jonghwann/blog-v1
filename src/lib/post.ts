@@ -58,3 +58,18 @@ export const createTableOfContents = (html: string): TableOfContents[] => {
 
   return headings;
 };
+
+export function parsePostFormData(formData: FormData) {
+  let content = formData.get('content')?.toString() ?? '';
+  content = highlightCodeBlocks(content);
+  content = addHeadingIds(content);
+
+  const summary = content.replace(/<[^>]+>/g, '').slice(0, 100) + '...';
+
+  return {
+    title: formData.get('title')?.toString() ?? '',
+    content,
+    summary,
+    tags: formData.get('tags')?.toString().split(',').filter(Boolean).sort().join(',') ?? '',
+  };
+}

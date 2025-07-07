@@ -50,7 +50,7 @@ export default function EditorTags({ className, defaultValue }: EditorTagsProps)
             <span>{tag}</span>
           </div>
 
-          <button className="cursor-pointer" onClick={() => handleRemoveTag(tag)}>
+          <button className="cursor-pointer" type="button" onClick={() => handleRemoveTag(tag)}>
             <XIcon className="size-3" />
           </button>
         </div>
