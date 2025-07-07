@@ -12,13 +12,13 @@ const schema = z.object({
   password: z.string().min(1, { message: 'Password is required.' }),
 });
 
-interface LoginAction {
+interface LoginActionState {
   errors?: { email?: string[]; password?: string[] };
   values?: { email: string; password: string };
   success?: boolean;
 }
 
-export async function loginAction(_previousState: unknown, formData: FormData): Promise<LoginAction> {
+export async function loginAction(_previousState: unknown, formData: FormData): Promise<LoginActionState> {
   const data = { email: formData.get('email')?.toString() ?? '', password: formData.get('password')?.toString() ?? '' };
   const validatedFields = schema.safeParse(data);
 
