@@ -15,7 +15,13 @@ interface PostPageProps {
 export default async function PostPage({ params }: PostPageProps) {
   const { id } = await params;
 
-  const post = await findPostById(Number(id));
+  let post = null;
+
+  try {
+    post = await findPostById(Number(id));
+  } catch (error) {
+    console.error('Error in PostPage:', error);
+  }
 
   if (!post) {
     notFound();
@@ -36,6 +42,11 @@ export default async function PostPage({ params }: PostPageProps) {
 }
 
 export async function generateStaticParams() {
-  const posts = await findPosts();
-  return posts.map((post) => ({ id: String(post.id) }));
+  try {
+    const posts = await findPosts();
+    return posts.map((post) => ({ id: String(post.id) }));
+  } catch (error) {
+    console.error('Error in generateStaticParams:', error);
+    return [];
+  }
 }
