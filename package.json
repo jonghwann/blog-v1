@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@prisma/client": "^6.10.1",
+    "@prisma/client": "^6.11.1",
     "@radix-ui/react-slot": "^1.2.3",
     "@tiptap/extension-code-block-lowlight": "^2.12.0",
     "@tiptap/extension-image": "^2.12.0",
@@ -48,7 +48,7 @@
     "eslint-config-prettier": "^10.1.5",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
-    "prisma": "^6.10.1",
+    "prisma": "^6.11.1",
     "tailwindcss": "^4",
     "tw-animate-css": "^1.3.0",
     "typescript": "^5"

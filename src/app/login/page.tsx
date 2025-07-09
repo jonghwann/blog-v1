@@ -27,7 +27,7 @@ export default function LoginPage() {
 
   return (
     <Form
-      className="absolute top-1/2 left-1/2 flex w-[320px] -translate-x-1/2 -translate-y-1/2 transform flex-col gap-3"
+      className="absolute top-1/2 left-1/2 flex w-full -translate-x-1/2 -translate-y-1/2 transform flex-col gap-3 px-4 sm:w-[320px] sm:px-0"
       action={formAction}
     >
       <Input name="email" defaultValue={state?.values?.email} placeholder="Email" errors={state?.errors?.email} />
