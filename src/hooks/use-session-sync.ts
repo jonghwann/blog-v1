@@ -25,5 +25,5 @@ export function useSessionSync() {
 
   useEffect(() => {
     checkSession();
-  }, [pathname, isLogin]);
+  }, [pathname]);
 }
