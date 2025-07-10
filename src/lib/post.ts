@@ -1,7 +1,8 @@
 import * as cheerio from 'cheerio';
 import { createLowlight, common } from 'lowlight';
 import { toHtml } from 'hast-util-to-html';
-import { TableOfContents } from '@/types/post';
+
+import { type TableOfContents } from '@/components/post/post-table-of-contents';
 
 const lowlight = createLowlight(common);
 
@@ -32,7 +33,7 @@ export function generateAnchorId(title: string): string {
 export function addHeadingIds(html: string): string {
   const $ = cheerio.load(html);
 
-  $('h2').each((_, el) => {
+  $('h2, h3').each((_, el) => {
     const title = $(el).text().trim();
     const anchorId = generateAnchorId(title);
     $(el).attr('id', anchorId);
@@ -45,14 +46,17 @@ export const createTableOfContents = (html: string): TableOfContents[] => {
   const $ = cheerio.load(html);
   const headings: TableOfContents[] = [];
 
-  $('h2').each((_, el) => {
+  $('h2, h3').each((i, el) => {
+    const tag = $(el).get(0)?.tagName?.toLowerCase();
     const title = $(el).text().trim();
     const anchorId = generateAnchorId(title);
+    const depth = tag ? Number(tag.replace('h', '')) - 2 : 0;
 
     headings.push({
+      id: i,
       title,
       link: `#${anchorId}`,
-      depth: 0,
+      depth,
     });
   });
 

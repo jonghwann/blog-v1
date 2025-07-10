@@ -2,32 +2,26 @@
 
 import { useRef, useState, useEffect } from 'react';
 
-import { TableOfContents } from '@/types/post';
+import { type TableOfContents } from '@/components/post/post-table-of-contents';
 
 export default function useActiveHeadings(tableOfContents: TableOfContents[]) {
   const observer = useRef<IntersectionObserver>(null);
 
   const [activeIdList, setActiveIdList] = useState<string[]>([]);
-  const [lastActiveId, setLastActiveId] = useState('');
 
   useEffect(() => {
     const handleIntersection: IntersectionObserverCallback = (entries) => {
       entries.forEach((entry) => {
-        const targetId = entry.target.id;
-
-        setActiveIdList((prev) => {
-          if (entry.isIntersecting) {
-            setLastActiveId('');
-            return [...prev, targetId];
-          } else {
-            if (prev.length === 1) setLastActiveId(prev[0]);
-            return prev.filter((activeId) => activeId !== targetId);
-          }
-        });
+        if (entry.isIntersecting) {
+          setActiveIdList((prev) => [...prev, entry.target.id]);
+        } else {
+          setActiveIdList((prev) => prev.filter((activeId) => activeId !== entry.target.id));
+        }
       });
     };
 
     observer.current = new IntersectionObserver(handleIntersection, {
+      rootMargin: '-82px 0px 0px 0px',
       threshold: 1,
     });
 
@@ -37,7 +31,8 @@ export default function useActiveHeadings(tableOfContents: TableOfContents[]) {
     });
 
     return () => observer.current?.disconnect();
-  }, [tableOfContents]);
+  }, []);
 
-  return [...activeIdList, lastActiveId];
+  const activeIdArr = tableOfContents.filter(({ link }) => activeIdList.includes(link.slice(1)));
+  return Math.min(...activeIdArr.map(({ id }) => id)) || 1;
 }
