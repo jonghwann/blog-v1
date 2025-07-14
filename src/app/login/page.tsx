@@ -1,15 +1,14 @@
 'use client';
 
-import { useActionState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 import Form from 'next/form';
+import { useRouter } from 'next/navigation';
+import { useActionState, useEffect } from 'react';
 
+import Button from '@/components/common/button';
+import Input from '@/components/common/input';
 import { useAuthStore } from '@/store/auth';
 
 import { loginAction } from './action';
-
-import Input from '@/components/common/input';
-import Button from '@/components/common/button';
 
 export default function LoginPage() {
   const router = useRouter();

@@ -3,7 +3,6 @@
 import Link from 'next/link';
 
 import useActiveHeadings from '@/hooks/use-active-headings';
-
 import { createTableOfContents } from '@/lib/post';
 import { cn } from '@/lib/utils';
 
@@ -21,7 +20,7 @@ interface PostTableOfContentsProps {
 
 export default function PostTableOfContents({ className, content }: PostTableOfContentsProps) {
   const tableOfContents = createTableOfContents(content);
-  const activeId = useActiveHeadings(tableOfContents);
+  const activeId = useActiveHeadings({ tableOfContents, options: { rootMargin: '-82px 0px 0px 0px', threshold: 1 } });
 
   return (
     <aside className={cn('block w-[200px] shrink-0', className)}>

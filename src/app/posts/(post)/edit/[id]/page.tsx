@@ -1,10 +1,10 @@
 import { notFound } from 'next/navigation';
 
+import PostForm from '@/components/post/post-form';
 import { findPostById } from '@/db/posts';
 
 import { editAction } from './action';
 
-import PostForm from '@/components/post/post-form';
 
 interface EditPageProps {
   params: Promise<{ id: string }>;
