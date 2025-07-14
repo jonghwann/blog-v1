@@ -1,8 +1,8 @@
 'use client';
 
+import { XIcon } from 'lucide-react';
 import { useState } from 'react';
 
-import { XIcon } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 

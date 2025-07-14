@@ -1,8 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
 
-import type { Editor } from '@tiptap/react';
 
 import {
   Undo2,
@@ -22,10 +20,13 @@ import {
   AlignJustify,
   ImagePlus,
 } from 'lucide-react';
+import { useRef } from 'react';
 
 import { uploadImageAction } from '@/app/posts/action';
 
 import EditorToolbarButton from './editor-toolbar-button';
+
+import type { Editor } from '@tiptap/react';
 
 interface EditorToolbarProps {
   editor: Editor | null;

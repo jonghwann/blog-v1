@@ -4,7 +4,12 @@ import { useRef, useState, useEffect } from 'react';
 
 import { type TableOfContents } from '@/components/post/post-table-of-contents';
 
-export default function useActiveHeadings(tableOfContents: TableOfContents[]) {
+interface useActiveHeadings {
+  tableOfContents: TableOfContents[];
+  options: { rootMargin?: string; threshold?: number };
+}
+
+export default function useActiveHeadings({ tableOfContents, options }: useActiveHeadings) {
   const observer = useRef<IntersectionObserver>(null);
 
   const [activeIdList, setActiveIdList] = useState<string[]>([]);
@@ -20,10 +25,7 @@ export default function useActiveHeadings(tableOfContents: TableOfContents[]) {
       });
     };
 
-    observer.current = new IntersectionObserver(handleIntersection, {
-      rootMargin: '-82px 0px 0px 0px',
-      threshold: 1,
-    });
+    observer.current = new IntersectionObserver(handleIntersection, options);
 
     tableOfContents.forEach(({ link }: { link: string }) => {
       const element = document.getElementById(link.slice(1));

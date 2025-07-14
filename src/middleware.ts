@@ -1,7 +1,8 @@
-import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
 import getSession from './lib/session';
+
+import type { NextRequest } from 'next/server';
 
 const protectedPaths = ['/posts/write', '/posts/edit/:path*'];
 

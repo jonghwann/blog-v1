@@ -1,10 +1,9 @@
 'use server';
 
-import { z } from 'zod';
 import bcrypt from 'bcrypt';
+import { z } from 'zod';
 
 import { findUserByEmail } from '@/db/login';
-
 import getSession from '@/lib/session';
 
 const schema = z.object({

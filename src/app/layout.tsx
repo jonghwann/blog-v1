@@ -1,8 +1,8 @@
-import type { Metadata } from 'next';
-
+import Layout from '@/components/layout/layout';
 import SessionSyncProvider from '@/providers/session-sync-provider';
 import ThemeProvider from '@/providers/theme-provider';
-import Layout from '@/components/layout/layout';
+
+import type { Metadata } from 'next';
 
 import './globals.css';
 

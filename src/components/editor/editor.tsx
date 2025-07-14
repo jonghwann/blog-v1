@@ -1,14 +1,14 @@
 'use client';
 
-import { useRef } from 'react';
 
+import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
+import Image from '@tiptap/extension-image';
+import Placeholder from '@tiptap/extension-placeholder';
+import TextAlign from '@tiptap/extension-text-align';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
-import Placeholder from '@tiptap/extension-placeholder';
-import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
 import { createLowlight, common } from 'lowlight';
-import TextAlign from '@tiptap/extension-text-align';
-import Image from '@tiptap/extension-image';
+import { useRef } from 'react';
 
 import { cn } from '@/lib/utils';
 

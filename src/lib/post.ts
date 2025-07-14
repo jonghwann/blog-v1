@@ -1,6 +1,6 @@
 import * as cheerio from 'cheerio';
-import { createLowlight, common } from 'lowlight';
 import { toHtml } from 'hast-util-to-html';
+import { createLowlight, common } from 'lowlight';
 
 import { type TableOfContents } from '@/components/post/post-table-of-contents';
 

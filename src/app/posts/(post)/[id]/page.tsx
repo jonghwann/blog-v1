@@ -1,12 +1,11 @@
 import { notFound } from 'next/navigation';
 
-import { findPostById, findPosts } from '@/db/posts';
-
-import ScrollProgressBar from '@/components/common/scroll-progress-bar';
 import BackButton from '@/components/common/back-button';
-import PostHeader from '@/components/post/post-header';
+import ScrollProgressBar from '@/components/common/scroll-progress-bar';
 import PostContent from '@/components/post/post-content';
+import PostHeader from '@/components/post/post-header';
 import PostTableOfContents from '@/components/post/post-table-of-contents';
+import { findPostById, findPosts } from '@/db/posts';
 
 interface PostPageProps {
   params: Promise<{ id: string }>;

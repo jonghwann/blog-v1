@@ -1,16 +1,13 @@
 'use client';
 
-import { useActionState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 import Form from 'next/form';
-
+import { useRouter } from 'next/navigation';
+import { useActionState, useEffect } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 
-import { useAuthStore } from '@/store/auth';
-
 import { logoutAction } from '@/app/logout/action';
-
 import useScrollVisibility from '@/hooks/use-scroll-visibility';
+import { useAuthStore } from '@/store/auth';
 
 import Nav from './nav';
 import Button from '../common/button';

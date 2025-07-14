@@ -1,6 +1,5 @@
-import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-
+import { useEffect } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 
 import { useAuthStore } from '@/store/auth';
