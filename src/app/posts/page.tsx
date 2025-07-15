@@ -6,7 +6,11 @@ import PostList from '@/components/post/post-list';
 import { findPosts, findTags } from '@/db/posts';
 import { parseTags } from '@/lib/post';
 
-export default async function PostsPage({ searchParams }: { searchParams: Promise<{ tag: string | string[] }> }) {
+interface PostsPageProps {
+  searchParams: Promise<{ tag: string | string[] }>;
+}
+
+export default async function PostsPage({ searchParams }: PostsPageProps) {
   const { tag } = await searchParams;
   const selectedTags = tag ? (Array.isArray(tag) ? tag : [tag]) : [];
 
