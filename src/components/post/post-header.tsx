@@ -5,14 +5,14 @@ import Tag from '../common/tag';
 
 interface PostHeaderProps {
   id: number;
-  createdAt: Date;
   title: string;
   tags: string;
+  createdAt: Date;
 }
 
-export default function PostHeader({ id, createdAt, title, tags }: PostHeaderProps) {
-  const formattedDate = format(new Date(createdAt), 'EEEE, MMMM do yyyy');
+export default function PostHeader({ id, title, tags, createdAt }: PostHeaderProps) {
   const tagList = tags.split(',');
+  const formattedDate = format(new Date(createdAt), 'EEEE, MMMM do yyyy');
 
   return (
     <div>
@@ -25,7 +25,9 @@ export default function PostHeader({ id, createdAt, title, tags }: PostHeaderPro
 
       <div className="mb-8 flex gap-2 border-b pb-4">
         {tagList.map((tag) => (
-          <Tag key={tag}>{tag}</Tag>
+          <Tag key={tag} href={`/posts?tag=${tag}`}>
+            {tag}
+          </Tag>
         ))}
       </div>
     </div>

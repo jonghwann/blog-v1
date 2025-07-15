@@ -17,8 +17,9 @@ model Post {
   id Int @id @default(autoincrement())
   title String
   content String
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  summary    String
-  tags       String
+  summary String
+  tags String
+  readingTime Int @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

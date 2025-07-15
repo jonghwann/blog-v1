@@ -1,8 +1,17 @@
 import * as cheerio from 'cheerio';
 import { toHtml } from 'hast-util-to-html';
 import { createLowlight, common } from 'lowlight';
+import readingTime from 'reading-time';
 
 import { type TableOfContents } from '@/components/post/post-table-of-contents';
+
+export function generateAnchorId(title: string): string {
+  return title
+    .toLowerCase()
+    .replace(/[^a-z0-9ㄱ-ㅎㅏ-ㅣ가-힣\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
 
 const lowlight = createLowlight(common);
 
@@ -22,14 +31,6 @@ export function highlightCodeBlocks(html: string): string {
   return $.root().html() || '';
 }
 
-export function generateAnchorId(title: string): string {
-  return title
-    .toLowerCase()
-    .replace(/[^a-z0-9ㄱ-ㅎㅏ-ㅣ가-힣\s-]/g, '')
-    .replace(/\s+/g, '-')
-    .replace(/^-+|-+$/g, '');
-}
-
 export function addHeadingIds(html: string): string {
   const $ = cheerio.load(html);
 
@@ -42,7 +43,7 @@ export function addHeadingIds(html: string): string {
   return $.root().html() || '';
 }
 
-export const createTableOfContents = (html: string): TableOfContents[] => {
+export function createTableOfContents(html: string): TableOfContents[] {
   const $ = cheerio.load(html);
   const headings: TableOfContents[] = [];
 
@@ -61,7 +62,19 @@ export const createTableOfContents = (html: string): TableOfContents[] => {
   });
 
   return headings;
-};
+}
+
+export function parseTags(tags: { tags: string }[]): string[] {
+  return Array.from(
+    new Set(
+      tags
+        .flatMap(({ tags }) => tags.split(','))
+        .map((tag) => tag.trim())
+        .filter(Boolean)
+        .sort(),
+    ),
+  );
+}
 
 export function parsePostFormData(formData: FormData) {
   let content = formData.get('content')?.toString() ?? '';
@@ -75,5 +88,18 @@ export function parsePostFormData(formData: FormData) {
     content,
     summary,
     tags: formData.get('tags')?.toString().split(',').filter(Boolean).sort().join(',') ?? '',
+    readingTime: Math.ceil(readingTime(content).minutes),
   };
+}
+
+export function createTagHref(tag: string, selectedTags: string[]) {
+  const isSelected = selectedTags.includes(tag);
+  const nextTags = isSelected ? selectedTags.filter((t) => t !== tag) : [...selectedTags, tag];
+
+  if (nextTags.length === 0) {
+    return '/posts';
+  }
+
+  const params = nextTags.map((t) => `tag=${t}`).join('&');
+  return `/posts?${params}`;
 }
