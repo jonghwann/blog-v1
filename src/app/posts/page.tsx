@@ -1,32 +1,35 @@
 import { type Post } from '@prisma/client';
 
 import FabLink from '@/components/common/fab-link';
-import { findPosts } from '@/db/posts';
+import TagList from '@/components/common/tag-list';
+import PostList from '@/components/post/post-list';
+import { findPosts, findTags } from '@/db/posts';
+import { parseTags } from '@/lib/post';
 
-export default async function PostsPage() {
+export default async function PostsPage({ searchParams }: { searchParams: Promise<{ tag: string | string[] }> }) {
+  const { tag } = await searchParams;
+  const selectedTags = tag ? (Array.isArray(tag) ? tag : [tag]) : [];
+
   let posts: Post[] = [];
+  let tags: string[] = [];
 
   try {
-    posts = await findPosts();
+    [posts, tags] = await Promise.all([findPosts(tag), findTags().then(parseTags)]);
   } catch (error) {
-    posts = [];
     console.error('Error in PostsPage:', error);
   }
-
-  console.log(posts);
 
   return (
     <section className="mx-auto flex w-full max-w-(--breakpoint-xl) lg:gap-10">
       <div className="relative flex-2 px-4">
-        <div className="mb-[10px]"></div>
-
-        <ul></ul>
+        <PostList posts={posts} />
         <FabLink href="/posts/write" />
       </div>
 
       <aside className="hidden flex-1 border-l px-4 md:block">
         <section className="flex flex-col gap-3">
           <h2 className="text-secondary-foreground text-sm font-medium">Tags</h2>
+          <TagList tags={tags} selectedTags={selectedTags} />
         </section>
       </aside>
     </section>
