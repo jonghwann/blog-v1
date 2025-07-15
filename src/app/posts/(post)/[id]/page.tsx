@@ -26,8 +26,6 @@ export default async function PostPage({ params }: PostPageProps) {
     notFound();
   }
 
-  console.log(post);
-
   return (
     <div>
       <ScrollProgressBar />

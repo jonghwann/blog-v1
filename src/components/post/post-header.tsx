@@ -26,7 +26,7 @@ export default function PostHeader({ id, title, tags, createdAt }: PostHeaderPro
       <div className="mb-8 flex gap-2 border-b pb-4">
         {tagList.map((tag) => (
           <Tag key={tag} href={`/posts?tag=${tag}`}>
-            {tag}
+            #{tag}
           </Tag>
         ))}
       </div>
