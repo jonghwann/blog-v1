@@ -1,12 +1,9 @@
-import { usePathname } from 'next/navigation';
 import { useEffect } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 
 import { useAuthStore } from '@/store/auth';
 
 export function useSessionSync() {
-  const pathname = usePathname();
-
   const { isLogin, setLogin, setLogout } = useAuthStore(
     useShallow((state) => ({ isLogin: state.isLogin, setLogin: state.setLogin, setLogout: state.setLogout })),
   );
@@ -24,5 +21,5 @@ export function useSessionSync() {
 
   useEffect(() => {
     checkSession();
-  }, [pathname]);
+  }, []);
 }

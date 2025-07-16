@@ -24,6 +24,7 @@ interface PostFormProps {
 }
 
 export default function PostForm({ mode = 'write', action, backButtonHref, id, initialValues }: PostFormProps) {
+  const backButtonText = mode === 'write' ? 'Back to Posts' : 'Back to Post';
   const actionText = mode === 'write' ? 'Publish' : 'Update';
   const alertDescription = mode === 'write' ? 'Are you sure you want to publish?' : 'Are you sure you want to update?';
 
@@ -48,7 +49,7 @@ export default function PostForm({ mode = 'write', action, backButtonHref, id, i
 
   return (
     <Form ref={formRef} action={formAction}>
-      <BackButton href={backButtonHref} />
+      <BackButton href={backButtonHref} text={backButtonText} />
       {id && <input type="hidden" name="id" value={id} />}
       <Input
         className="border-none px-0 focus-visible:ring-0"

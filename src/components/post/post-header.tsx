@@ -1,34 +1,35 @@
-import { format } from 'date-fns';
+import { formatDate } from '@/lib/utils';
 
 import EditButton from '../common/edit-button';
-import Tag from '../common/tag';
+import TagList from '../common/tag-list';
 
 interface PostHeaderProps {
   id: number;
   title: string;
   tags: string;
+  readingTime: number;
   createdAt: Date;
 }
 
-export default function PostHeader({ id, title, tags, createdAt }: PostHeaderProps) {
-  const tagList = tags.split(',');
-  const formattedDate = format(new Date(createdAt), 'EEEE, MMMM do yyyy');
+export default function PostHeader({ id, title, tags, readingTime, createdAt }: PostHeaderProps) {
+  const formattedDate = formatDate(createdAt);
 
   return (
     <div>
-      <div className="mb-6 flex items-center justify-between">
-        <time className="text-secondary-foreground text-sm">{formattedDate}</time>
+      <h1 className="mb-7 text-5xl leading-[1.2] font-bold">{title}</h1>
+
+      <div className="mb-8 flex items-center justify-between">
+        <div className="text-secondary-foreground flex items-center gap-2 text-sm">
+          <time>{formattedDate}</time>
+          <span>·</span>
+          <span>{readingTime} min read</span>
+        </div>
+
         <EditButton id={id} />
       </div>
 
-      <h1 className="mb-12 text-5xl font-bold">{title}</h1>
-
-      <div className="mb-8 flex gap-2 border-b pb-4">
-        {tagList.map((tag) => (
-          <Tag key={tag} href={`/posts?tag=${tag}`}>
-            #{tag}
-          </Tag>
-        ))}
+      <div className="mb-12 border-b pb-6">
+        <TagList tags={tags.split(',')} />
       </div>
     </div>
   );

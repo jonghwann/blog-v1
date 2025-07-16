@@ -31,7 +31,10 @@ export default function PostTableOfContents({ className, content }: PostTableOfC
             {tableOfContents.map(({ id, title, link, depth }) => (
               <li key={title} className={depth ? 'ml-3' : ''}>
                 <Link
-                  className={id + 1 === activeId ? 'text-accent-foreground font-semibold' : 'text-secondary-foreground'}
+                  className={cn(
+                    'hover:text-foreground transition-colors duration-200 ease-in-out',
+                    id + 1 === activeId ? 'text-accent-foreground font-semibold' : 'text-secondary-foreground',
+                  )}
                   href={link}
                 >
                   {title}

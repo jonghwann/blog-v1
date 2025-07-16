@@ -20,7 +20,7 @@ export default function Nav() {
           <li key={href}>
             <Link
               className={cn(
-                'text-secondary-foreground hover:text-foreground text-sm transition-colors duration-150 ease-in-out',
+                'text-secondary-foreground hover:text-foreground text-sm transition-colors duration-200 ease-in-out',
                 href === pathname && 'text-accent-foreground hover:text-accent-foreground',
               )}
               href={href}
