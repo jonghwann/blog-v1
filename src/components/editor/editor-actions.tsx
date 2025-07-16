@@ -18,7 +18,12 @@ export default function EditorActions({ className, actions }: EditorActionsProps
     <div className={cn('flex gap-2 text-sm *:cursor-pointer', className)}>
       {actions.map(({ type = 'button', text, onClick }) => {
         return (
-          <button className="hover:text-foreground text-secondary-foreground" key={text} type={type} onClick={onClick}>
+          <button
+            className="hover:text-foreground text-secondary-foreground transition-colors duration-200 ease-in-out"
+            key={text}
+            type={type}
+            onClick={onClick}
+          >
             {text}
           </button>
         );

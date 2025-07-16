@@ -16,7 +16,7 @@ export default function PostItem({ id, title, summary, readingTime, createdAt }:
       <Link className="group flex items-center justify-between gap-5 py-5" href={`/posts/${id}`}>
         <div className="flex flex-col gap-3">
           <div className="flex flex-col gap-2">
-            <h2 className="text-foreground group-hover:text-accent-foreground line-clamp-1 text-base font-semibold sm:text-xl">
+            <h2 className="text-foreground group-hover:text-accent-foreground line-clamp-1 text-base font-semibold transition-colors duration-200 ease-in-out sm:text-xl">
               {title}
             </h2>
             <p className="text-secondary-foreground line-clamp-2 text-xs sm:text-sm">{summary}</p>
