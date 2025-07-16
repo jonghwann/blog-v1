@@ -33,7 +33,10 @@ export default async function PostsPage({ searchParams }: PostsPageProps) {
       <aside className="hidden flex-1 border-l px-4 md:block">
         <section className="flex flex-col gap-3">
           <h2 className="text-secondary-foreground text-sm font-medium">Tags</h2>
-          <TagList tags={tags} selectedTags={selectedTags} />
+
+          <nav>
+            <TagList tags={tags} selectedTags={selectedTags} />
+          </nav>
         </section>
       </aside>
     </section>

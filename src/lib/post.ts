@@ -92,14 +92,14 @@ export function parsePostFormData(formData: FormData) {
   };
 }
 
-export function createTagHref(tag: string, selectedTags: string[]) {
-  const isSelected = selectedTags.includes(tag);
-  const nextTags = isSelected ? selectedTags.filter((t) => t !== tag) : [...selectedTags, tag];
+export function createTagHref(tag: string, selectedTags?: string[]) {
+  const isSelected = selectedTags?.includes(tag);
+  const nextTags = isSelected ? selectedTags?.filter((t) => t !== tag) : [...(selectedTags ?? []), tag];
 
-  if (nextTags.length === 0) {
+  if (nextTags?.length === 0) {
     return '/posts';
   }
 
-  const params = nextTags.map((t) => `tag=${t}`).join('&');
+  const params = nextTags?.map((t) => `tag=${t}`).join('&');
   return `/posts?${params}`;
 }

@@ -1,6 +1,5 @@
 import { notFound } from 'next/navigation';
 
-import BackButton from '@/components/common/back-button';
 import ScrollProgressBar from '@/components/common/scroll-progress-bar';
 import PostContent from '@/components/post/post-content';
 import PostHeader from '@/components/post/post-header';
@@ -29,7 +28,6 @@ export default async function PostPage({ params }: PostPageProps) {
   return (
     <div>
       <ScrollProgressBar />
-      <BackButton />
       <PostHeader {...post} />
 
       <div className="flex gap-16">

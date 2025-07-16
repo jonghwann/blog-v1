@@ -1,5 +1,7 @@
 import Link from 'next/link';
 
+import { formatDate } from '@/lib/utils';
+
 interface PostItemProps {
   id: number;
   title: string;
@@ -21,7 +23,7 @@ export default function PostItem({ id, title, summary, readingTime, createdAt }:
           </div>
 
           <div className="text-secondary-foreground flex items-center gap-2 text-xs">
-            <time>{createdAt.toLocaleDateString()}</time>
+            <time>{formatDate(createdAt)}</time>
             <span>·</span>
             <span>{readingTime} min read</span>
           </div>

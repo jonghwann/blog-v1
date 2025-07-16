@@ -12,7 +12,7 @@ export default function Tag({ className, href, children }: TagProps) {
   return (
     <Link
       className={cn(
-        'bg-secondary text-secondary-foreground hover:bg-muted rounded-full px-[10px] py-[6px] text-sm',
+        'bg-secondary text-secondary-foreground hover:bg-muted flex items-center rounded-full px-[10px] py-1 text-sm',
         className,
       )}
       href={href}
