@@ -44,7 +44,7 @@ export default function Alert({
       <div className="bg-background fixed top-[50%] left-[50%] z-[var(--z-alert)] grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border p-6 shadow-lg duration-200 sm:max-w-lg">
         <div className="flex flex-col gap-2 text-center sm:text-left">
           <h2 className="text-lg font-semibold">{title}</h2>
-          <p className="text-muted-foreground text-sm">{description}</p>
+          <p className="text-sm">{description}</p>
         </div>
 
         <div className="mt-4 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">

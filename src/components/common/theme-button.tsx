@@ -4,13 +4,20 @@ import { Sun, Monitor, Moon } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 
-
 import { cn } from '@/lib/utils';
 
 export default function ThemeButton() {
   const [mounted, setMounted] = useState(false);
 
   const { theme, setTheme } = useTheme();
+
+  const handleThemeChange = (mode: string) => {
+    document.documentElement.classList.add('no-transition');
+    setTheme(mode);
+    setTimeout(() => {
+      document.documentElement.classList.remove('no-transition');
+    }, 100);
+  };
 
   useEffect(() => {
     setMounted(true);
@@ -27,11 +34,11 @@ export default function ThemeButton() {
             theme === mode && 'bg-secondary',
           )}
           key={mode}
-          onClick={() => setTheme(mode)}
+          onClick={() => handleThemeChange(mode)}
         >
           <Icon
             className={cn(
-              'group-hover:text-foreground size-4',
+              'group-hover:text-foreground size-4 transition-colors duration-200 ease-in-out',
               theme === mode ? 'text-foreground' : 'text-secondary-foreground',
             )}
           />

@@ -1,7 +1,5 @@
 'use client';
 
-
-
 import {
   Undo2,
   Redo2,
@@ -156,7 +154,7 @@ export default function EditorToolbar({ editor }: EditorToolbarProps) {
       />
 
       <EditorToolbarButton
-        className="hover:text-foreground text-secondary-foreground"
+        className="text-secondary-foreground"
         Icon={ImagePlus}
         onClick={() => fileInputRef.current?.click()}
       />

@@ -17,7 +17,13 @@ export default function EditorToolbarButton({
 }: EditorToolbarButtonProps) {
   return (
     <button className={cn('cursor-pointer', className)} type="button" onClick={onClick}>
-      <Icon className={cn('size-4', disabled && 'text-secondary-foreground', iconClassName)} />
+      <Icon
+        className={cn(
+          'hover:text-foreground size-4 transition-colors duration-200 ease-in-out',
+          disabled && 'text-secondary-foreground',
+          iconClassName,
+        )}
+      />
     </button>
   );
 }

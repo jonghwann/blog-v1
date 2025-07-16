@@ -19,7 +19,7 @@ export default function TagList({ tags, selectedTags }: TagListProps) {
         return (
           <li key={tag}>
             <Tag
-              className={isSelected ? 'bg-accent text-accent-foreground hover:bg-accent-background gap-1' : ''}
+              className={isSelected ? 'hover:bg-accent-hover bg-accent text-accent-foreground gap-1' : ''}
               href={createTagHref(tag, selectedTags)}
             >
               {tag}
