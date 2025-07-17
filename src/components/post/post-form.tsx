@@ -12,7 +12,7 @@ import EditorActions from '@/components/editor/editor-actions';
 import EditorTags from '@/components/editor/editor-tags';
 
 interface PostFormProps {
-  mode?: 'write' | 'edit';
+  variant?: 'write' | 'edit';
   action: (prevState: unknown, formData: FormData) => Promise<{ success: boolean; postId?: number }>;
   backButtonHref?: string;
   id?: string;
@@ -23,10 +23,21 @@ interface PostFormProps {
   };
 }
 
-export default function PostForm({ mode = 'write', action, backButtonHref, id, initialValues }: PostFormProps) {
-  const backButtonText = mode === 'write' ? 'Back to Posts' : 'Back to Post';
-  const actionText = mode === 'write' ? 'Publish' : 'Update';
-  const alertDescription = mode === 'write' ? 'Are you sure you want to publish?' : 'Are you sure you want to update?';
+const config = {
+  write: {
+    backButtonText: 'Back to Posts',
+    actionText: 'Publish',
+    alertDescription: 'Are you sure you want to publish?',
+  },
+  edit: {
+    backButtonText: 'Back to Post',
+    actionText: 'Update',
+    alertDescription: 'Are you sure you want to update?',
+  },
+};
+
+export default function PostForm({ variant = 'write', action, backButtonHref, id, initialValues }: PostFormProps) {
+  const { backButtonText, actionText, alertDescription } = config[variant];
 
   const router = useRouter();
 

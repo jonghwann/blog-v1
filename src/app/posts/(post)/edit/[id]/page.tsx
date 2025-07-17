@@ -5,7 +5,6 @@ import { findPostById } from '@/db/posts';
 
 import { editAction } from './action';
 
-
 interface EditPageProps {
   params: Promise<{ id: string }>;
 }
@@ -27,7 +26,7 @@ export default async function EditPage({ params }: EditPageProps) {
 
   return (
     <PostForm
-      mode="edit"
+      variant="edit"
       action={editAction}
       backButtonHref={`/posts/${id}`}
       id={id}

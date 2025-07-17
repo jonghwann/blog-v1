@@ -81,7 +81,12 @@ export function parsePostFormData(formData: FormData) {
   content = highlightCodeBlocks(content);
   content = addHeadingIds(content);
 
-  const summary = content.replace(/<[^>]+>/g, '').slice(0, 100) + '...';
+  const summary = content
+    .replace(/<pre><code[\s\S]*?<\/code><\/pre>/g, '')
+    .replace(/<[^>]+>/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, 150);
 
   return {
     title: formData.get('title')?.toString() ?? '',

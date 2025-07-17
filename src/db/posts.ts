@@ -1,16 +1,9 @@
 import { type Post } from '@prisma/client';
 
+import { Navigation } from '@/components/post/post-navigation';
 import prisma from '@/db/client';
 
-export async function findPosts(tag?: string | string[]): Promise<Post[]> {
-  let tags;
-
-  if (typeof tag === 'string') {
-    tags = [tag];
-  } else if (Array.isArray(tag)) {
-    tags = tag;
-  }
-
+export async function findPosts(tags?: string[]): Promise<Post[]> {
   if (tags && tags.length > 0) {
     return await prisma.post.findMany({
       where: { OR: tags.map((tag) => ({ tags: { contains: tag } })) },
@@ -31,6 +24,19 @@ export async function createPost(data: Omit<Post, 'id' | 'createdAt' | 'updatedA
 
 export async function findPostById(id: number): Promise<Post | null> {
   return await prisma.post.findUnique({ where: { id } });
+}
+
+export async function findPostByIdWithNavigation(id: number): Promise<{ post: Post | null; navigation: Navigation }> {
+  const post = await prisma.post.findUnique({ where: { id } });
+  const posts = await prisma.post.findMany({ select: { id: true, title: true }, orderBy: { id: 'desc' } });
+  const idx = posts.findIndex((post) => post.id === id);
+
+  const navigation = {
+    prev: posts[idx + 1] ? { id: posts[idx + 1].id, title: posts[idx + 1].title } : null,
+    next: posts[idx - 1] ? { id: posts[idx - 1].id, title: posts[idx - 1].title } : null,
+  };
+
+  return { post, navigation };
 }
 
 export async function updatePost(data: Omit<Post, 'createdAt' | 'updatedAt'>) {
