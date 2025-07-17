@@ -18,7 +18,7 @@ export default async function PostsPage({ searchParams }: PostsPageProps) {
   let tags: string[] = [];
 
   try {
-    [posts, tags] = await Promise.all([findPosts(tag), findTags().then(parseTags)]);
+    [posts, tags] = await Promise.all([findPosts(selectedTags), findTags().then(parseTags)]);
   } catch (error) {
     console.error('Error in PostsPage:', error);
   }

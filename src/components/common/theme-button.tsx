@@ -6,6 +6,12 @@ import { useEffect, useState } from 'react';
 
 import { cn } from '@/lib/utils';
 
+const themeOptions = [
+  { mode: 'light', Icon: Sun },
+  { mode: 'system', Icon: Monitor },
+  { mode: 'dark', Icon: Moon },
+];
+
 export default function ThemeButton() {
   const [mounted, setMounted] = useState(false);
 
@@ -27,7 +33,7 @@ export default function ThemeButton() {
 
   return (
     <div className="flex h-10 w-[104px] items-center rounded-full border p-[3px]">
-      {themeOptions.map(({ mode, icon: Icon }) => (
+      {themeOptions.map(({ mode, Icon }) => (
         <button
           className={cn(
             'group flex size-8 cursor-pointer items-center justify-center rounded-full',
@@ -47,9 +53,3 @@ export default function ThemeButton() {
     </div>
   );
 }
-
-const themeOptions = [
-  { mode: 'light', icon: Sun },
-  { mode: 'system', icon: Monitor },
-  { mode: 'dark', icon: Moon },
-];
