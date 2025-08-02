@@ -1,47 +1,59 @@
 'use client';
-
-import Form from 'next/form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from '@tanstack/react-query';
+import { HTTPError } from 'ky';
 import { useRouter } from 'next/navigation';
-import { useActionState, useEffect } from 'react';
-
+import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
+import type z from 'zod';
+import { login } from '@/api/auth/auth';
 import Button from '@/components/common/button';
 import Input from '@/components/common/input';
+import { loginSchema } from '@/schema/login-schema';
 import { useAuthStore } from '@/store/auth';
-
-import { loginAction } from './action';
 
 export default function LoginPage() {
   const router = useRouter();
 
   const setLogin = useAuthStore((state) => state.setLogin);
 
-  const [state, formAction, isPending] = useActionState(loginAction, null);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: zodResolver(loginSchema), mode: 'onChange' });
 
-  useEffect(() => {
-    if (state?.success) {
+  const { mutate, isPending } = useMutation({
+    mutationFn: login,
+    onSuccess: () => {
       setLogin();
-      router.replace('/posts');
-    }
-  }, [state]);
+      router.push('/posts');
+    },
+    onError: async (error) => {
+      if (error instanceof HTTPError) {
+        const data = await error.response.json();
+        toast.error(data.message);
+      } else {
+        console.error(error);
+      }
+    },
+  });
+
+  const onSubmit = (data: z.infer<typeof loginSchema>) => {
+    mutate(data);
+  };
 
   return (
-    <Form
-      className="absolute top-1/2 left-1/2 flex w-full -translate-x-1/2 -translate-y-1/2 transform flex-col gap-3 px-4 sm:w-[320px] sm:px-0"
-      action={formAction}
+    <form
+      className='-translate-x-1/2 -translate-y-1/2 absolute top-1/2 left-1/2 flex w-full transform flex-col gap-3 px-4 sm:w-[320px] sm:px-0'
+      onSubmit={handleSubmit(onSubmit)}
     >
-      <Input name="email" defaultValue={state?.values?.email} placeholder="Email" errors={state?.errors?.email} />
+      <Input register={register('email')} placeholder='Email' errors={errors?.email?.message} />
+      <Input register={register('password')} type='password' placeholder='Password' errors={errors?.password?.message} />
 
-      <Input
-        name="password"
-        type="password"
-        defaultValue={state?.values?.password}
-        placeholder="Password"
-        errors={state?.errors?.password}
-      />
-
-      <Button variant="secondary" size="lg" isLoading={isPending}>
+      <Button variant='secondary' size='lg' isLoading={isPending}>
         Login
       </Button>
-    </Form>
+    </form>
   );
 }
