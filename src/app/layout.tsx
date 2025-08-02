@@ -1,8 +1,8 @@
+import type { Metadata } from 'next';
 import Layout from '@/components/layout/layout';
+import { ReactQueryProvider } from '@/providers/react-query-provider';
 import SessionSyncProvider from '@/providers/session-sync-provider';
 import ThemeProvider from '@/providers/theme-provider';
-
-import type { Metadata } from 'next';
 
 import './globals.css';
 
@@ -10,13 +10,15 @@ export const metadata: Metadata = { title: 'Create Next App', description: 'Gene
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="ko" className="scroll-smooth" suppressHydrationWarning>
-      <body className="antialiased">
-        <SessionSyncProvider>
-          <ThemeProvider>
-            <Layout>{children}</Layout>
-          </ThemeProvider>
-        </SessionSyncProvider>
+    <html lang='ko' className='scroll-smooth' suppressHydrationWarning>
+      <body className='antialiased'>
+        <ReactQueryProvider>
+          <SessionSyncProvider>
+            <ThemeProvider>
+              <Layout>{children}</Layout>
+            </ThemeProvider>
+          </SessionSyncProvider>
+        </ReactQueryProvider>
       </body>
     </html>
   );
