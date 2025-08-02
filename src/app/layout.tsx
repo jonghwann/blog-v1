@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Toaster } from 'sonner';
 import Layout from '@/components/layout/layout';
 import { ReactQueryProvider } from '@/providers/react-query-provider';
 import SessionSyncProvider from '@/providers/session-sync-provider';
@@ -16,6 +17,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <SessionSyncProvider>
             <ThemeProvider>
               <Layout>{children}</Layout>
+              <Toaster position='top-center' richColors />
             </ThemeProvider>
           </SessionSyncProvider>
         </ReactQueryProvider>
