@@ -12,9 +12,9 @@ export function useSessionSync() {
     const response = await fetch('/api/session');
     const data = await response.json();
 
-    if (data.isLogin && !isLogin) {
+    if (data.isLogin) {
       setLogin();
-    } else if (!data.isLogin && isLogin) {
+    } else {
       setLogout();
     }
   };

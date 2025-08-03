@@ -1,20 +1,17 @@
-import { NextResponse } from 'next/server';
-
-import getSession from './lib/session';
-
 import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
 
 const protectedPaths = ['/posts/write', '/posts/edit/:path*'];
 
 export async function middleware(request: NextRequest) {
-  const { id } = await getSession();
+  const accessToken = request.cookies.get('access_token');
 
-  if (id && request.nextUrl.pathname.startsWith('/login')) {
+  if (accessToken && request.nextUrl.pathname.startsWith('/login')) {
     return NextResponse.redirect(new URL('/posts', request.url));
   }
 
-  if (!id && protectedPaths.some((path) => request.nextUrl.pathname.startsWith(path))) {
-    return NextResponse.redirect(new URL('/posts', request.url));
+  if (!accessToken && protectedPaths.some((path) => request.nextUrl.pathname.startsWith(path))) {
+    return NextResponse.redirect(new URL('/login', request.url));
   }
 }
 

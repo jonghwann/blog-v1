@@ -1,11 +1,9 @@
-import { NextResponse } from 'next/server';
+import { type NextRequest, NextResponse } from 'next/server';
 
-import getSession from '@/lib/session';
+export async function GET(request: NextRequest) {
+  const accessToken = request.cookies.get('access_token');
 
-export async function GET() {
-  const session = await getSession();
-
-  if (session?.id) {
+  if (accessToken) {
     return NextResponse.json({ isLogin: true });
   } else {
     return NextResponse.json({ isLogin: false });
