@@ -27,7 +27,7 @@ export default function LoginPage() {
     mutationFn: login,
     onSuccess: () => {
       setLogin();
-      router.push('/posts');
+      router.replace('/posts');
     },
     onError: async (error) => {
       if (error instanceof HTTPError) {

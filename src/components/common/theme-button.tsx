@@ -1,6 +1,6 @@
 'use client';
 
-import { Sun, Monitor, Moon } from 'lucide-react';
+import { Monitor, Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 
@@ -32,19 +32,17 @@ export default function ThemeButton() {
   if (!mounted) return null;
 
   return (
-    <div className="flex h-10 w-[104px] items-center rounded-full border p-[3px]">
+    <div className='flex h-10 w-[104px] items-center rounded-full border p-[3px]'>
       {themeOptions.map(({ mode, Icon }) => (
         <button
-          className={cn(
-            'group flex size-8 cursor-pointer items-center justify-center rounded-full',
-            theme === mode && 'bg-secondary',
-          )}
+          type='button'
+          className={cn('group flex size-8 cursor-pointer items-center justify-center rounded-full', theme === mode && 'bg-secondary')}
           key={mode}
           onClick={() => handleThemeChange(mode)}
         >
           <Icon
             className={cn(
-              'group-hover:text-foreground size-4 transition-colors duration-200 ease-in-out',
+              'size-4 transition-colors duration-200 ease-in-out group-hover:text-foreground',
               theme === mode ? 'text-foreground' : 'text-secondary-foreground',
             )}
           />
