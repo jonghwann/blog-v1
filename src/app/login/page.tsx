@@ -1,6 +1,6 @@
 'use client';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { HTTPError } from 'ky';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
@@ -10,12 +10,10 @@ import { login } from '@/api/auth/auth';
 import Button from '@/components/common/button';
 import Input from '@/components/common/input';
 import { loginSchema } from '@/schema/login-schema';
-import { useAuthStore } from '@/store/auth';
 
 export default function LoginPage() {
   const router = useRouter();
-
-  const setLogin = useAuthStore((state) => state.setLogin);
+  const queryClient = useQueryClient();
 
   const {
     register,
@@ -25,8 +23,8 @@ export default function LoginPage() {
 
   const { mutate, isPending } = useMutation({
     mutationFn: login,
-    onSuccess: () => {
-      setLogin();
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ['me'] });
       router.replace('/posts');
     },
     onError: async (error) => {
