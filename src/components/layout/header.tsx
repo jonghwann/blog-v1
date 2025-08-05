@@ -1,31 +1,27 @@
 'use client';
-
-import Form from 'next/form';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
-import { useActionState, useEffect } from 'react';
-import { useShallow } from 'zustand/react/shallow';
-
-import { logoutAction } from '@/app/logout/action';
+import { logout } from '@/api/auth/auth';
+import { getMe } from '@/api/auth/auth-server';
 import useScrollVisibility from '@/hooks/use-scroll-visibility';
-import { useAuthStore } from '@/store/auth';
 import Button from '../common/button';
 import Nav from './nav';
 
 export default function Header() {
   const router = useRouter();
-
-  const { isLogin, setLogout } = useAuthStore(useShallow((state) => ({ isLogin: state.isLogin, setLogout: state.setLogout })));
-
-  const [state, formAction, isPending] = useActionState(logoutAction, null);
+  const queryClient = useQueryClient();
 
   const marginTop = useScrollVisibility(64);
 
-  useEffect(() => {
-    if (state?.success) {
-      setLogout();
-      router.push('/posts');
-    }
-  }, [state]);
+  const { data: me } = useQuery({ queryKey: ['me'], queryFn: getMe });
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: logout,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['me'] });
+      router.replace('/posts');
+    },
+  });
 
   return (
     <header
@@ -35,10 +31,10 @@ export default function Header() {
       <div className='mx-auto flex h-16 w-full max-w-(--breakpoint-xl) items-center justify-between px-4'>
         <Nav />
 
-        {isLogin && (
-          <Form action={formAction}>
-            <Button isLoading={isPending}>Logout</Button>
-          </Form>
+        {me?.isLogin && (
+          <Button isLoading={isPending} onClick={() => mutate()}>
+            Logout
+          </Button>
         )}
       </div>
     </header>

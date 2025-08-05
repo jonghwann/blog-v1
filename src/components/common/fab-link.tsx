@@ -1,10 +1,9 @@
 'use client';
-
+import { useQuery } from '@tanstack/react-query';
 import { PlusIcon } from 'lucide-react';
 import Link from 'next/link';
-
+import { getMe } from '@/api/auth/auth-server';
 import { cn } from '@/lib/utils';
-import { useAuthStore } from '@/store/auth';
 
 interface FabLinkProps {
   className?: string;
@@ -13,14 +12,14 @@ interface FabLinkProps {
 }
 
 export default function FabLink({ className, iconClassName, href }: FabLinkProps) {
-  const isLogin = useAuthStore((state) => state.isLogin);
+  const { data: me } = useQuery({ queryKey: ['me'], queryFn: getMe });
 
   return (
-    isLogin && (
+    me?.isLogin && (
       <Link
         href={href}
         className={cn(
-          'bg-secondary text-secondary-foreground hover:bg-secondary-hover absolute right-4 bottom-0 flex size-14 cursor-pointer items-center justify-center rounded-full transition-colors duration-200 ease-in-out',
+          'absolute right-4 bottom-0 flex size-14 cursor-pointer items-center justify-center rounded-full bg-secondary text-secondary-foreground transition-colors duration-200 ease-in-out hover:bg-secondary-hover',
           className,
         )}
       >

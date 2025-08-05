@@ -1,5 +1,4 @@
 import ky from 'ky';
-import { useAuthStore } from '@/store/auth';
 import { refresh } from './auth/auth';
 
 export const api = ky.create({
@@ -12,11 +11,10 @@ export const api = ky.create({
           const data = await response.clone().json();
           if (data.code === 2004 || data.code === 2005) {
             try {
-              const response = await refresh();
-              if (response.code === 1) return api(request, options);
-            } catch (_error) {
+              await refresh();
+              return api(request, options);
+            } catch {
               if (typeof window !== 'undefined') {
-                useAuthStore.getState().setLogout();
                 window.location.href = '/posts';
               }
             }
