@@ -32,13 +32,13 @@ export default async function PostPage({ params }: PostPageProps) {
       <ScrollProgressBar />
       <PostHeader {...post} />
 
-      <div className="flex gap-16">
-        <div className="w-full">
-          <PostContent className="xl:min-w-[736px]" html={post.content} />
+      <div className='flex gap-16'>
+        <div className='w-full'>
+          <PostContent className='xl:min-w-[736px]' html={post.content} />
           <PostNavigation navigation={navigation} />
         </div>
 
-        <PostTableOfContents className="hidden xl:block" content={post.content} />
+        <PostTableOfContents className='hidden xl:block' content={post.content} />
       </div>
     </div>
   );

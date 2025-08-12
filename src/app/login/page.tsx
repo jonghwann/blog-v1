@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import type z from 'zod';
-import { login } from '@/api/auth/auth';
+import { login } from '@/api/auth/api';
 import Button from '@/components/common/button';
 import Input from '@/components/common/input';
 import { loginSchema } from '@/schema/login-schema';

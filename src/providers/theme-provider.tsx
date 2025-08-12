@@ -1,5 +1,4 @@
 'use client';
-
 import { ThemeProvider as NextThemeProvider } from 'next-themes';
 
 interface ThemeProviderProps {
@@ -7,5 +6,5 @@ interface ThemeProviderProps {
 }
 
 export default function ThemeProvider({ children }: ThemeProviderProps) {
-  return <NextThemeProvider attribute="class">{children}</NextThemeProvider>;
+  return <NextThemeProvider attribute='class'>{children}</NextThemeProvider>;
 }
