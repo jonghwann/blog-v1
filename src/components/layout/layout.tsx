@@ -7,9 +7,9 @@ interface LayoutProps {
 
 export default async function Layout({ children }: LayoutProps) {
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className='flex min-h-screen flex-col'>
       <Header />
-      <main className="mt-32 flex flex-1">{children}</main>
+      <main className='mt-32 flex flex-1'>{children}</main>
       <Footer />
     </div>
   );

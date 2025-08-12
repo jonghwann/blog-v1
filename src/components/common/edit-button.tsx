@@ -1,20 +1,19 @@
 'use client';
-
+import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
-
-import { useAuthStore } from '@/store/auth';
+import { getMe } from '@/api/auth/api-server';
 
 interface EditButtonProps {
   id: number;
 }
 
 export default function EditButton({ id }: EditButtonProps) {
-  const isLogin = useAuthStore((state) => state.isLogin);
+  const { data: me } = useQuery({ queryKey: ['me'], queryFn: getMe });
 
   return (
-    isLogin && (
+    me?.isLogin && (
       <Link
-        className="text-secondary-foreground hover:text-foreground text-sm transition-colors duration-200 ease-in-out"
+        className='text-secondary-foreground text-sm transition-colors duration-200 ease-in-out hover:text-foreground'
         href={`/posts/edit/${id}`}
       >
         edit

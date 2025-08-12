@@ -1,8 +1,6 @@
 'use client';
-
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-
 import { cn } from '@/lib/utils';
 
 const NAV_LINKS = [
@@ -15,12 +13,12 @@ export default function Nav() {
 
   return (
     <nav>
-      <ul className="flex items-center gap-6">
+      <ul className='flex items-center gap-6'>
         {NAV_LINKS.map(({ name, href }) => (
           <li key={href}>
             <Link
               className={cn(
-                'text-secondary-foreground hover:text-foreground text-sm transition-colors duration-200 ease-in-out',
+                'text-secondary-foreground text-sm transition-colors duration-200 ease-in-out hover:text-foreground',
                 href === pathname && 'text-accent-foreground hover:text-accent-foreground',
               )}
               href={href}

@@ -6,9 +6,8 @@
     "dev": "next dev",
     "build": "prisma generate && prisma migrate deploy && next build",
     "start": "next start",
-    "format": "biome format --write",
-    "lint": "biome lint --write",
-    "reporter": "biome check --reporter=summary"
+    "format-and-lint": "biome check .",
+    "format-and-lint:fix": "biome check . --write"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.1",

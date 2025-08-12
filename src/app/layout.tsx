@@ -1,8 +1,7 @@
 import type { Metadata } from 'next';
 import { Toaster } from 'sonner';
 import Layout from '@/components/layout/layout';
-import { QueryProvider } from '@/providers/query-provider';
-import SessionProvider from '@/providers/session-provider';
+import QueryProvider from '@/providers/query-provider';
 import ThemeProvider from '@/providers/theme-provider';
 import './globals.css';
 
@@ -13,12 +12,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang='ko' className='scroll-smooth' suppressHydrationWarning>
       <body className='antialiased'>
         <QueryProvider>
-          <SessionProvider>
-            <ThemeProvider>
-              <Layout>{children}</Layout>
-              <Toaster position='top-center' richColors />
-            </ThemeProvider>
-          </SessionProvider>
+          <ThemeProvider>
+            <Layout>{children}</Layout>
+            <Toaster position='top-center' richColors />
+          </ThemeProvider>
         </QueryProvider>
       </body>
     </html>

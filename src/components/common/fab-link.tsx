@@ -2,7 +2,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { PlusIcon } from 'lucide-react';
 import Link from 'next/link';
-import { getMe } from '@/api/auth/auth-server';
+import { getMe } from '@/api/auth/api-server';
 import { cn } from '@/lib/utils';
 
 interface FabLinkProps {

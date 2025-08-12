@@ -1,6 +1,6 @@
-import { type Post } from '@prisma/client';
+import type { Post } from '@prisma/client';
 
-import { Navigation } from '@/components/post/post-navigation';
+import type { Navigation } from '@/components/post/post-navigation';
 import prisma from '@/db/client';
 
 export async function findPosts(tags?: string[]): Promise<Post[]> {
