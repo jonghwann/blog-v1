@@ -5,11 +5,10 @@ import { HTTPError } from 'ky';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
-import type z from 'zod';
 import { login } from '@/api/auth/api';
 import Button from '@/components/common/button';
 import Input from '@/components/common/input';
-import { loginSchema } from '@/schema/login-schema';
+import { type LoginFormValues, loginSchema } from '@/schemas/login-schema';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -19,7 +18,7 @@ export default function LoginPage() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ resolver: zodResolver(loginSchema), mode: 'onChange' });
+  } = useForm<LoginFormValues>({ resolver: zodResolver(loginSchema), mode: 'onChange' });
 
   const { mutate, isPending } = useMutation({
     mutationFn: login,
@@ -31,13 +30,11 @@ export default function LoginPage() {
       if (error instanceof HTTPError) {
         const data = await error.response.json();
         toast.error(data.message);
-      } else {
-        console.error(error);
       }
     },
   });
 
-  const onSubmit = (data: z.infer<typeof loginSchema>) => {
+  const onSubmit = (data: LoginFormValues) => {
     mutate(data);
   };
 

@@ -1,6 +1,7 @@
 import { getPosts } from '@/api/posts/api';
 import FabLink from '@/components/common/fab-link';
 import PostList from '@/components/post/post-list';
+import type { Post } from '@/types/post';
 
 interface PostsPageProps {
   searchParams: Promise<{ tag: string }>;
@@ -9,7 +10,14 @@ interface PostsPageProps {
 export default async function PostsPage({ searchParams }: PostsPageProps) {
   const { tag } = await searchParams;
 
-  const posts = await getPosts(tag);
+  let posts: Post[] = [];
+
+  try {
+    posts = await getPosts(tag);
+  } catch (error) {
+    console.error(error);
+    posts = [];
+  }
 
   return (
     <section className='mx-auto flex w-full max-w-(--breakpoint-xl) lg:gap-10'>
