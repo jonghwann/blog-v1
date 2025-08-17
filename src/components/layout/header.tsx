@@ -1,28 +1,10 @@
 'use client';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useRouter } from 'next/navigation';
-import { toast } from 'sonner';
-import { logout } from '@/api/auth/api';
 import useScrollVisibility from '@/hooks/use-scroll-visibility';
-import Button from '../common/button';
+import LogoutButton from '../common/logout-button';
 import Nav from './nav';
 
 export default function Header() {
-  const router = useRouter();
-  const queryClient = useQueryClient();
-
   const marginTop = useScrollVisibility(64);
-
-  const { mutate, isPending } = useMutation({
-    mutationFn: logout,
-    onSuccess: async (data) => {
-      if (data?.code === 1) {
-        toast.success(data.message);
-        await queryClient.invalidateQueries({ queryKey: ['me'] });
-        router.replace('/posts');
-      }
-    },
-  });
 
   return (
     <header
@@ -31,12 +13,7 @@ export default function Header() {
     >
       <div className='mx-auto flex h-16 w-full max-w-(--breakpoint-xl) items-center justify-between px-4'>
         <Nav />
-
-        {/* { && (
-          <Button isLoading={isPending} onClick={() => mutate()}>
-            Logout
-          </Button>
-        )} */}
+        <LogoutButton />
       </div>
     </header>
   );

@@ -1,8 +1,6 @@
 'use client';
-
-import { useRef, useState, useEffect } from 'react';
-
-import { type TableOfContents } from '@/components/post/post-table-of-contents';
+import { useEffect, useRef, useState } from 'react';
+import type { TableOfContents } from '@/components/post/post-table-of-contents';
 
 interface useActiveHeadings {
   tableOfContents: TableOfContents[];

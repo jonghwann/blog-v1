@@ -1,8 +1,7 @@
 'use client';
-import { useQuery } from '@tanstack/react-query';
 import { PlusIcon } from 'lucide-react';
 import Link from 'next/link';
-import { getMe } from '@/api/auth/api-server';
+import useSession from '@/hooks/use-session';
 import { cn } from '@/lib/utils';
 
 interface FabLinkProps {
@@ -12,10 +11,10 @@ interface FabLinkProps {
 }
 
 export default function FabLink({ className, iconClassName, href }: FabLinkProps) {
-  const { data: me } = useQuery({ queryKey: ['me'], queryFn: getMe });
+  const { isLogin } = useSession();
 
   return (
-    me?.isLogin && (
+    isLogin && (
       <Link
         href={href}
         className={cn(

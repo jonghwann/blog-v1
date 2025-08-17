@@ -1,5 +1,4 @@
-import { Post } from '@prisma/client';
-
+import type { Post } from '@prisma/client';
 import PostItem from './post-item';
 
 interface PostListProps {

@@ -1,12 +1,9 @@
 import type { User } from '@/types/user';
-import type { ApiResponse } from '../model';
 
-export interface GetMeResponseData {
+export interface GetMeResponse {
   isLogin: boolean;
-  user: User | null;
+  user: User;
 }
-
-export type GetMeResponse = ApiResponse<GetMeResponseData>;
 
 export interface LoginRequest {
   email: string;

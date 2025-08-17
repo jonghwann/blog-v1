@@ -1,5 +1,4 @@
-import ky, { HTTPError } from 'ky';
-import { toast } from 'sonner';
+import ky from 'ky';
 import { refresh } from './auth/api';
 
 export const api = ky.create({
@@ -14,15 +13,9 @@ export const api = ky.create({
             try {
               await refresh();
               return api(request, options);
-            } catch (error) {
+            } catch {
               if (typeof window !== 'undefined') {
-                if (error instanceof HTTPError) {
-                  const data = await error.response.json();
-                  toast.error(data.message);
-                  window.location.href = '/posts';
-                } else {
-                  console.error(error);
-                }
+                window.location.href = '/posts';
               }
             }
           }

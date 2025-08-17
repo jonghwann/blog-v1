@@ -1,4 +1,5 @@
-import { useRef, useState, useCallback, useEffect } from 'react';
+'use client';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 export default function useScrollVisibility(elemHeight: number) {
   const lastScrollPosition = useRef(0);
@@ -25,10 +26,7 @@ export default function useScrollVisibility(elemHeight: number) {
       scrollTransitionPoint.current = lastScrollPosition.current + elemHeight;
     }
 
-    const calculatedMargin = Math.min(
-      0,
-      Math.max(-elemHeight, scrollTransitionPoint.current - nextElementBottomPosition),
-    );
+    const calculatedMargin = Math.min(0, Math.max(-elemHeight, scrollTransitionPoint.current - nextElementBottomPosition));
     setMarginTop(calculatedMargin);
 
     isLastScrollingUp.current = isScrollingUp;
