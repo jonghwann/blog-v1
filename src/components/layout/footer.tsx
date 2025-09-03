@@ -1,12 +1,11 @@
-import ThemeButton from '../common/theme-button';
-
 export default function Footer() {
+  const year = new Date().getFullYear();
+
   return (
-    <footer className='mt-16 border-t'>
-      <div className='m-auto flex h-16 max-w-(--breakpoint-xl) items-center justify-between px-4'>
-        <span className='text-secondary-foreground text-sm'>© Powered by Jonghwan Jang</span>
-        <ThemeButton />
-      </div>
+    <footer className='mt-14 flex h-14 items-center justify-center border-t px-4'>
+      <small className='text-secondary-foreground text-sm'>
+        © <time>{year}</time>. jonghwan All rights reserved.
+      </small>
     </footer>
   );
 }

@@ -1,29 +1,21 @@
-'use client';
+import { List, Search, Signal, Tags } from 'lucide-react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { cn } from '@/lib/utils';
 
-const NAV_LINKS = [
-  { name: 'Posts', href: '/posts' },
-  { name: 'About', href: '/about' },
+const icons = [
+  { Icon: Tags, href: '/tags' },
+  { Icon: List, href: '/series' },
+  { Icon: Signal, href: '/xml' },
+  { Icon: Search, href: '/search' },
 ];
 
 export default function Nav() {
-  const pathname = usePathname();
-
   return (
     <nav>
-      <ul className='flex items-center gap-6'>
-        {NAV_LINKS.map(({ name, href }) => (
+      <ul className='flex items-center gap-3'>
+        {icons.map(({ Icon, href }) => (
           <li key={href}>
-            <Link
-              className={cn(
-                'text-secondary-foreground text-sm transition-colors duration-200 ease-in-out hover:text-foreground',
-                href === pathname && 'text-accent-foreground hover:text-accent-foreground',
-              )}
-              href={href}
-            >
-              {name}
+            <Link href={href}>
+              <Icon className='size-5 text-secondary-foreground hover:text-foreground' />
             </Link>
           </li>
         ))}
