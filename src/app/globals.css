@@ -25,6 +25,7 @@
     'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue',
     'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji',
     'Segoe UI Symbol', sans-serif;
+  --font-source-code-pro: var(--source-code-pro);
 
   --z-header: 100;
   --z-scroll-progress-bar: 200;
@@ -74,8 +75,8 @@
     @apply bg-background text-foreground;
   }
 
-  .no-transition * {
-    transition: none !important;
+  .transitions-limited * {
+    @apply !transition-opacity !transition-transform;
   }
 }
 

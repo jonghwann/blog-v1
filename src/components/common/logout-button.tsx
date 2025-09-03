@@ -1,10 +1,10 @@
 'use client';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { LogOut } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { logout } from '@/api/auth/api';
 import useSession from '@/hooks/use-session';
-import Button from './button';
 
 export default function LogoutButton() {
   const router = useRouter();
@@ -12,7 +12,7 @@ export default function LogoutButton() {
 
   const { isLogin } = useSession();
 
-  const { mutate, isPending } = useMutation({
+  const { mutate } = useMutation({
     mutationFn: logout,
     onSuccess: async (data) => {
       toast.success(data.message);
@@ -23,9 +23,5 @@ export default function LogoutButton() {
 
   if (!isLogin) return null;
 
-  return (
-    <Button isLoading={isPending} onClick={() => mutate()}>
-      Logout
-    </Button>
-  );
+  return <LogOut className='size-5 cursor-pointer text-secondary-foreground hover:text-foreground' onClick={() => mutate()} />;
 }

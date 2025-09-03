@@ -1,51 +1,45 @@
 'use client';
-import { Monitor, Moon, Sun } from 'lucide-react';
+import { Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 
-const themeOptions = [
-  { mode: 'light', Icon: Sun },
-  { mode: 'system', Icon: Monitor },
-  { mode: 'dark', Icon: Moon },
+const icons = [
+  { Icon: Moon, theme: 'dark' },
+  { Icon: Sun, theme: 'light' },
 ];
 
 export default function ThemeButton() {
   const [mounted, setMounted] = useState(false);
 
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
 
-  const handleThemeChange = (mode: string) => {
-    document.documentElement.classList.add('no-transition');
-    setTheme(mode);
+  const handleClick = () => {
+    document.documentElement.classList.add('transitions-limited');
+    setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
+
     setTimeout(() => {
-      document.documentElement.classList.remove('no-transition');
-    }, 100);
+      document.documentElement.classList.remove('transitions-limited');
+    }, 120);
   };
 
   useEffect(() => {
     setMounted(true);
-  }, [theme]);
+  }, []);
 
   if (!mounted) return null;
 
   return (
-    <div className='flex h-10 w-[104px] items-center rounded-full border p-[3px]'>
-      {themeOptions.map(({ mode, Icon }) => (
-        <button
-          type='button'
-          className={cn('group flex size-8 cursor-pointer items-center justify-center rounded-full', theme === mode && 'bg-secondary')}
-          key={mode}
-          onClick={() => handleThemeChange(mode)}
-        >
-          <Icon
-            className={cn(
-              'size-4 transition-colors duration-200 ease-in-out group-hover:text-foreground',
-              theme === mode ? 'text-foreground' : 'text-secondary-foreground',
-            )}
-          />
-        </button>
+    <button className='size-5 cursor-pointer overflow-hidden' type='button' onClick={handleClick}>
+      {icons.map(({ Icon, theme }) => (
+        <Icon
+          className={cn(
+            'size-5 text-secondary-foreground transition-transform duration-300 ease-in-out hover:text-foreground',
+            resolvedTheme === 'dark' ? '-translate-y-5' : 'translate-y-0',
+          )}
+          key={theme}
+        />
       ))}
-    </div>
+    </button>
   );
 }
