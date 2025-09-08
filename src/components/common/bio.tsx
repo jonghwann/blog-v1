@@ -1,0 +1,37 @@
+import Link from 'next/link';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { cn } from '@/lib/utils';
+
+interface BioProps {
+  className?: string;
+}
+
+const icons = [
+  { Icon: FaGithub, href: 'https://github.com/wkdwhdghks' },
+  { Icon: FaLinkedin, href: 'https://www.linkedin.com/in/jonghwan/' },
+];
+
+export default function Bio({ className }: BioProps) {
+  return (
+    <aside className={cn('flex items-center gap-4', className)}>
+      <div className='size-32 rounded-full bg-gray-400' />
+
+      <div>
+        <h2 className='mb-1 font-semibold text-2xl leading-6'>@jonghwan</h2>
+        <p className='mb-3 text-base'>꾸준히, 의미있는 학습을 기록하기 위한 공간입니다.</p>
+
+        <nav>
+          <ul className='flex items-center gap-2'>
+            {icons.map(({ Icon, href }) => (
+              <li key={href}>
+                <Link href={href} target='_blank'>
+                  <Icon className='size-6' />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+    </aside>
+  );
+}
