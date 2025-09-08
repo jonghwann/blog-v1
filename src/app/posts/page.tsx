@@ -1,27 +1,21 @@
 import { getPosts } from '@/api/posts/api';
-import FabLink from '@/components/common/fab-link';
-import PostList from '@/components/post/post-list';
+import Bio from '@/components/common/bio';
 import type { Post } from '@/types/post';
 
-interface PostsPageProps {
-  searchParams: Promise<{ tag: string }>;
-}
-
-export default async function PostsPage({ searchParams }: PostsPageProps) {
-  const { tag } = await searchParams;
-
+export default async function PostsPage() {
   let posts: Post[] = [];
 
   try {
-    posts = await getPosts(tag);
+    posts = await getPosts();
   } catch (error) {
     console.error(error);
     posts = [];
   }
 
   return (
-    <section className='mx-auto flex w-full max-w-(--breakpoint-xl) lg:gap-10'>
-      <div className='relative flex-2 px-4'>
+    <section className='mt-4'>
+      <Bio />
+      {/* <div className='relative flex-2 px-4'>
         <PostList posts={posts} />
         <FabLink href='/posts/write' />
       </div>
@@ -30,9 +24,9 @@ export default async function PostsPage({ searchParams }: PostsPageProps) {
         <section className='flex flex-col gap-3'>
           <h2 className='font-medium text-secondary-foreground text-sm'>Tags</h2>
 
-          <nav>{/* <TagList tags={tags} selectedTags={selectedTags} /> */}</nav>
+          <nav><TagList tags={tags} selectedTags={selectedTags} /></nav>
         </section>
-      </aside>
+      </aside> */}
     </section>
   );
 }

@@ -1,7 +1,7 @@
 'use client';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { LogOut } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { FaSignOutAlt } from 'react-icons/fa';
 import { toast } from 'sonner';
 import { logout } from '@/api/auth/api';
 import useSession from '@/hooks/use-session';
@@ -23,5 +23,5 @@ export default function LogoutButton() {
 
   if (!isLogin) return null;
 
-  return <LogOut className='size-5 cursor-pointer text-secondary-foreground hover:text-foreground' onClick={() => mutate()} />;
+  return <FaSignOutAlt className='size-5 cursor-pointer text-secondary-foreground hover:text-foreground' onClick={() => mutate()} />;
 }

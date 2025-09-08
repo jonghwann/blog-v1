@@ -9,7 +9,7 @@ export default async function Layout({ children }: LayoutProps) {
   return (
     <div className='flex min-h-screen flex-col'>
       <Header />
-      <main className='mt-28 flex flex-1'>{children}</main>
+      <main className='mx-auto mt-28 flex w-full max-w-[712px] flex-1 px-4'>{children}</main>
       <Footer />
     </div>
   );
