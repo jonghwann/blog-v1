@@ -5,6 +5,7 @@ import { FaSignOutAlt } from 'react-icons/fa';
 import { toast } from 'sonner';
 import { logout } from '@/api/auth/api';
 import useSession from '@/hooks/use-session';
+import Icon from './icon';
 
 export default function LogoutButton() {
   const router = useRouter();
@@ -23,5 +24,5 @@ export default function LogoutButton() {
 
   if (!isLogin) return null;
 
-  return <FaSignOutAlt className='size-5 cursor-pointer text-tertiary-foreground hover:text-foreground' onClick={() => mutate()} />;
+  return <Icon Icon={FaSignOutAlt} onClick={() => mutate()} />;
 }

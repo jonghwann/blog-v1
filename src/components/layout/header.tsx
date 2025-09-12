@@ -10,7 +10,7 @@ export default function Header() {
 
   return (
     <header
-      className='fixed top-0 z-[var(--z-header)] w-full bg-background/80 px-4 shadow-[0_0_8px_rgba(0,0,0,0.08)] backdrop-blur-[5px]'
+      className='fixed top-0 z-[var(--z-header)] w-full bg-background/80 px-4 shadow-[var(--shadow)] backdrop-blur-[5px]'
       style={{ marginTop }}
     >
       <div className='mx-0 flex h-14 items-center justify-between md:mx-16'>

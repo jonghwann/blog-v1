@@ -49,6 +49,8 @@
   --tertiary: #868E96;
   --tertiary-foreground: #868E96;
 
+  --shadow: 0px 0px 8px rgba(0, 0, 0, 0.08);
+
   /* --secondary: #f2f2f2;
   --secondary-foreground: #666666;
   --secondary-hover: #e6e6e6;
@@ -63,9 +65,15 @@
 .dark {
   --border: hsla(0, 0%, 12%, 1);
   --background: #191919;
-  --foreground: #ededed;
+  --foreground: #f8f9fa;
 
-  --secondary-foreground: #666666;
+  --secondary: #2d2d2d;
+  --secondary-foreground: #ced4da;
+
+  --tertiary: #adb5bd;
+  --tertiary-foreground: #adb5bd;
+
+  --shadow: 0px 0px 8px rgba(150, 150, 150, 0.08);
 
   /* --secondary: #1a1a1a;
   --secondary-foreground: #888888;

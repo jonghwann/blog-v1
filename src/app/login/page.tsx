@@ -40,8 +40,8 @@ export default function LoginPage() {
 
   return (
     <form
-      className='-translate-x-1/2 -translate-y-1/2 absolute top-1/2 left-1/2 flex w-full transform flex-col gap-3 px-4 sm:w-[320px] sm:px-0'
       onSubmit={handleSubmit(onSubmit)}
+      className='-translate-x-1/2 -translate-y-1/2 absolute top-1/2 left-1/2 flex w-full transform flex-col gap-3 px-4 sm:w-[320px] sm:px-0'
     >
       <Input register={register('email')} placeholder='Email' errors={errors?.email?.message} />
       <Input register={register('password')} type='password' placeholder='Password' errors={errors?.password?.message} />
