@@ -23,5 +23,5 @@ export default function LogoutButton() {
 
   if (!isLogin) return null;
 
-  return <FaSignOutAlt className='size-5 cursor-pointer text-secondary-foreground hover:text-foreground' onClick={() => mutate()} />;
+  return <FaSignOutAlt className='size-5 cursor-pointer text-tertiary-foreground hover:text-foreground' onClick={() => mutate()} />;
 }
