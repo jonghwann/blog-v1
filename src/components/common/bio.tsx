@@ -1,14 +1,15 @@
 import Link from 'next/link';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { cn } from '@/lib/utils';
+import Icon from './icon';
 
 interface BioProps {
   className?: string;
 }
 
 const icons = [
-  { Icon: FaGithub, href: 'https://github.com/wkdwhdghks' },
-  { Icon: FaLinkedin, href: 'https://www.linkedin.com/in/jonghwan/' },
+  { icon: FaGithub, href: 'https://github.com/wkdwhdghks' },
+  { icon: FaLinkedin, href: 'https://www.linkedin.com/in/jonghwan/' },
 ];
 
 export default function Bio({ className }: BioProps) {
@@ -22,10 +23,10 @@ export default function Bio({ className }: BioProps) {
 
         <nav>
           <ul className='flex items-center gap-2'>
-            {icons.map(({ Icon, href }) => (
+            {icons.map(({ icon, href }) => (
               <li key={href}>
                 <Link href={href} target='_blank'>
-                  <Icon className='size-6' />
+                  <Icon Icon={icon} className='size-6' />
                 </Link>
               </li>
             ))}

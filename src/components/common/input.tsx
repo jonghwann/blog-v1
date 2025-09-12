@@ -2,13 +2,13 @@ import type { UseFormRegisterReturn } from 'react-hook-form';
 import { cn } from '@/lib/utils';
 
 interface InputProps extends React.ComponentProps<'input'> {
+  register?: UseFormRegisterReturn;
   className?: string;
   errorClassName?: string;
-  register?: UseFormRegisterReturn;
   errors?: string;
 }
 
-export default function Input({ className, errorClassName, register, errors, ...rest }: InputProps) {
+export default function Input({ register, className, errorClassName, errors, ...rest }: InputProps) {
   return (
     <div className='flex flex-col gap-2'>
       <input

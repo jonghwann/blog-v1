@@ -19,8 +19,8 @@ export default function EditorActions({ className, actions }: EditorActionsProps
       {actions.map(({ type = 'button', text, onClick }) => {
         return (
           <button
-            className="hover:text-foreground text-secondary-foreground transition-colors duration-200 ease-in-out"
             key={text}
+            className='text-secondary-foreground transition-colors duration-200 ease-in-out hover:text-foreground'
             type={type}
             onClick={onClick}
           >

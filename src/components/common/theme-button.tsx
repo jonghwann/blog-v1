@@ -3,10 +3,11 @@ import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 import { FaMoon, FaSun } from 'react-icons/fa';
 import { cn } from '@/lib/utils';
+import Icon from './icon';
 
 const icons = [
-  { Icon: FaSun, theme: 'light' },
-  { Icon: FaMoon, theme: 'dark' },
+  { icon: FaSun, theme: 'light' },
+  { icon: FaMoon, theme: 'dark' },
 ];
 
 export default function ThemeButton() {
@@ -30,14 +31,15 @@ export default function ThemeButton() {
   if (!mounted) return null;
 
   return (
-    <button className='group size-5 cursor-pointer overflow-hidden' type='button' onClick={handleClick}>
-      {icons.map(({ Icon, theme }) => (
+    <button type='button' onClick={handleClick} className='group size-5 cursor-pointer overflow-hidden'>
+      {icons.map(({ icon, theme }) => (
         <Icon
+          key={theme}
           className={cn(
-            'size-5 text-tertiary-foreground transition-transform duration-300 ease-in-out group-hover:text-foreground',
+            'transition-transform duration-300 ease-in-out group-hover:text-foreground',
             resolvedTheme === 'light' ? '-translate-y-5' : 'translate-y-0',
           )}
-          key={theme}
+          Icon={icon}
         />
       ))}
     </button>
