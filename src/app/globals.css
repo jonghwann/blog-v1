@@ -12,12 +12,18 @@
 
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-tertiary: var(--tertiary);
+  --color-tertiary-foreground: var(--tertiary-foreground);
+
+  /* --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
   --color-secondary-hover: var(--secondary-hover);
   --color-secondary-inverse: var(--secondary-inverse);
 
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
-  --color-accent-hover: var(--accent-hover);
+  --color-accent-hover: var(--accent-hover); */
 
   --color-error: var(--error);
 
@@ -35,33 +41,39 @@
 :root {
   --border: hsla(0, 0%, 92%, 1);
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #191919;
 
-  --secondary: #f2f2f2;
+  --secondary: #F1F3F5; 
+  --secondary-foreground: #404040;
+
+  --tertiary: #868E96;
+  --tertiary-foreground: #868E96;
+
+  /* --secondary: #f2f2f2;
   --secondary-foreground: #666666;
   --secondary-hover: #e6e6e6;
   --secondary-inverse: #383838;
-
   --accent: hsla(212, 100%, 97%, 1);
   --accent-foreground: oklch(57.61% 0.2508 258.23);
-  --accent-hover: #c9e2ff;
+  --accent-hover: #c9e2ff; */
 
   --error: #f24040;
 }
 
 .dark {
   --border: hsla(0, 0%, 12%, 1);
-  --background: #000000;
+  --background: #191919;
   --foreground: #ededed;
 
-  --secondary: #1a1a1a;
+  --secondary-foreground: #666666;
+
+  /* --secondary: #1a1a1a;
   --secondary-foreground: #888888;
   --secondary-hover: #1f1f1f;
   --secondary-inverse: #cccccc;
-
   --accent: hsla(216, 50%, 12%, 1);
   --accent-foreground: #52a8ff;
-  --accent-hover: #1a2738;
+  --accent-hover: #1a2738; */
 
   --error: #f24040;
 }

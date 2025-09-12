@@ -34,7 +34,7 @@ export default function ThemeButton() {
       {icons.map(({ Icon, theme }) => (
         <Icon
           className={cn(
-            'size-5 text-secondary-foreground transition-transform duration-300 ease-in-out group-hover:text-foreground',
+            'size-5 text-tertiary-foreground transition-transform duration-300 ease-in-out group-hover:text-foreground',
             resolvedTheme === 'light' ? '-translate-y-5' : 'translate-y-0',
           )}
           key={theme}

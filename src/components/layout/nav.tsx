@@ -15,7 +15,7 @@ export default function Nav() {
         {icons.map(({ Icon, href }) => (
           <li key={href}>
             <Link href={href}>
-              <Icon className='size-5 text-secondary-foreground hover:text-foreground' />
+              <Icon className='size-5 text-tertiary-foreground hover:text-foreground' />
             </Link>
           </li>
         ))}
