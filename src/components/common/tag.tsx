@@ -1,21 +1,20 @@
 import Link from 'next/link';
-
 import { cn } from '@/lib/utils';
 
 interface TagProps {
-  className?: string;
-  href: string;
   children: React.ReactNode;
+  href: string;
+  className?: string;
 }
 
-export default function Tag({ className, href, children }: TagProps) {
+export default function Tag({ children, href, className }: TagProps) {
   return (
     <Link
+      href={href}
       className={cn(
-        'bg-secondary text-secondary-foreground hover:bg-secondary-hover flex items-center rounded-full px-[10px] py-1 text-sm transition-colors duration-200 ease-in-out',
+        'block rounded-full bg-secondary px-[10px] py-[6px] text-secondary-foreground text-sm hover:bg-secondary-hover',
         className,
       )}
-      href={href}
     >
       {children}
     </Link>

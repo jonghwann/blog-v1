@@ -1,30 +1,17 @@
-'use client';
-import { X } from 'lucide-react';
-import { createTagHref } from '@/lib/post';
 import Tag from './tag';
 
 interface TagListProps {
   tags: string[];
-  selectedTags?: string[];
 }
 
-export default function TagList({ tags, selectedTags }: TagListProps) {
+export default function TagList({ tags }: TagListProps) {
   return (
-    <ul className='flex flex-wrap items-center gap-[8px_6px]'>
-      {tags.map((tag) => {
-        const isSelected = selectedTags?.includes(tag);
-        return (
-          <li key={tag}>
-            <Tag
-              className={isSelected ? 'gap-1 bg-accent text-accent-foreground hover:bg-accent-hover' : ''}
-              href={createTagHref(tag, selectedTags)}
-            >
-              {tag}
-              {isSelected && <X className='size-4 stroke-[1.5px]' />}
-            </Tag>
-          </li>
-        );
-      })}
+    <ul className='flex flex-wrap items-center gap-2'>
+      {tags.map((tag) => (
+        <li key={tag}>
+          <Tag href={`/posts/tag/${tag}`}>{tag}</Tag>
+        </li>
+      ))}
     </ul>
   );
 }

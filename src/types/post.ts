@@ -5,6 +5,6 @@ export interface Post {
   createdAt: Date;
   updatedAt: Date;
   summary: string;
-  tags: string;
+  tags: string[];
   readingTime: number;
 }
