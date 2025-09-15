@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { formatDate } from '@/lib/utils';
-import TagList from '../common/tag-list';
+import TagGroup from '../common/tag-group';
 
 interface PostItemProps {
   id: number;
@@ -20,7 +20,7 @@ export default function PostItem({ id, title, createdAt, summary, tags }: PostIt
       <time className='mb-4 block text-sm text-tertiary-foreground leading-[1]'>{formatDate(createdAt)}</time>
       <p className='mb-8 text-[15px] leading-[1.7]'>{summary}</p>
 
-      <TagList tags={tags} />
+      <TagGroup tags={tags} />
     </article>
   );
 }
