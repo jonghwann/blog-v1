@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { cn } from '@/lib/utils';
@@ -15,7 +16,7 @@ const icons = [
 export default function Bio({ className }: BioProps) {
   return (
     <aside className={cn('flex items-center gap-4', className)}>
-      <div className='size-32 rounded-full bg-gray-400' />
+      <Image src='/profile.jpg' alt='profile' width={128} height={128} className='size-32 flex-shrink-0 rounded-full object-cover' />
 
       <div>
         <h2 className='mb-1 font-semibold text-2xl leading-6'>@jonghwan</h2>
