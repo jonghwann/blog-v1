@@ -28,9 +28,7 @@ export default function PostHeader({ id, title, tags, readingTime, createdAt }: 
         <EditButton id={id} />
       </div>
 
-      <div className='mb-12 border-b pb-6'>
-        <TagList tags={tags.split(',')} />
-      </div>
+      <div className='mb-12 border-b pb-6'>{/* <TagList tags={tags.split(',')} /> */}</div>
     </div>
   );
 }

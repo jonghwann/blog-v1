@@ -16,7 +16,14 @@ const icons = [
 export default function Bio({ className }: BioProps) {
   return (
     <aside className={cn('flex items-center gap-4', className)}>
-      <Image src='/profile.jpg' alt='profile' width={128} height={128} className='size-32 flex-shrink-0 rounded-full object-cover' />
+      <Image
+        src='/profile.jpg'
+        alt='profile'
+        width={128}
+        height={128}
+        priority
+        className='size-32 flex-shrink-0 rounded-full object-cover'
+      />
 
       <div>
         <h2 className='mb-1 font-semibold text-2xl leading-6'>@jonghwan</h2>

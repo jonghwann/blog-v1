@@ -1,3 +1,5 @@
+import type { Tag } from './tag';
+
 export interface Post {
   id: number;
   title: string;
@@ -5,6 +7,6 @@ export interface Post {
   createdAt: Date;
   updatedAt: Date;
   summary: string;
-  tags: string[];
+  tags: Tag[];
   readingTime: number;
 }

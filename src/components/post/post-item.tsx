@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { formatDate } from '@/lib/utils';
+import type { Tag } from '@/types/tag';
 import TagGroup from '../common/tag-group';
 
 interface PostItemProps {
@@ -7,7 +8,7 @@ interface PostItemProps {
   title: string;
   createdAt: Date;
   summary: string;
-  tags: string[];
+  tags: Tag[];
 }
 
 export default function PostItem({ id, title, createdAt, summary, tags }: PostItemProps) {
@@ -17,7 +18,7 @@ export default function PostItem({ id, title, createdAt, summary, tags }: PostIt
         <h2 className='mb-6 font-bold text-[32px] leading-[1.2]'>{title}</h2>
       </Link>
 
-      <time className='mb-4 block text-sm text-tertiary-foreground leading-[1]'>{formatDate(createdAt)}</time>
+      <time className='mb-4 block text-quaternary-foreground text-sm leading-[1]'>{formatDate(createdAt)}</time>
       <p className='mb-8 text-[15px] leading-[1.7]'>{summary}</p>
 
       <TagGroup tags={tags} />

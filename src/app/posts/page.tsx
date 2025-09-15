@@ -1,25 +1,13 @@
-import { getPosts } from '@/api/posts/api';
-import { getTags } from '@/api/tags/api';
 import Bio from '@/components/common/bio';
 import TagList from '@/components/common/tag-list';
 import PostList from '@/components/post/post-list';
-import type { Post } from '@/types/post';
-import type { Tag } from '@/types/tag';
+import { getPostsAndTags } from '@/lib/data';
 
 export default async function PostsPage() {
-  let posts: Post[] = [];
-  let tags: Tag[] = [];
-
-  try {
-    [posts, tags] = await Promise.all([getPosts(), getTags()]);
-  } catch (error) {
-    console.error(error);
-    posts = [];
-    tags = [];
-  }
+  const { posts, tags } = await getPostsAndTags();
 
   return (
-    <section className='mt-4 w-full'>
+    <section className='mt-7 w-full'>
       <Bio className='mb-12 border-b pb-12' />
 
       <div className='relative'>
