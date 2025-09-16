@@ -1,4 +1,5 @@
 import TagGroup from '@/components/common/tag-group';
+import Title from '@/components/common/title';
 import PostList from '@/components/post/post-list';
 import { getPostsAndTags } from '@/lib/data';
 
@@ -14,12 +15,8 @@ export default async function TagPage({ params }: TagPageProps) {
 
   return (
     <section>
-      <h1 className='mb-6 font-bold text-lg'>
-        {tag ? `There are ${posts.length} posts that match #${tag}.` : `There are ${tags.length} tags.`}
-      </h1>
-
+      <Title>{tag ? `There are ${posts.length} posts that match #${tag}.` : `There are ${tags.length} tags.`}</Title>
       <TagGroup tags={tags} tag={tag} className='mb-14' />
-
       <PostList posts={posts} />
     </section>
   );
