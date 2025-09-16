@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Source_Code_Pro } from 'next/font/google';
+import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import { Toaster } from 'sonner';
 import Layout from '@/components/layout/layout';
 import { cn } from '@/lib/utils';
@@ -21,7 +22,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body className='antialiased'>
         <QueryProvider>
           <ThemeProvider>
-            <Layout>{children}</Layout>
+            <NuqsAdapter>
+              <Layout>{children}</Layout>
+            </NuqsAdapter>
             <Toaster position='top-center' richColors />
           </ThemeProvider>
         </QueryProvider>

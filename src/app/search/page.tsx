@@ -1,31 +1,22 @@
-import { FiSearch } from 'react-icons/fi';
-import { getPosts } from '@/api/posts/api';
-import Input from '@/components/common/input';
-import Title from '@/components/common/title';
-import PostList from '@/components/post/post-list';
-import type { Post } from '@/types/post';
+import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
+import { getSearchPosts } from '@/api/search/api';
+import PostSearch from '@/components/post/post-search';
 
 interface SearchPageProps {
-  searchParams: Promise<{ query: string }>;
+  searchParams: Promise<{ q: string }>;
 }
 
 export default async function SearchPage({ searchParams }: SearchPageProps) {
-  const { query } = await searchParams;
+  const { q } = await searchParams;
+  const search = q ?? '';
 
-  let posts: Post[] = [];
+  const queryClient = new QueryClient();
 
-  try {
-    posts = await getPosts();
-  } catch (error) {
-    console.error(error);
-    posts = [];
-  }
+  await queryClient.prefetchQuery({ queryKey: ['search', search], queryFn: () => getSearchPosts(search) });
 
   return (
-    <div>
-      <Title>There are {posts.length} posts.</Title>
-      <Input placeholder='Search' icon={<FiSearch />} classNames={{ container: 'mb-[70px]', input: 'h-[46px] pl-10', icon: 'left-3' }} />
-      <PostList posts={posts} />
-    </div>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <PostSearch initialSearch={search} />
+    </HydrationBoundary>
   );
 }
