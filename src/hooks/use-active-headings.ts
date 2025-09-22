@@ -1,38 +1,36 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { TableOfContents } from '@/components/post/post-table-of-contents';
 
-interface useActiveHeadings {
-  tableOfContents: TableOfContents[];
-  options: { rootMargin?: string; threshold?: number };
-}
-
-export default function useActiveHeadings({ tableOfContents, options }: useActiveHeadings) {
-  const observer = useRef<IntersectionObserver>(null);
-
-  const [activeIdList, setActiveIdList] = useState<string[]>([]);
+export default function useActiveHeadings(tableOfContents: TableOfContents[]) {
+  const [activeId, setActiveId] = useState<number | null>(null);
 
   useEffect(() => {
-    const handleIntersection: IntersectionObserverCallback = (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveIdList((prev) => [...prev, entry.target.id]);
-        } else {
-          setActiveIdList((prev) => prev.filter((activeId) => activeId !== entry.target.id));
-        }
-      });
-    };
-
-    observer.current = new IntersectionObserver(handleIntersection, options);
-
-    tableOfContents.forEach(({ link }: { link: string }) => {
+    const headerPositions = tableOfContents.map(({ link, id }) => {
       const element = document.getElementById(link.slice(1));
-      if (element) observer.current?.observe(element);
+      return { id, top: element?.offsetTop || 0 };
     });
 
-    return () => observer.current?.disconnect();
-  }, []);
+    const handleScroll = () => {
+      const scrollY = window.scrollY + 1;
+      let currentActiveId = null;
 
-  const activeIdArr = tableOfContents.filter(({ link }) => activeIdList.includes(link.slice(1)));
-  return Math.min(...activeIdArr.map(({ id }) => id)) || 1;
+      headerPositions.forEach(({ id, top }) => {
+        if (top < scrollY) {
+          currentActiveId = id;
+        }
+      });
+
+      setActiveId(currentActiveId);
+    };
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [tableOfContents]);
+
+  return activeId;
 }
