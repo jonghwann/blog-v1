@@ -1,6 +1,6 @@
 import { cva } from 'class-variance-authority';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
+import { BiLeftArrowAlt, BiRightArrowAlt } from 'react-icons/bi';
 
 interface PostNavigationItemProps {
   variant?: 'prev' | 'next';
@@ -10,55 +10,56 @@ interface PostNavigationItemProps {
 
 const config = {
   prev: {
-    label: 'Previous',
-    icon: ChevronLeft,
+    label: 'Previous Post',
+    icon: BiLeftArrowAlt,
   },
   next: {
-    label: 'Next',
-    icon: ChevronRight,
+    label: 'Next Post',
+    icon: BiRightArrowAlt,
   },
 };
 
-const linkVariants = cva('group relative flex flex-col gap-1 py-1 max-w-[75%] sm:max-w-[55%]', {
-  variants: {
-    variant: {
-      prev: 'pr-2 pl-7',
-      next: 'pr-7 pl-2 ml-auto',
-    },
-  },
-  defaultVariants: {
-    variant: 'prev',
-  },
-});
-
-const iconVariants = cva(
-  'text-secondary-foreground absolute size-5 group-hover:text-foreground transition-colors duration-200 ease-in-out',
+const linkVariants = cva(
+  'group relative flex w-full items-center rounded-sm bg-secondary px-4 py-5 hover:bg-secondary-hover md:w-[282px]',
   {
     variants: {
       variant: {
-        prev: 'left-0',
-        next: 'right-0',
+        prev: 'justify-start pl-14',
+        next: 'justify-end pr-14',
       },
-    },
-    defaultVariants: {
-      variant: 'prev',
     },
   },
 );
+
+const iconVariants = cva('absolute size-6 transition-transform duration-200 ease-in-out', {
+  variants: {
+    variant: {
+      prev: 'group-hover:-translate-x-0.5 left-4',
+      next: 'right-4 group-hover:translate-x-0.5',
+    },
+  },
+});
+
+const labelVariants = cva('flex w-full text-xs', {
+  variants: {
+    variant: {
+      prev: 'justify-start',
+      next: 'justify-end',
+    },
+  },
+});
 
 export default function PostNavigationItem({ variant = 'prev', id, title }: PostNavigationItemProps) {
   const { label, icon: Icon } = config[variant];
 
   return (
     id && (
-      <Link className={linkVariants({ variant })} href={`/posts/${id}`}>
-        <span className="text-secondary-foreground group-hover:text-foreground text-sm transition-colors duration-200 ease-in-out">
-          {label}
-        </span>
+      <Link href={`/posts/${id}`} className={linkVariants({ variant })}>
+        <Icon className={iconVariants({ variant })} />
 
-        <div className="flex items-center">
-          <span className="truncate">{title}</span>
-          <Icon className={iconVariants({ variant })} />
+        <div className='flex min-w-0 flex-col justify-end gap-1'>
+          <span className={labelVariants({ variant })}>{label}</span>
+          <h4 className='truncate font-medium'>{title}</h4>
         </div>
       </Link>
     )

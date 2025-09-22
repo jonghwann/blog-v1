@@ -24,7 +24,7 @@ export default async function PostsPage() {
 
       <div className='relative'>
         <PostList posts={posts} />
-        <TagList tags={tags} className='absolute top-0 left-[112%] hidden 2xl:block' />
+        <TagList tags={tags} className='absolute top-0 left-[112%] hidden min-[1301px]:block' />
       </div>
     </section>
   );

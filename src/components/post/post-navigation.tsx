@@ -11,9 +11,9 @@ interface PostNavigationProps {
 
 export default function PostNavigation({ navigation: { prev, next } }: PostNavigationProps) {
   return (
-    <nav className="my-12 flex flex-wrap justify-between border-t pt-8">
-      <PostNavigationItem variant="prev" id={prev?.id} title={prev?.title} />
-      <PostNavigationItem variant="next" id={next?.id} title={next?.title} />
+    <nav className='mt-15 mb-12 flex flex-col justify-between gap-3 md:flex-row md:flex-wrap'>
+      <PostNavigationItem variant='prev' id={prev?.id} title={prev?.title} />
+      <PostNavigationItem variant='next' id={next?.id} title={next?.title} />
     </nav>
   );
 }

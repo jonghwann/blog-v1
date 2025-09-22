@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import { getPost, getPosts } from '@/api/posts/api';
+import Bio from '@/components/common/bio';
 import ScrollProgressBar from '@/components/common/scroll-progress-bar';
 import PostContent from '@/components/post/post-content';
 import PostHeader from '@/components/post/post-header';
@@ -33,9 +34,10 @@ export default async function PostPage({ params }: PostPageProps) {
         <div className='w-full'>
           <PostContent html={post.content} className='xl:min-w-[680px]' />
           <PostNavigation navigation={navigation} />
+          <Bio className='mb-12 border-b pb-8' />
         </div>
 
-        <PostTableOfContents className='hidden xl:block' content={post.content} />
+        <PostTableOfContents className='hidden min-[1301px]:block' content={post.content} />
       </div>
     </section>
   );
