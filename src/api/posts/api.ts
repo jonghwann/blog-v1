@@ -20,4 +20,3 @@ export async function updatePost(params: PostRequest): Promise<Post> {
   const response = await api.put(`posts/${id}`, { json: processedData, credentials: 'include' }).json<ApiResponse<Post>>();
   return response.data;
 }
-6
