@@ -21,6 +21,9 @@
       "correctness": {
         "useExhaustiveDependencies": "warn"
       },
+      "security": {
+        "noDangerouslySetInnerHtml": "warn"
+      },
       "nursery": {
         "useSortedClasses": {
           "fix": "safe",

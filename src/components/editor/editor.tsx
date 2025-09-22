@@ -56,7 +56,7 @@ function Content({ value, onChange, className }: ContentProps) {
   return (
     <div>
       <EditorToolbar editor={editor} />
-      <EditorContent className='tiptap' editor={editor} />
+      <EditorContent className='editor' editor={editor} />
     </div>
   );
 }

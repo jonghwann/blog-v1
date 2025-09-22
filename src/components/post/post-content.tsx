@@ -6,5 +6,5 @@ interface PostContentProps {
 }
 
 export default function PostContent({ className, html }: PostContentProps) {
-  return <article className={cn('tiptap', className)} dangerouslySetInnerHTML={{ __html: html }} />;
+  return <article className={cn('editor', className)} dangerouslySetInnerHTML={{ __html: html }} />;
 }

@@ -65,10 +65,6 @@ export default function PostForm({ variant = 'write', action, backButtonHref, id
     mode: 'onChange',
   });
 
-  console.log(watch('title'));
-  console.log(watch('content'));
-  console.log(watch('tags'));
-
   const { mutate } = useMutation({
     mutationFn: updatePost,
   });
