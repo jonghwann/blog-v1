@@ -1,9 +1,8 @@
 import * as cheerio from 'cheerio';
 import { toHtml } from 'hast-util-to-html';
-import { createLowlight, common } from 'lowlight';
+import { common, createLowlight } from 'lowlight';
 import readingTime from 'reading-time';
-
-import { type TableOfContents } from '@/components/post/post-table-of-contents';
+import type { TableOfContents } from '@/components/post/post-table-of-contents';
 
 export function generateAnchorId(title: string): string {
   return title
@@ -94,6 +93,22 @@ export function parsePostFormData(formData: FormData) {
     summary,
     tags: formData.get('tags')?.toString().split(',').filter(Boolean).sort().join(',') ?? '',
     readingTime: Math.ceil(readingTime(content).minutes),
+  };
+}
+
+export function processPostData(data: { title: string; content: string; tags: string[] }) {
+  const processedContent = addHeadingIds(highlightCodeBlocks(data.content));
+
+  return {
+    ...data,
+    content: processedContent,
+    readingTime: Math.ceil(readingTime(processedContent).minutes),
+    summary: processedContent
+      .replace(/<pre><code[\s\S]*?<\/code><\/pre>/g, '')
+      .replace(/<[^>]+>/g, '')
+      .replace(/\s+/g, ' ')
+      .trim()
+      .slice(0, 150),
   };
 }
 

@@ -2,7 +2,7 @@ import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
 const guestPaths = ['/login'];
-const protectedPaths = ['/posts/write', '/posts/edit/:path*'];
+const protectedPaths = ['/posts/write', '/posts/edit'];
 
 export async function middleware(request: NextRequest) {
   const accessToken = request.cookies.get('access_token');

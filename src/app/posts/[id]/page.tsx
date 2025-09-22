@@ -1,11 +1,11 @@
 import { notFound } from 'next/navigation';
-
+import { getPost, getPosts } from '@/api/posts/api';
 import ScrollProgressBar from '@/components/common/scroll-progress-bar';
 import PostContent from '@/components/post/post-content';
 import PostHeader from '@/components/post/post-header';
 import PostNavigation from '@/components/post/post-navigation';
 import PostTableOfContents from '@/components/post/post-table-of-contents';
-import { findPostByIdWithNavigation, findPosts } from '@/db/posts';
+import type { Navigation, Post } from '@/types/post';
 
 interface PostPageProps {
   params: Promise<{ id: string }>;
@@ -14,42 +14,39 @@ interface PostPageProps {
 export default async function PostPage({ params }: PostPageProps) {
   const { id } = await params;
 
-  let post = null;
-  let navigation = null;
+  let post: Post;
+  let navigation: Navigation;
 
   try {
-    ({ post, navigation } = await findPostByIdWithNavigation(Number(id)));
+    ({ post, navigation } = await getPost(Number(id)));
   } catch (error) {
-    console.error('Error in PostPage:', error);
-  }
-
-  if (!post || !navigation) {
+    console.error(error);
     notFound();
   }
 
   return (
-    <div>
+    <section className='mt-3 w-full'>
       <ScrollProgressBar />
       <PostHeader {...post} />
 
       <div className='flex gap-16'>
         <div className='w-full'>
-          <PostContent className='xl:min-w-[736px]' html={post.content} />
+          <PostContent html={post.content} className='xl:min-w-[680px]' />
           <PostNavigation navigation={navigation} />
         </div>
 
         <PostTableOfContents className='hidden xl:block' content={post.content} />
       </div>
-    </div>
+    </section>
   );
 }
 
 export async function generateStaticParams() {
   try {
-    const posts = await findPosts();
+    const posts = await getPosts();
     return posts.map((post) => ({ id: String(post.id) }));
   } catch (error) {
-    console.error('Error in generateStaticParams:', error);
+    console.error(error);
     return [];
   }
 }

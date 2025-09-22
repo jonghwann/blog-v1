@@ -1,7 +1,6 @@
 'use client';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { HTTPError } from 'ky';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
@@ -22,15 +21,10 @@ export default function LoginPage() {
 
   const { mutate, isPending } = useMutation({
     mutationFn: login,
-    onSuccess: async () => {
+    onSuccess: async (data) => {
+      toast.success(data.message);
       await queryClient.invalidateQueries({ queryKey: ['me'] });
       router.replace('/posts');
-    },
-    onError: async (error) => {
-      if (error instanceof HTTPError) {
-        const data = await error.response.json();
-        toast.error(data.message);
-      }
     },
   });
 

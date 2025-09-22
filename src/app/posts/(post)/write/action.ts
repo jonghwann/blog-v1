@@ -1,7 +1,7 @@
 'use server';
 
 import { createPost } from '@/db/posts';
-import { parsePostFormData } from '@/lib/post';
+import { parsePostFormData } from '@/lib/posts';
 
 interface WriteActionState {
   success: boolean;
