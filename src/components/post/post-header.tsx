@@ -1,12 +1,12 @@
-import { formatDate } from '@/lib/utils';
-
+import { formatDate } from '@/lib/date';
+import type { Tag } from '@/types/tag';
 import EditButton from '../common/edit-button';
-import TagList from '../common/tag-group';
+import TagGroup from '../common/tag-group';
 
 interface PostHeaderProps {
   id: number;
   title: string;
-  tags: string;
+  tags: Tag[];
   readingTime: number;
   createdAt: Date;
 }
@@ -15,11 +15,11 @@ export default function PostHeader({ id, title, tags, readingTime, createdAt }: 
   const formattedDate = formatDate(createdAt);
 
   return (
-    <div>
-      <h1 className='mb-7 font-bold text-5xl leading-[1.2]'>{title}</h1>
+    <div className='mb-12 border-b pb-6'>
+      <h1 className='mb-[26px] font-bold text-[44px] leading-[1.2]'>{title}</h1>
 
       <div className='mb-8 flex items-center justify-between'>
-        <div className='flex items-center gap-2 text-secondary-foreground text-sm'>
+        <div className='flex items-center gap-2 text-sm text-tertiary-foreground'>
           <time>{formattedDate}</time>
           <span>·</span>
           <span>{readingTime} min read</span>
@@ -28,7 +28,7 @@ export default function PostHeader({ id, title, tags, readingTime, createdAt }: 
         <EditButton id={id} />
       </div>
 
-      <div className='mb-12 border-b pb-6'>{/* <TagList tags={tags.split(',')} /> */}</div>
+      <TagGroup tags={tags} />
     </div>
   );
 }

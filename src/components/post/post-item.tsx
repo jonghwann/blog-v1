@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { formatDate } from '@/lib/utils';
+import { formatDate } from '@/lib/date';
 import type { Tag } from '@/types/tag';
 import TagGroup from '../common/tag-group';
 

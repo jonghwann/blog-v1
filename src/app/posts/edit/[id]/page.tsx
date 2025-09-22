@@ -1,8 +1,7 @@
 import { notFound } from 'next/navigation';
-
+import { getPost } from '@/api/posts/api';
 import PostForm from '@/components/post/post-form';
-import { findPostById } from '@/db/posts';
-
+import type { Post } from '@/types/post';
 import { editAction } from './action';
 
 interface EditPageProps {
@@ -12,21 +11,18 @@ interface EditPageProps {
 export default async function EditPage({ params }: EditPageProps) {
   const { id } = await params;
 
-  let post = null;
+  let post: Post;
 
   try {
-    post = await findPostById(Number(id));
+    ({ post } = await getPost(Number(id)));
   } catch (error) {
-    console.error('Error in EditPage:', error);
-  }
-
-  if (!post) {
+    console.error(error);
     notFound();
   }
 
   return (
     <PostForm
-      variant="edit"
+      variant='edit'
       action={editAction}
       backButtonHref={`/posts/${id}`}
       id={id}

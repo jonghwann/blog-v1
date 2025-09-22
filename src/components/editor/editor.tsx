@@ -1,27 +1,40 @@
 'use client';
-
-
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
 import Image from '@tiptap/extension-image';
 import Placeholder from '@tiptap/extension-placeholder';
 import TextAlign from '@tiptap/extension-text-align';
-import { useEditor, EditorContent } from '@tiptap/react';
+import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
-import { createLowlight, common } from 'lowlight';
-import { useRef } from 'react';
-
+import { common, createLowlight } from 'lowlight';
+import { type Control, Controller } from 'react-hook-form';
 import { cn } from '@/lib/utils';
-
 import EditorToolbar from './editor-toolbar';
 
 interface EditorProps {
-  className?: string;
+  control: Control<any>;
+  name: string;
   defaultValue?: string;
+  className?: string;
 }
 
-export default function Editor({ className, defaultValue }: EditorProps) {
-  const inputRef = useRef<HTMLInputElement>(null);
+export default function Editor({ control, name, defaultValue, className }: EditorProps) {
+  return (
+    <Controller
+      control={control}
+      name={name}
+      defaultValue={defaultValue}
+      render={({ field: { value, onChange } }) => <Content value={value} onChange={onChange} className={className} />}
+    />
+  );
+}
 
+interface ContentProps {
+  value: string;
+  onChange: (value: string) => void;
+  className?: string;
+}
+
+function Content({ value, onChange, className }: ContentProps) {
   const editor = useEditor({
     extensions: [
       StarterKit.configure({ codeBlock: false }),
@@ -32,21 +45,18 @@ export default function Editor({ className, defaultValue }: EditorProps) {
     ],
     editorProps: {
       attributes: {
-        class: cn(
-          'outline-none min-h-[calc(100vh-64px-64px-64px-64px-84px-48px-40px-40px-20px-2px)] pb-12 pt-5',
-          className,
-        ),
+        class: cn('min-h-[calc(100vh-64px-64px-64px-64px-84px-48px-40px-40px-20px-2px)] pt-5 pb-12 outline-none', className),
       },
     },
-    content: defaultValue ?? '',
+    content: value,
+    onUpdate: ({ editor }) => onChange(editor.getHTML()),
     immediatelyRender: false,
   });
 
   return (
     <div>
       <EditorToolbar editor={editor} />
-      <EditorContent className="tiptap" editor={editor} />
-      <input ref={inputRef} type="hidden" name="content" value={editor?.getHTML() ?? ''} />
+      <EditorContent className='tiptap' editor={editor} />
     </div>
   );
 }

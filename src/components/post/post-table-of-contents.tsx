@@ -3,7 +3,7 @@
 import Link from 'next/link';
 
 import useActiveHeadings from '@/hooks/use-active-headings';
-import { createTableOfContents } from '@/lib/post';
+import { createTableOfContents } from '@/lib/posts';
 import { cn } from '@/lib/utils';
 
 export interface TableOfContents {
@@ -24,16 +24,16 @@ export default function PostTableOfContents({ className, content }: PostTableOfC
 
   return (
     <aside className={cn('block w-[200px] shrink-0', className)}>
-      <div className="sticky top-[128px] text-xs">
-        <h2 className="mb-3 text-sm font-medium">On this page</h2>
+      <div className='sticky top-[128px] text-xs'>
+        <h2 className='mb-3 font-medium text-sm'>On this page</h2>
         <nav>
-          <ul className="flex flex-col gap-1.5">
+          <ul className='flex flex-col gap-1.5'>
             {tableOfContents.map(({ id, title, link, depth }) => (
               <li key={title} className={depth ? 'ml-3' : ''}>
                 <Link
                   className={cn(
-                    'hover:text-foreground transition-colors duration-200 ease-in-out',
-                    id + 1 === activeId ? 'text-accent-foreground font-semibold' : 'text-secondary-foreground',
+                    'transition-colors duration-200 ease-in-out hover:text-foreground',
+                    id + 1 === activeId ? 'font-semibold text-accent-foreground' : 'text-secondary-foreground',
                   )}
                   href={link}
                 >

@@ -3,7 +3,7 @@
 import { revalidatePath } from 'next/cache';
 
 import { updatePost } from '@/db/posts';
-import { parsePostFormData } from '@/lib/post';
+import { parsePostFormData } from '@/lib/posts';
 
 interface EditActionState {
   success: boolean;
