@@ -18,8 +18,8 @@ export default function PostItem({ id, title, createdAt, summary, tags }: PostIt
         <h2 className='font-bold text-[32px] leading-[1.2]'>{title}</h2>
       </Link>
 
-      <time className='mb-4 block font-nanum-square-round text-secondary-foreground text-sm leading-[1]'>{formatDate(createdAt)}</time>
-      <p className='mb-8 text-[15px] leading-[1.7]'>{summary}</p>
+      <time className='mb-4 block font-nanum-round text-secondary-foreground text-sm leading-[1]'>{formatDate(createdAt)}</time>
+      <p className='mb-8 font-nanum-round leading-[1.7]'>{summary}</p>
 
       <TagGroup tags={tags} />
     </article>

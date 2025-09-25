@@ -1,48 +1,56 @@
 @layer components {
-  .editor pre {
-    @apply !bg-[#2d2d2d] overflow-auto mb-4 !whitespace-pre rounded-[6px] p-5 shadow-[var(--shadow-code)] text-[13px];
-  }
-
   .editor h2 {
-    @apply text-foreground mt-12 mb-6 scroll-mt-[-40px] border-t pt-10 text-2xl leading-[1.3em] font-semibold;
+    @apply text-[2em] mb-[1.5em] pt-[2.1em] scroll-mt-[-2.1em] leading-[1.5] border-t font-bold tracking-[-0.025em];
   }
 
   .editor h3 {
-    @apply text-foreground mt-8 mb-3 scroll-mt-0 text-xl leading-[1.6em] font-semibold;
+    @apply mt-[2em] text-[1.8em] tracking-[-0.025em] leading-[1.5] mb-[1.5rem] font-bold;
   }
 
   .editor p {
-    @apply text-foreground mb-5 text-base leading-7;
+    @apply sm:text-[1.05rem] lg:text-[1.1rem] xl:text-[1.15rem] mb-[2rem] leading-[1.9] font-nanum-round;
   }
 
   .editor blockquote {
-    @apply border-l-6 py-10 px-5 mb-5 rounded-[6px];
+    @apply border-l-[0.5rem] mt-[1.5rem] mb-[2rem] p-[1rem] rounded-[0.5rem];
     @apply bg-[#F4F4F4] border-[#e0e0e0];
     @apply dark:bg-[#1a1e22] dark:border-[#424242];
 
     p {
-      @apply mb-0;
+      @apply mt-[2rem];
     }
   }
 
+  .editor ul, ol {
+    @apply pl-[1.5rem] my-[2rem];
+  }
+
   .editor ul {
-    @apply text-foreground mb-5 list-disc pl-5 text-base leading-7;
+    @apply list-disc;
   }
 
   .editor ol {
-    @apply text-foreground mb-5 list-decimal pl-5 text-base leading-7;
+    @apply list-decimal;
   }
 
   .editor li {
-    @apply text-foreground mb-2;
+    @apply sm:text-[1.05rem] lg:text-[1.1rem] xl:text-[1.15rem] font-nanum-round;
+
+    p {
+      @apply mt-[0.25rem] mb-[0.5rem];
+    }
   }
 
   .editor a {
-    @apply underline decoration-dashed underline-offset-[7px] hover:text-[#567EC0];
+    @apply underline decoration-dashed underline-offset-[0.45em] hover:text-[#567EC0];
+  }
+
+  .editor pre {
+    @apply !bg-[#2d2d2d] overflow-auto mb-[2rem] !whitespace-pre rounded-[0.5rem] p-[1em] shadow-[var(--shadow-code)] sm:text-[1.05rem] lg:text-[1.1rem] xl:text-[1.15rem] leading-[1.9];
   }
 
   .editor p code {
-    @apply rounded-md px-[3.5px] py-[1.68px] text-sm break-words;
+    @apply rounded-[0.4rem] px-[0.3rem] py-[0.2rem] mx-[0.2rem] text-[0.9em] break-words;
     @apply bg-[#e83e8c1a] text-[#e83e8c];
     @apply dark:bg-[#3e3e3e] dark:text-[#ff8926];
   }

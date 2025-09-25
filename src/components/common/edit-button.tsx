@@ -11,7 +11,7 @@ export default function EditButton({ id }: EditButtonProps) {
 
   return (
     isLogin && (
-      <Link className='text-sm text-tertiary-foreground hover:text-foreground' href={`/posts/edit/${id}`}>
+      <Link className='font-nanum-round text-secondary-foreground hover:text-foreground' href={`/posts/edit/${id}`}>
         edit
       </Link>
     )

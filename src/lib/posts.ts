@@ -137,7 +137,7 @@ async function processHtmlForStorage(html: string): Promise<string> {
 
 export async function processPostData(data: { title: string; content: string; tags: string[] }) {
   // const processedContent = addHeadingIds(highlightCodeBlocks(data.content));
-  const processedContent = await processHtmlForStorage(data.content);
+  const processedContent = addHeadingIds(await processHtmlForStorage(data.content));
   return {
     ...data,
     content: data.content,

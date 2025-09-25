@@ -34,7 +34,7 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #191919;
+  --foreground: #424242;
 
   --border: #e0e0e0;
 
@@ -49,7 +49,7 @@
 
   --accent-foreground: #567EC0;
 
-  --inverse: #191919;
+  --inverse: #424242;
   --inverse-foreground: #ffffff;
 
 
@@ -63,7 +63,7 @@
   --border: #424242;
 
   --shadow: 0px 0px 8px rgba(150, 150, 150, 0.08);
-  --shadow-code: 0 0.2em 0.6em rgba(0, 0, 0, 0.25);
+  --shadow-code: 0 0.2em 0.6em #1a1e22;
 
   --secondary: #2d2d2d;
   --secondary-foreground: #bdbdbd;
