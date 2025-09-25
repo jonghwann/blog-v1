@@ -15,11 +15,11 @@ export default function PostHeader({ id, title, tags, readingTime, createdAt }: 
   const formattedDate = formatDate(createdAt);
 
   return (
-    <div className='mb-12 border-b pb-6'>
+    <div className='mb-15 border-b pb-6'>
       <h1 className='mb-[26px] font-bold text-[44px] leading-[1.2]'>{title}</h1>
 
       <div className='mb-8 flex items-center justify-between'>
-        <div className='flex items-center gap-2 text-sm text-tertiary-foreground'>
+        <div className='flex items-center gap-2 font-nanum-round text-secondary-foreground'>
           <time>{formattedDate}</time>
           <span>·</span>
           <span>{readingTime} min read</span>

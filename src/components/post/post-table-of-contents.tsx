@@ -28,8 +28,8 @@ export default function PostTableOfContents({ className, content }: PostTableOfC
             <li key={title} className={depth ? 'ml-4' : ''}>
               <Link
                 className={cn(
-                  'block transition-transform',
-                  id === (activeId ?? 0) ? '-translate-x-[10px] text-tertiary-foreground' : 'translate-x-0 text-ring-focus',
+                  'block font-nanum-round transition-transform',
+                  id === (activeId ?? 0) ? '-translate-x-[10px] text-accent-foreground' : 'translate-x-0',
                 )}
                 href={link}
               >
