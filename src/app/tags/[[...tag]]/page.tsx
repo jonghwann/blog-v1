@@ -3,7 +3,7 @@ import { getTags } from '@/api/tags/api';
 import TagGroup from '@/components/common/tag-group';
 import Title from '@/components/common/title';
 import PostList from '@/components/post/post-list';
-import type { Post } from '@/types/post';
+import type { PostSummary } from '@/types/post';
 import type { Tag } from '@/types/tag';
 
 interface TagPageProps {
@@ -14,7 +14,7 @@ export default async function TagPage({ params }: TagPageProps) {
   const { tag: encodedTag } = await params;
   const tag = encodedTag && decodeURIComponent(encodedTag);
 
-  let posts: Post[] = [];
+  let posts: PostSummary[] = [];
   let tags: Tag[] = [];
 
   try {
