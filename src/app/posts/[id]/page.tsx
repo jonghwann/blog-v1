@@ -32,7 +32,7 @@ export default async function PostPage({ params }: PostPageProps) {
 
       <div className='flex gap-16'>
         <div className='w-full'>
-          <PostContent html={post.content} className='xl:min-w-[680px]' />
+          <PostContent html={post.html} className='xl:min-w-[680px]' />
           <PostNavigation navigation={navigation} />
           <Bio className='mb-12 border-b pb-8' />
         </div>

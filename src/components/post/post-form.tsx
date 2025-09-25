@@ -86,7 +86,7 @@ export default function PostForm({ variant = 'write', action, backButtonHref, id
 
   return (
     // <Form ref={formRef} action={formAction}>
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} className='w-full'>
       <BackButton href={backButtonHref} text={backButtonText} />
       {/* {id && <input type='hidden' name='id' value={id} />} */}
       <Input

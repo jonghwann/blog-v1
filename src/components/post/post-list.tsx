@@ -1,8 +1,8 @@
-import type { Post } from '@/types/post';
+import type { PostSummary } from '@/types/post';
 import PostItem from './post-item';
 
 interface PostListProps {
-  posts: Post[];
+  posts: PostSummary[];
 }
 
 export default function PostList({ posts }: PostListProps) {

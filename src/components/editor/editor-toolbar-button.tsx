@@ -1,29 +1,17 @@
 import { cn } from '@/lib/utils';
 
 interface EditorToolbarButtonProps {
+  Icon: React.ComponentType<{ className?: string }>;
+  isActive?: boolean;
+  onClick: () => void;
   className?: string;
   iconClassName?: string;
-  Icon: React.ComponentType<{ className?: string }>;
-  disabled?: boolean;
-  onClick: () => void;
 }
 
-export default function EditorToolbarButton({
-  className,
-  iconClassName,
-  Icon,
-  disabled,
-  onClick,
-}: EditorToolbarButtonProps) {
+export default function EditorToolbarButton({ Icon, isActive, onClick, className, iconClassName }: EditorToolbarButtonProps) {
   return (
-    <button className={cn('cursor-pointer', className)} type="button" onClick={onClick}>
-      <Icon
-        className={cn(
-          'hover:text-foreground size-4 transition-colors duration-200 ease-in-out',
-          disabled && 'text-secondary-foreground',
-          iconClassName,
-        )}
-      />
+    <button type='button' onClick={onClick} className={cn('cursor-pointer', className)}>
+      <Icon className={cn('size-4 text-tertiary-foreground hover:text-foreground', isActive && 'text-foreground', iconClassName)} />
     </button>
   );
 }

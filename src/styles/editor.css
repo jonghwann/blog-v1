@@ -1,4 +1,8 @@
 @layer components {
+  .editor pre {
+    @apply !bg-[#2d2d2d] overflow-auto mb-4 !whitespace-pre rounded-[6px] p-5 shadow-[var(--shadow-code)] text-[13px];
+  }
+
   .editor h2 {
     @apply text-foreground mt-12 mb-6 scroll-mt-[-40px] border-t pt-10 text-2xl leading-[1.3em] font-semibold;
   }
@@ -9,6 +13,16 @@
 
   .editor p {
     @apply text-foreground mb-5 text-base leading-7;
+  }
+
+  .editor blockquote {
+    @apply border-l-6 py-10 px-5 mb-5 rounded-[6px];
+    @apply bg-[#F4F4F4] border-[#e0e0e0];
+    @apply dark:bg-[#1a1e22] dark:border-[#424242];
+
+    p {
+      @apply mb-0;
+    }
   }
 
   .editor ul {
@@ -23,69 +37,18 @@
     @apply text-foreground mb-2;
   }
 
+  .editor a {
+    @apply underline decoration-dashed underline-offset-[7px] hover:text-[#567EC0];
+  }
+
   .editor p code {
-    @apply rounded-md border border-[hsl(210,0%,93%)] bg-[#f7f7f7] px-[3.5px] py-[1.68px] text-sm break-words;
+    @apply rounded-md px-[3.5px] py-[1.68px] text-sm break-words;
+    @apply bg-[#e83e8c1a] text-[#e83e8c];
+    @apply dark:bg-[#3e3e3e] dark:text-[#ff8926];
   }
 
   .editor .is-empty.is-editor-empty[data-placeholder]::before {
     content: attr(data-placeholder);
     @apply text-secondary-foreground pointer-events-none absolute;
-  }
-
-  .dark .editor p code {
-    @apply border border-[hsl(359,2%,24%)] bg-[#2a2828];
-  }
-
-  .editor pre {
-    @apply mb-4;
-
-    .hljs-keyword {
-      color: oklch(53.5% 0.2058 2.84);
-    }
-
-    .hljs-title,
-    .hljs-attr,
-    .hljs-built_in {
-      color: oklch(47.18% 0.2579 304);
-    }
-
-    .hljs-name,
-    .hljs-string {
-      color: oklch(51.75% 0.1453 147.65);
-    }
-
-    .hljs-comment {
-      color: hsla(0, 0%, 40%, 1);
-    }
-  }
-
-  .dark .editor pre {
-    .hljs-keyword {
-      color: oklch(69.36% 0.2223 3.91);
-    }
-
-    .hljs-title,
-    .hljs-attr,
-    .hljs-built_in {
-      color: oklch(69.87% 0.2037 309.51);
-    }
-
-    .hljs-name,
-    .hljs-string {
-      color: oklch(73.1% 0.2158 148.29);
-    }
-
-    .hljs-comment {
-      color: hsla(0, 0%, 63%, 1);
-    }
-  }
-
-  .editor pre,
-  .dark .editor pre {
-    @apply bg-background text-foreground rounded-[6px] border p-5 font-mono text-[13px];
-
-    .class_ {
-      @apply text-foreground;
-    }
   }
 }
