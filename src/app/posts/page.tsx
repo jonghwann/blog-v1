@@ -3,11 +3,11 @@ import { getTags } from '@/api/tags/api';
 import Bio from '@/components/common/bio';
 import TagList from '@/components/common/tag-list';
 import PostList from '@/components/post/post-list';
-import type { Post } from '@/types/post';
+import type { PostSummary } from '@/types/post';
 import type { Tag } from '@/types/tag';
 
 export default async function PostsPage() {
-  let posts: Post[] = [];
+  let posts: PostSummary[] = [];
   let tags: Tag[] = [];
 
   try {

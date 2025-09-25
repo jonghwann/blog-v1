@@ -1,14 +1,18 @@
 import type { Tag } from './tag';
 
-export interface Post {
+export interface PostSummary {
   id: number;
   title: string;
-  content: string;
   createdAt: Date;
-  updatedAt: Date;
   summary: string;
   tags: Tag[];
+}
+
+export interface Post extends PostSummary {
+  content: string;
+  updatedAt: Date;
   readingTime: number;
+  html: string;
 }
 
 export interface PostDetail {

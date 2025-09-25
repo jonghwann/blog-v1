@@ -16,6 +16,7 @@
     "@tanstack/react-query": "^5.84.1",
     "@tiptap/extension-code-block-lowlight": "^2.12.0",
     "@tiptap/extension-image": "^2.12.0",
+    "@tiptap/extension-link": "^3.5.2",
     "@tiptap/extension-placeholder": "^2.12.0",
     "@tiptap/extension-text-align": "^2.12.0",
     "@tiptap/pm": "^2.12.0",
@@ -40,8 +41,10 @@
     "react-hook-form": "^7.62.0",
     "react-icons": "^5.5.0",
     "reading-time": "^1.5.0",
+    "shiki": "^3.13.0",
     "sonner": "^2.0.6",
     "tailwind-merge": "^3.3.0",
+    "tiptap-extension-code-block-shiki": "^0.6.0",
     "zod": "^3.25.20",
     "zustand": "^5.0.5"
   },

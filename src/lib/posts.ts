@@ -96,19 +96,59 @@ export function parsePostFormData(formData: FormData) {
   };
 }
 
-export function processPostData(data: { title: string; content: string; tags: string[] }) {
-  const processedContent = addHeadingIds(highlightCodeBlocks(data.content));
+import { codeToHtml } from 'shiki';
 
+async function processHtmlForStorage(html: string): Promise<string> {
+  try {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+
+    const codeBlocks = doc.querySelectorAll('pre code[class*="language-"]');
+
+    let processedHtml = html;
+
+    for (const codeBlock of codeBlocks) {
+      const code = codeBlock.textContent || '';
+
+      const classList = Array.from(codeBlock.classList);
+
+      const languageClass = classList.find((cls) => cls.startsWith('language-'));
+
+      const language = languageClass ? languageClass.replace('language-', '') : 'tsx';
+
+      const highlightedHtml = await codeToHtml(code, {
+        lang: language,
+        theme: 'dark-plus',
+      });
+
+      const originalPreTag = codeBlock.parentElement?.outerHTML;
+
+      if (originalPreTag) {
+        processedHtml = processedHtml.replace(originalPreTag, highlightedHtml);
+      }
+    }
+
+    return processedHtml;
+  } catch (error) {
+    console.error(error);
+    return html;
+  }
+}
+
+export async function processPostData(data: { title: string; content: string; tags: string[] }) {
+  // const processedContent = addHeadingIds(highlightCodeBlocks(data.content));
+  const processedContent = await processHtmlForStorage(data.content);
   return {
     ...data,
-    content: processedContent,
-    readingTime: Math.ceil(readingTime(processedContent).minutes),
-    summary: processedContent
+    content: data.content,
+    summary: data.content
       .replace(/<pre><code[\s\S]*?<\/code><\/pre>/g, '')
       .replace(/<[^>]+>/g, '')
       .replace(/\s+/g, ' ')
       .trim()
       .slice(0, 150),
+    readingTime: Math.ceil(readingTime(data.content).minutes),
+    html: processedContent,
   };
 }
 

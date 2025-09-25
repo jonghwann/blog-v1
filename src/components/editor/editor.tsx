@@ -1,12 +1,12 @@
 'use client';
-import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
 import Image from '@tiptap/extension-image';
+import Link from '@tiptap/extension-link';
 import Placeholder from '@tiptap/extension-placeholder';
 import TextAlign from '@tiptap/extension-text-align';
-import { EditorContent, useEditor } from '@tiptap/react';
+import { EditorContent, Extension, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
-import { common, createLowlight } from 'lowlight';
 import { type Control, Controller } from 'react-hook-form';
+import CodeBlockShiki from 'tiptap-extension-code-block-shiki';
 import { cn } from '@/lib/utils';
 import EditorToolbar from './editor-toolbar';
 
@@ -38,30 +38,27 @@ function Content({ value, onChange, className }: ContentProps) {
   const editor = useEditor({
     extensions: [
       StarterKit.configure({ codeBlock: false }),
-      Placeholder.configure({ placeholder: 'Write your story...' }),
-      CustomCodeBlockLowlight.configure({ lowlight: createLowlight(common), defaultLanguage: 'typescript' }),
-      TextAlign.configure({ types: ['heading', 'paragraph', 'image'] }),
       Image,
+      Link.configure({ openOnClick: false }),
+      CodeBlockShiki.configure({ defaultTheme: 'dark-plus', defaultLanguage: 'tsx' }),
+      Placeholder.configure({ placeholder: 'Write your story...' }),
+      TextAlign.configure({ types: ['heading', 'paragraph', 'image'] }),
+      CodeBlockTabExtension,
     ],
-    editorProps: {
-      attributes: {
-        class: cn('min-h-[calc(100vh-64px-64px-64px-64px-84px-48px-40px-40px-20px-2px)] pt-5 pb-12 outline-none', className),
-      },
-    },
+    editorProps: { attributes: { class: cn('pt-5 pb-15 outline-none', className) } },
     content: value,
     onUpdate: ({ editor }) => onChange(editor.getHTML()),
-    immediatelyRender: false,
   });
 
   return (
     <div>
       <EditorToolbar editor={editor} />
-      <EditorContent className='editor' editor={editor} />
+      <EditorContent editor={editor} className='editor' />
     </div>
   );
 }
 
-const CustomCodeBlockLowlight = CodeBlockLowlight.extend({
+const CodeBlockTabExtension = Extension.create({
   addKeyboardShortcuts() {
     return {
       Tab: () => {
