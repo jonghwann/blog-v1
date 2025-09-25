@@ -26,8 +26,8 @@ export default function Bio({ className }: BioProps) {
       />
 
       <div>
-        <h2 className='mb-1 font-semibold text-2xl leading-6'>@jonghwan</h2>
-        <p className='mb-3 text-base'>꾸준히, 의미있는 학습을 기록하기 위한 공간입니다.</p>
+        <h2 className='mb-1 font-bold text-2xl leading-6'>@jonghwan</h2>
+        <p className='mb-3 font-nanum-square-round text-base'>꾸준히, 의미있는 학습을 기록하기 위한 공간입니다.</p>
 
         <nav>
           <ul className='flex items-center gap-2'>

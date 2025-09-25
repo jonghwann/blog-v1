@@ -8,5 +8,5 @@ interface IconProps {
 }
 
 export default function Icon({ Icon, onClick, className }: IconProps) {
-  return <Icon onClick={onClick} className={cn('size-5 text-quaternary-foreground hover:text-foreground', className)} />;
+  return <Icon onClick={onClick} className={cn('size-5 text-tertiary-foreground hover:text-foreground', className)} />;
 }

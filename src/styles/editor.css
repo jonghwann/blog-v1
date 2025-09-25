@@ -47,8 +47,8 @@
     @apply dark:bg-[#3e3e3e] dark:text-[#ff8926];
   }
 
-  .editor .is-empty.is-editor-empty[data-placeholder]::before {
+  /* .editor .is-empty.is-editor-empty[data-placeholder]::before {
     content: attr(data-placeholder);
     @apply text-secondary-foreground pointer-events-none absolute;
-  }
+  } */
 }

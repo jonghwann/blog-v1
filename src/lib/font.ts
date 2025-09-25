@@ -39,4 +39,5 @@ export const sourceCodePro = Source_Code_Pro({
   subsets: ['latin'],
   weight: ['800'],
   variable: '--source-code-pro',
+  display: 'swap',
 });
