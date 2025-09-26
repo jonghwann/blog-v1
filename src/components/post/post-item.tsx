@@ -14,7 +14,7 @@ interface PostItemProps {
 export default function PostItem({ id, title, createdAt, summary, tags }: PostItemProps) {
   return (
     <article>
-      <Link href={`/posts/${id}`} className='mb-6 block hover:text-accent-foreground'>
+      <Link href={`/posts/${id}`} className='mb-6 inline-block hover:text-accent-foreground'>
         <h2 className='font-bold text-[32px] leading-[1.2]'>{title}</h2>
       </Link>
 

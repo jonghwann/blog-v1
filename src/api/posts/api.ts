@@ -17,6 +17,7 @@ export async function getPost(id: number): Promise<PostDetail> {
 export async function updatePost(params: PostRequest): Promise<Post> {
   const { id, data } = params;
   const processedData = await processPostData(data);
+
   const response = await api.put(`posts/${id}`, { json: processedData, credentials: 'include' }).json<ApiResponse<Post>>();
   return response.data;
 }
