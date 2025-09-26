@@ -21,7 +21,7 @@ import {
   Undo2,
 } from 'lucide-react';
 import { useRef } from 'react';
-import { uploadImageAction } from '@/app/posts/action';
+import { uploadImage } from '@/api/upload/api';
 import EditorToolbarButton from './editor-toolbar-button';
 
 interface EditorToolbarProps {
@@ -68,17 +68,17 @@ export default function EditorToolbar({ editor }: EditorToolbarProps) {
     editor?.commands.setLink({ href: url });
   };
 
-  // const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const file = e.target.files?.[0];
-  //   if (!file) return;
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
 
-  //   try {
-  //     const url = await uploadImageAction(file);
-  //     editor?.chain().focus().setImage({ src: url }).run();
-  //   } catch (error) {
-  //     console.error('Error in handleImageUpload:', error);
-  //   }
-  // };
+    try {
+      const { url } = await uploadImage(file);
+      editor?.chain().focus().setImage({ src: url }).run();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className='flex min-h-10 flex-wrap items-center gap-4 bg-background/80 backdrop-blur-[5px] backdrop-saturate-[180%]'>
@@ -136,8 +136,7 @@ export default function EditorToolbar({ editor }: EditorToolbarProps) {
       />
 
       <EditorToolbarButton className='text-secondary-foreground' Icon={ImagePlus} onClick={() => fileInputRef.current?.click()} />
-
-      {/* <input className='hidden' ref={fileInputRef} type='file' onChange={handleImageUpload} /> */}
+      <input className='hidden' ref={fileInputRef} type='file' onChange={handleImageUpload} />
     </div>
   );
 }

@@ -1,20 +1,20 @@
 @layer components {
   .editor h2 {
-    @apply text-[2em] mb-[1.5em] pt-[2.1em] scroll-mt-[-2.1em] leading-[1.5] border-t font-bold tracking-[-0.025em];
+    @apply mb-[1.5em] scroll-mt-[-2.1em] border-t pt-[2.1em] font-bold text-[2em] leading-[1.5] tracking-[-0.025em];
   }
 
   .editor h3 {
-    @apply mt-[2em] text-[1.8em] tracking-[-0.025em] leading-[1.5] mb-[1.5rem] font-bold;
+    @apply mt-[2em] mb-[1.5rem] font-bold text-[1.8em] leading-[1.5] tracking-[-0.025em];
   }
 
   .editor p {
-    @apply sm:text-[1.05rem] lg:text-[1.1rem] xl:text-[1.15rem] mb-[2rem] leading-[1.9] font-nanum-round;
+    @apply mb-[2rem] font-nanum-round leading-[1.9] sm:text-[1.05rem] lg:text-[1.1rem] xl:text-[1.15rem];
   }
 
   .editor blockquote {
-    @apply border-l-[0.5rem] mt-[1.5rem] mb-[2rem] p-[1rem] rounded-[0.5rem];
-    @apply bg-[#F4F4F4] border-[#e0e0e0];
-    @apply dark:bg-[#1a1e22] dark:border-[#424242];
+    @apply mt-[1.5rem] mb-[2rem] rounded-[0.5rem] border-l-[0.5rem] p-[1rem];
+    @apply border-[#e0e0e0] bg-[#F4F4F4];
+    @apply dark:border-[#424242] dark:bg-[#1a1e22];
 
     p {
       @apply mt-[2rem];
@@ -22,7 +22,7 @@
   }
 
   .editor ul, ol {
-    @apply pl-[1.5rem] my-[2rem];
+    @apply my-[2rem] pl-[1.5rem];
   }
 
   .editor ul {
@@ -34,11 +34,15 @@
   }
 
   .editor li {
-    @apply sm:text-[1.05rem] lg:text-[1.1rem] xl:text-[1.15rem] font-nanum-round;
+    @apply font-nanum-round sm:text-[1.05rem] lg:text-[1.1rem] xl:text-[1.15rem];
 
     p {
       @apply mt-[0.25rem] mb-[0.5rem];
     }
+  }
+
+  .editor em {
+    @apply block p-[10px] text-[0.9rem] leading-[1.9];
   }
 
   .editor a {
@@ -46,13 +50,17 @@
   }
 
   .editor pre {
-    @apply !bg-[#2d2d2d] overflow-auto mb-[2rem] !whitespace-pre rounded-[0.5rem] p-[1em] shadow-[var(--shadow-code)] sm:text-[1.05rem] lg:text-[1.1rem] xl:text-[1.15rem] leading-[1.9];
+    @apply !bg-[#2d2d2d] !whitespace-pre mb-[2rem] overflow-auto rounded-[0.5rem] p-[1em] leading-[1.9] shadow-[var(--shadow-code)] sm:text-[1.05rem] lg:text-[1.1rem] xl:text-[1.15rem];
   }
 
   .editor p code {
-    @apply rounded-[0.4rem] px-[0.3rem] py-[0.2rem] mx-[0.2rem] text-[0.9em] break-words;
+    @apply mx-[0.2rem] break-words rounded-[0.4rem] px-[0.3rem] py-[0.2rem] text-[0.9em];
     @apply bg-[#e83e8c1a] text-[#e83e8c];
     @apply dark:bg-[#3e3e3e] dark:text-[#ff8926];
+  }
+
+  .editor img {
+    @apply m-auto rounded-[0.5rem] shadow-[var(--shadow-code)];
   }
 
   /* .editor .is-empty.is-editor-empty[data-placeholder]::before {
