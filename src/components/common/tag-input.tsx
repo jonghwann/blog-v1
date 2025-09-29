@@ -57,24 +57,22 @@ function TagInputField({ value: tags, onChange, className }: TagInputFieldProps)
   };
 
   return (
-    <div className={cn('flex flex-wrap gap-3 text-secondary-foreground text-sm', className)}>
-      {tags && tags.length > 0 && (
-        <ul className='flex flex-wrap gap-3'>
-          {tags.map((tag) => (
-            <li key={tag} className='flex items-center gap-1'>
-              <span>#</span>
-              <span>{tag}</span>
+    <div className={cn('flex flex-wrap gap-3 font-nanum-round text-secondary-foreground', className)}>
+      {tags &&
+        tags.length > 0 &&
+        tags.map((tag) => (
+          <div key={tag} className='flex items-center gap-1'>
+            <span aria-hidden='true'>#</span>
+            <span>{tag}</span>
 
-              <button className='cursor-pointer' type='button' onClick={() => handleRemoveTag(tag)}>
-                <XIcon className='size-3' />
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
+            <button className='cursor-pointer' type='button' onClick={() => handleRemoveTag(tag)} aria-label={`${tag} 태그 삭제`}>
+              <XIcon className='size-4' aria-hidden='true' />
+            </button>
+          </div>
+        ))}
 
       <div className='flex items-center gap-1'>
-        <span>#</span>
+        <span aria-hidden='true'>#</span>
 
         <AutosizeInput
           value={input}
@@ -82,6 +80,7 @@ function TagInputField({ value: tags, onChange, className }: TagInputFieldProps)
           onChange={handleChange}
           onKeyDown={handleKeyDown}
           className='placeholder:text-secondary-foreground focus-visible:outline-none'
+          aria-label='새 태그 입력'
         />
       </div>
     </div>

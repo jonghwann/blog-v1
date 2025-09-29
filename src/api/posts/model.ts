@@ -1,9 +1,9 @@
-export interface PostRequest {
+export interface UpdatePostRequest {
   id: number;
-  data: PostData;
+  data: PostFormData;
 }
 
-export interface PostData {
+export interface PostFormData {
   title: string;
   content: string;
   tags: string[];

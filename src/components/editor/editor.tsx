@@ -45,9 +45,10 @@ function Content({ value, onChange, className }: ContentProps) {
       TextAlign.configure({ types: ['heading', 'paragraph', 'image'] }),
       CodeBlockTabExtension,
     ],
-    editorProps: { attributes: { class: cn('pt-5 pb-15 outline-none', className) } },
+    editorProps: { attributes: { class: cn('pt-10 pb-15 outline-none', className) } },
     content: value,
     onUpdate: ({ editor }) => onChange(editor.getHTML()),
+    immediatelyRender: false,
   });
 
   return (

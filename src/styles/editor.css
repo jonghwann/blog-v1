@@ -63,8 +63,8 @@
     @apply m-auto rounded-[0.5rem] shadow-[var(--shadow-code)];
   }
 
-  /* .editor .is-empty.is-editor-empty[data-placeholder]::before {
+  .editor .is-empty.is-editor-empty[data-placeholder]::before {
     content: attr(data-placeholder);
     @apply text-secondary-foreground pointer-events-none absolute;
-  } */
+  }
 }

@@ -11,7 +11,7 @@ interface EditorToolbarButtonProps {
 export default function EditorToolbarButton({ Icon, isActive, onClick, className, iconClassName }: EditorToolbarButtonProps) {
   return (
     <button type='button' onClick={onClick} className={cn('cursor-pointer', className)}>
-      <Icon className={cn('size-4 text-tertiary-foreground hover:text-foreground', isActive && 'text-foreground', iconClassName)} />
+      <Icon className={cn('size-5 text-tertiary-foreground hover:text-foreground', isActive && 'text-foreground', iconClassName)} />
     </button>
   );
 }

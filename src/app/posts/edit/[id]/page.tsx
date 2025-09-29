@@ -2,7 +2,6 @@ import { notFound } from 'next/navigation';
 import { getPost } from '@/api/posts/api';
 import PostForm from '@/components/post/post-form';
 import type { Post } from '@/types/post';
-import { editAction } from './action';
 
 interface EditPageProps {
   params: Promise<{ id: string }>;
@@ -20,13 +19,5 @@ export default async function EditPage({ params }: EditPageProps) {
     notFound();
   }
 
-  return (
-    <PostForm
-      variant='edit'
-      action={editAction}
-      backButtonHref={`/posts/${id}`}
-      id={id}
-      initialValues={{ title: post.title, content: post.content, tags: post.tags }}
-    />
-  );
+  return <PostForm variant='edit' id={id} initialValues={{ title: post.title, content: post.content, tags: post.tags }} />;
 }

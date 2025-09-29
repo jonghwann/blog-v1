@@ -1,23 +1,21 @@
 'use client';
 import { useMutation } from '@tanstack/react-query';
-import Form from 'next/form';
 import { useRouter } from 'next/navigation';
-import { startTransition, useActionState, useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { updatePost } from '@/api/posts/api';
-import type { PostData } from '@/api/posts/model';
+import { createPost, updatePost } from '@/api/posts/api';
+import type { PostFormData } from '@/api/posts/model';
 import Alert from '@/components/common/alert';
 import BackButton from '@/components/common/back-button';
 import Input from '@/components/common/input';
 import TagInput from '@/components/common/tag-input';
 import Editor from '@/components/editor/editor';
-import EditorActions from '@/components/editor/editor-actions';
+import useVisible from '@/hooks/use-visible';
+import type { PostSummary } from '@/types/post';
 import type { Tag } from '@/types/tag';
+import Button from '../common/button';
 
 interface PostFormProps {
   variant?: 'write' | 'edit';
-  action: (prevState: unknown, formData: FormData) => Promise<{ success: boolean; postId?: number }>;
-  backButtonHref?: string;
   id?: string;
   initialValues?: {
     title: string;
@@ -26,93 +24,82 @@ interface PostFormProps {
   };
 }
 
-const config = {
-  write: {
-    backButtonText: 'Back to Posts',
-    actionText: 'Publish',
-    alertDescription: 'Are you sure you want to publish?',
-  },
-  edit: {
-    backButtonText: 'Back to Post',
-    actionText: 'Update',
-    alertDescription: 'Are you sure you want to update?',
-  },
-};
+export default function PostForm({ variant = 'write', id, initialValues }: PostFormProps) {
+  const config = {
+    write: {
+      backButtonText: 'Back to Posts',
+      backButtonHref: '/posts',
+      actionText: 'Publish',
+      alertDescription: 'Are you sure you want to publish?',
+    },
+    edit: {
+      backButtonText: 'Back to Post',
+      backButtonHref: `/posts/${id}`,
+      actionText: 'Update',
+      alertDescription: 'Are you sure you want to update?',
+    },
+  };
 
-interface DefaultValues {
-  title: string;
-  content: string;
-  tags: string[];
-}
+  const { backButtonText, backButtonHref, actionText, alertDescription } = config[variant];
 
-export default function PostForm({ variant = 'write', action, backButtonHref, id, initialValues }: PostFormProps) {
-  const { backButtonText, actionText, alertDescription } = config[variant];
+  const defaultValues = {
+    title: initialValues?.title ?? '',
+    content: initialValues?.content ?? '',
+    tags: initialValues?.tags.map((tag) => tag.name) ?? [],
+  };
 
   const router = useRouter();
+  const { control, register, handleSubmit } = useForm<PostFormData>({ defaultValues });
+  const { isVisible, show, hide } = useVisible();
 
-  // const formRef = useRef<HTMLFormElement>(null);
+  const handleSuccess = (data: PostSummary) => {
+    router.push(`/posts/${data.id}`);
+  };
 
-  // const [isSubmitAlertOpen, setSubmitAlertOpen] = useState(false);
+  const handleSettled = () => {
+    hide();
+  };
 
-  // const [state, formAction, isPending] = useActionState(action, null);
-
-  const { control, register, handleSubmit, watch } = useForm<DefaultValues>({
-    defaultValues: {
-      title: initialValues?.title ?? '',
-      content: initialValues?.content ?? '',
-      tags: initialValues?.tags.map((tag) => tag.name) ?? [],
-    },
-    mode: 'onChange',
+  const { mutate: createMutate, isPending: isCreatePending } = useMutation({
+    mutationFn: createPost,
+    onSuccess: handleSuccess,
+    onSettled: handleSettled,
   });
 
-  const { mutate } = useMutation({
+  const { mutate: updateMutate, isPending: isUpdatePending } = useMutation({
     mutationFn: updatePost,
+    onSuccess: handleSuccess,
+    onSettled: handleSettled,
   });
 
-  // const handleSubmit = () => {
-  //   setSubmitAlertOpen(true);
-  // };
-
-  // useEffect(() => {
-  //   if (state?.success) {
-  //     setSubmitAlertOpen(false);
-  //     router.push(`/posts/${state.postId}`);
-  //   }
-  // }, [state]);
-
-  const onSubmit = (data: PostData) => {
-    mutate({ id: Number(id), data });
+  const onSubmit = (data: PostFormData) => {
+    if (variant === 'write') {
+      createMutate(data);
+    } else {
+      updateMutate({ id: Number(id), data });
+    }
   };
 
   return (
-    // <Form ref={formRef} action={formAction}>
-    <form onSubmit={handleSubmit(onSubmit)} className='w-full'>
+    <form onSubmit={(e) => e.preventDefault()} className='w-full'>
       <BackButton href={backButtonHref} text={backButtonText} />
-      {/* {id && <input type='hidden' name='id' value={id} />} */}
-      <Input
-        register={register('title')}
-        className='px-0 focus-visible:outline-none'
-        name='title'
-        placeholder='Title'
-        defaultValue={initialValues?.title}
-      />
-      <Editor control={control} name='content' defaultValue={initialValues?.content} />
-      <TagInput control={control} name='tags' className='mb-5' defaultValue={initialValues?.tags.map((tag) => tag.name)} />
-      <EditorActions actions={[{ text: actionText, onClick: () => {} }]} />
-      <button type='submit'>submit</button>
+      <Input register={register('title')} name='title' placeholder='Title' classNames={{ input: 'px-0 ring-0 text-[1.15rem]' }} />
+      <Editor control={control} name='content' />
+      <TagInput control={control} name='tags' className='mb-5' />
 
-      {/* <Alert
-        open={isSubmitAlertOpen}
+      <Alert
+        trigger={
+          <Button variant='ghost' size='ghost'>
+            {actionText}
+          </Button>
+        }
+        title={actionText}
         description={alertDescription}
-        isLoading={isPending}
-        onCancel={() => setSubmitAlertOpen(false)}
-        actionText={actionText}
-        onAction={() => {
-          const formData = new FormData(formRef.current!);
-          startTransition(() => formAction(formData));
-        }}
-      /> */}
-      {/* </Form> */}
+        onSubmit={handleSubmit(onSubmit)}
+        open={isVisible}
+        onOpenChange={(open) => (open ? show() : hide())}
+        isLoading={isCreatePending || isUpdatePending}
+      />
     </form>
   );
 }

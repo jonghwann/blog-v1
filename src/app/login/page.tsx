@@ -40,7 +40,7 @@ export default function LoginPage() {
       <Input register={register('email')} placeholder='Email' errors={errors?.email?.message} />
       <Input register={register('password')} type='password' placeholder='Password' errors={errors?.password?.message} />
 
-      <Button variant='secondary' size='lg' isLoading={isPending}>
+      <Button size='lg' isLoading={isPending}>
         Login
       </Button>
     </form>
