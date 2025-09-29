@@ -81,7 +81,7 @@ export default function EditorToolbar({ editor }: EditorToolbarProps) {
   };
 
   return (
-    <div className='flex min-h-10 flex-wrap items-center gap-4 bg-background/80 backdrop-blur-[5px] backdrop-saturate-[180%]'>
+    <div className='sticky top-0 z-[var(--z-header)] flex min-h-12 flex-wrap items-center gap-4 bg-background/80 backdrop-blur-[5px]'>
       <EditorToolbarButton Icon={Undo2} isActive={!isUndoDisabled} onClick={() => editor?.chain().focus().undo().run()} />
       <EditorToolbarButton Icon={Redo2} isActive={!isRedoDisabled} onClick={() => editor?.chain().focus().redo().run()} />
 

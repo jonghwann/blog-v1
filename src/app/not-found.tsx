@@ -9,9 +9,7 @@ export default function NotFound() {
       <p className='mb-8 text-lg'>찾을 수 없는 페이지입니다.</p>
 
       <Link href='/posts'>
-        <Button variant='secondary' className='h-10 w-[116px]'>
-          홈으로
-        </Button>
+        <Button className='h-10 w-[116px]'>홈으로</Button>
       </Link>
     </section>
   );

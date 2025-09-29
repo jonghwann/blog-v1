@@ -1,16 +1,26 @@
 'use client';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import useScrollVisibility from '@/hooks/use-scroll-visibility';
+import { cn } from '@/lib/utils';
 import LogoutButton from '../common/logout-button';
 import ThemeButton from '../common/theme-button';
 import Nav from './nav';
 
+const relativeHeaderPaths = ['/posts/write', '/posts/edit'];
+
 export default function Header() {
-  const marginTop = useScrollVisibility(56);
+  const pathname = usePathname();
+  const isRelativeHeader = relativeHeaderPaths.some((path) => pathname.startsWith(path));
+
+  const marginTop = useScrollVisibility(56, !isRelativeHeader);
 
   return (
     <header
-      className='fixed top-0 z-[var(--z-header)] w-full bg-background/80 px-4 shadow-[var(--shadow)] backdrop-blur-[5px]'
+      className={cn(
+        'fixed top-0 z-[var(--z-header)] w-full bg-background/80 px-4 shadow-[var(--shadow)] backdrop-blur-[5px]',
+        isRelativeHeader && 'relative',
+      )}
       style={{ marginTop }}
     >
       <div className='mx-0 flex h-14 items-center justify-between min-[860px]:mx-16'>

@@ -1,6 +1,5 @@
 import { ArrowLeftIcon } from 'lucide-react';
 import Link from 'next/link';
-
 import { cn } from '@/lib/utils';
 
 interface BackButtonProps {
@@ -13,13 +12,13 @@ export default function BackButton({ className, href = '/posts', text = 'Back to
   return (
     <Link
       className={cn(
-        '*:text-secondary-foreground hover:*:text-foreground mb-16 inline-flex items-center gap-2 *:transition-colors *:duration-200 *:ease-in-out',
+        'mb-16 inline-flex items-center gap-2 font-nanum-round *:text-secondary-foreground *:transition-colors *:duration-300 *:ease-in-out hover:*:text-foreground',
         className,
       )}
       href={href}
     >
-      <ArrowLeftIcon className="size-4" />
-      <span className="text-sm">{text}</span>
+      <ArrowLeftIcon className='size-5' />
+      <span>{text}</span>
     </Link>
   );
 }

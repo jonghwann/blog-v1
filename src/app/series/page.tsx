@@ -9,9 +9,7 @@ export default function SeriesPage() {
       <p className='mb-8 text-lg'>준비 중인 페이지입니다.</p>
 
       <Link href='/posts'>
-        <Button variant='secondary' className='h-10 w-[116px]'>
-          홈으로
-        </Button>
+        <Button className='h-10 w-[116px]'>홈으로</Button>
       </Link>
     </section>
   );
