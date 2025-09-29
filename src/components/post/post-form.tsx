@@ -52,7 +52,13 @@ export default function PostForm({ variant = 'write', id, initialValues }: PostF
   const { control, register, handleSubmit } = useForm<PostFormData>({ defaultValues });
   const { isVisible, show, hide } = useVisible();
 
-  const handleSuccess = (data: PostSummary) => {
+  const handleSuccess = async (data: PostSummary) => {
+    try {
+      await fetch('/api/posts', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id: data.id }) });
+    } catch (error) {
+      console.error(error);
+    }
+
     router.push(`/posts/${data.id}`);
   };
 
