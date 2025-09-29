@@ -5,12 +5,12 @@ import type * as React from 'react';
 import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
-  'inline-flex cursor-pointer items-center justify-center font-medium transition-colors duration-200 ease-in-out disabled:pointer-events-none disabled:opacity-50',
+  'inline-flex cursor-pointer items-center justify-center font-medium disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
       variant: {
-        default: 'border hover:bg-secondary',
-        secondary: 'bg-foreground text-background hover:bg-secondary-inverse',
+        default: 'border',
+        secondary: 'bg-inverse text-inverse-foreground hover:bg-inverse-hover',
       },
       size: {
         default: 'h-8 rounded-md px-3 text-sm',

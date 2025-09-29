@@ -20,6 +20,7 @@
 
   --color-inverse: var(--inverse);
   --color-inverse-foreground: var(--inverse-foreground);
+  --color-inverse-hover: var(--inverse-hover);
 
   --color-error: var(--error);
 
@@ -51,6 +52,7 @@
 
   --inverse: #424242;
   --inverse-foreground: #ffffff;
+  --inverse-hover: #606060;
 
 
   --error: #f24040;
@@ -73,6 +75,7 @@
 
   --inverse: #ffffff;
   --inverse-foreground: #212529;
+  --inverse-hover: #e8e8e8;
 }
 
 @layer base {
