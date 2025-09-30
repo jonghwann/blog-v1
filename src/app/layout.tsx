@@ -1,5 +1,4 @@
 import { Metadata } from 'next';
-
 import ThemeProvider from '@/providers/theme-provider';
 import Layout from '@/components/layout/layout';
 
