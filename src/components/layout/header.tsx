@@ -5,6 +5,7 @@ import useScrollVisibility from '@/hooks/use-scroll-visibility';
 import { cn } from '@/lib/utils';
 import LogoutButton from '../common/logout-button';
 import ThemeButton from '../common/theme-button';
+import WriteButton from '../common/write-button';
 import Nav from './nav';
 
 const relativeHeaderPaths = ['/posts/write', '/posts/edit'];
@@ -31,6 +32,7 @@ export default function Header() {
         <div className='flex items-center gap-[15px]'>
           <ThemeButton />
           <Nav />
+          <WriteButton />
           <LogoutButton />
         </div>
       </div>
