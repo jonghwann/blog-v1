@@ -2,7 +2,7 @@ import ky from 'ky';
 import { refresh } from './auth/api';
 
 export const api = ky.create({
-  prefixUrl: process.env.NEXT_PUBLIC_API_BASE_URL,
+  prefixUrl: process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://localhost:3000',
   headers: { 'Content-Type': 'application/json' },
   retry: 1,
   hooks: {
