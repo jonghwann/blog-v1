@@ -16,7 +16,7 @@ export const api = ky.create({
               return api(request, options);
             } catch {
               if (typeof window !== 'undefined') {
-                window.location.href = '/posts';
+                window.location.href = '/login';
               }
             }
           }

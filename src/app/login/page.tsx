@@ -2,6 +2,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { login } from '@/api/auth/api';
@@ -31,6 +32,10 @@ export default function LoginPage() {
   const onSubmit = (data: LoginFormValues) => {
     mutate(data);
   };
+
+  useEffect(() => {
+    queryClient.setQueriesData({ queryKey: ['me'] }, { isLogin: false, user: null });
+  }, []);
 
   return (
     <form
