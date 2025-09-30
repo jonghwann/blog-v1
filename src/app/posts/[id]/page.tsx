@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import { getPost, getPosts } from '@/api/posts/api';
 import Bio from '@/components/common/bio';
+import Giscus from '@/components/common/giscus';
 import ScrollProgressBar from '@/components/common/scroll-progress-bar';
 import PostContent from '@/components/post/post-content';
 import PostHeader from '@/components/post/post-header';
@@ -35,6 +36,7 @@ export default async function PostPage({ params }: PostPageProps) {
           <PostContent html={post.html} className='xl:min-w-[680px]' />
           <PostNavigation navigation={navigation} />
           <Bio className='mb-12 border-b pb-8' />
+          <Giscus />
         </div>
 
         <PostTableOfContents className='hidden min-[1301px]:block' content={post.content} />
