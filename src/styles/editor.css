@@ -1,0 +1,70 @@
+@layer components {
+  .editor h2 {
+    @apply mb-[1.5em] scroll-mt-[-2.1em] border-t pt-[2.1em] font-bold text-[2em] leading-[1.5] tracking-[-0.025em];
+  }
+
+  .editor h3 {
+    @apply mt-[2em] mb-[1.5rem] font-bold text-[1.8em] leading-[1.5] tracking-[-0.025em];
+  }
+
+  .editor p {
+    @apply mb-[2rem] font-nanum-round leading-[1.9] sm:text-[1.05rem] lg:text-[1.1rem] xl:text-[1.15rem];
+  }
+
+  .editor blockquote {
+    @apply mt-[1.5rem] mb-[2rem] rounded-[0.5rem] border-l-[0.5rem] p-[1rem];
+    @apply border-[#e0e0e0] bg-[#F4F4F4];
+    @apply dark:border-[#424242] dark:bg-[#1a1e22];
+
+    p {
+      @apply mt-[2rem];
+    }
+  }
+
+  .editor ul, ol {
+    @apply my-[2rem] pl-[1.5rem];
+  }
+
+  .editor ul {
+    @apply list-disc;
+  }
+
+  .editor ol {
+    @apply list-decimal;
+  }
+
+  .editor li {
+    @apply font-nanum-round sm:text-[1.05rem] lg:text-[1.1rem] xl:text-[1.15rem];
+
+    p {
+      @apply mt-[0.25rem] mb-[0.5rem];
+    }
+  }
+
+  .editor em {
+    @apply block p-[10px] text-[0.9rem] leading-[1.9];
+  }
+
+  .editor a {
+    @apply underline decoration-dashed underline-offset-[0.45em] hover:text-[#567EC0];
+  }
+
+  .editor pre {
+    @apply !bg-[#2d2d2d] !whitespace-pre mb-[2rem] overflow-auto rounded-[0.5rem] p-[1em] leading-[1.9] shadow-[var(--shadow-code)] sm:text-[1.05rem] lg:text-[1.1rem] xl:text-[1.15rem];
+  }
+
+  .editor p code {
+    @apply mx-[0.2rem] break-words rounded-[0.4rem] px-[0.3rem] py-[0.2rem] text-[0.9em];
+    @apply bg-[#e83e8c1a] text-[#e83e8c];
+    @apply dark:bg-[#3e3e3e] dark:text-[#ff8926];
+  }
+
+  .editor img {
+    @apply m-auto rounded-[0.5rem] shadow-[var(--shadow-code)];
+  }
+
+  .editor .is-empty.is-editor-empty[data-placeholder]::before {
+    content: attr(data-placeholder);
+    @apply text-secondary-foreground pointer-events-none absolute;
+  }
+}

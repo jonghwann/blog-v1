@@ -1,20 +1,16 @@
 import Link from 'next/link';
-
-import { Button } from '@/components/ui/button';
+import Button from '@/components/common/button';
 
 export default function NotFound() {
   return (
-    <div className="m-auto">
-      <div className="flex flex-col items-center justify-center gap-8">
-        <div className="flex flex-col items-center gap-4">
-          <h1 className="text-2xl font-bold">Not Found</h1>
-          <p className="text-lg">찾을 수 없는 페이지입니다.</p>
-        </div>
+    <section className='absolute inset-0 flex flex-col items-center justify-center'>
+      <h1 className='mb-4 font-bold text-2xl'>Not Found</h1>
 
-        <Button className="h-10 bg-secondary-background px-10 text-secondary-foreground shadow-none transition-none hover:bg-tertiary-background" asChild>
-          <Link href="/posts">홈으로</Link>
-        </Button>
-      </div>
-    </div>
+      <p className='mb-8 text-lg'>찾을 수 없는 페이지입니다.</p>
+
+      <Link href='/posts'>
+        <Button className='h-10 w-[116px]'>홈으로</Button>
+      </Link>
+    </section>
   );
 }

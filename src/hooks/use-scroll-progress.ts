@@ -1,9 +1,7 @@
-import { useState, useEffect } from 'react';
-import { usePathname } from 'next/navigation';
+'use client';
+import { useEffect, useState } from 'react';
 
 export default function useScrollProgress() {
-  const pathname = usePathname();
-
   const [scrollPercentage, setScrollPercentage] = useState(0);
 
   useEffect(() => {
@@ -20,10 +18,6 @@ export default function useScrollProgress() {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-
-  useEffect(() => {
-    setScrollPercentage(0);
-  }, [pathname]);
 
   return scrollPercentage;
 }
